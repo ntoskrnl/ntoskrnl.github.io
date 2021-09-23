@@ -1,4 +1,106 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 22 Sep 2021 03:58:58 GMT</lastBuildDate><item><title><![CDATA[First blog post]]></title><description><![CDATA[I decided to teach myself some modern web technologies and put together a static blog based on Gatsby.js. Who am I? My name is Anton. I am a…]]></description><link>https://ntoskrnl.github.io/hello-world/</link><guid isPermaLink="false">https://ntoskrnl.github.io/hello-world/</guid><pubDate>Sat, 18 Sep 2021 17:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I decided to teach myself some modern web technologies and put together a static blog based on Gatsby.js.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 23 Sep 2021 02:51:19 GMT</lastBuildDate><item><title><![CDATA[Publishing Gatsby blog. Part 1.]]></title><description><![CDATA[As promised in my first blog post, I am sharing how I set up Gatsby blog and deployed it to Github Pages.
+There is a lot of material on the…]]></description><link>https://ntoskrnl.github.io/creating-blog/</link><guid isPermaLink="false">https://ntoskrnl.github.io/creating-blog/</guid><pubDate>Wed, 22 Sep 2021 22:30:00 GMT</pubDate><content:encoded>&lt;p&gt;As promised in my first blog post, I am sharing how I set up Gatsby blog and deployed it to Github Pages.
+There is a lot of material on the Internet on this particular topic, but I still want to document my experience in case I need to do it again.&lt;/p&gt;
+&lt;p&gt;I split this into two posts. Here is what we’ll cover in this one:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;How to install Node.js and Gatsby on MacOS.&lt;/li&gt;
+&lt;li&gt;How to create blog from blog-starter template.&lt;/li&gt;
+&lt;li&gt;Explain project structure and how it works.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Publishing to GitHub pages will be in the next post.&lt;/p&gt;
+&lt;h2&gt;Istalling our tools&lt;/h2&gt;
+&lt;p&gt;In order to build website with Gatsby.js, you need to install Node.js. Node is a JavaScript runtime build on Chrome’s javascript engine. Just like you need JRE to run Java apps, you also need some environment (like a web-browser) to run javascript programs. Node.js lets you run javascript without the browser. It also comes with a package manager, which gives you access to thousands of libraries and tools.&lt;/p&gt;
+&lt;h3&gt;Installing Node.js&lt;/h3&gt;
+&lt;p&gt;You may go ahead and install the latest stable Node version. But because there are many versions of Node (just like with Java), and different projects might require different versions of node, there is this tool called “nvm”, or Node Version Manager. Usually you would install this first, and then use it to install a desired version of Node. The advantage of using nvm is that you can have several versions of Node.js and switch between them with a command.&lt;/p&gt;
+&lt;p&gt;To install LTS version of Node.js on MacOS run these two commands:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# installing VVM&lt;/span&gt;
+brew &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; nvm
+&lt;span class=&quot;token comment&quot;&gt;# installing LTS version of Node.js&lt;/span&gt;
+nvm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --lts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-text&quot;&gt;node --version&lt;/code&gt; to check the installed version.&lt;/p&gt;
+&lt;h3&gt;Installing Gatsby CLI&lt;/h3&gt;
+&lt;p&gt;Gatsby.js is not just a JS framework, it’s a toolkit that among other things includes development http server, web GraphQL IDE. To manage all this they ship a command line tool, aka &lt;a href=&quot;https://www.gatsbyjs.com/docs/reference/gatsby-cli/&quot;&gt;Gatsby CLI&lt;/a&gt;, which can be installed with &lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# install Gatsby CLI globally&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -g gatsby-cli&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Creating blog with Gatsby&lt;/h2&gt;
+&lt;p&gt;You can create a new website with &lt;code class=&quot;language-text&quot;&gt;gatsby new&lt;/code&gt; and write initial boilerplate yourself, but CLI tools provide a convenient way to create a project from a variety of templates. I chose the simplest thing that is available out there, which is &lt;a href=&quot;https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog&quot;&gt;Gatsby Starter Blog&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Creating website from template&lt;/h3&gt;
+&lt;p&gt;Navigate to the directory where you want to create your project and run the following command (replace &lt;code class=&quot;language-text&quot;&gt;YOUR-PROJECT-NAME-HERE&lt;/code&gt; with the name of your project):&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;npx gatsby new YOUR-PROJECT-NAME-HERE https://github.com/gatsbyjs/gatsby-starter-blog&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Gatsby will create a directory and set up a website based on provided template.&lt;/p&gt;
+&lt;p&gt;You can run your website with &lt;code class=&quot;language-text&quot;&gt;gatsby develop&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Project structure&lt;/h3&gt;
+&lt;p&gt;Here is how my project structure looks like as of now:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;./
+├── package.json
+├── gatsby-browser.js
+├── gatsby-config.js
+├── gatsby-node.js
+├── src
+│   ├── components
+│   │   ├── bio.js
+│   │   ├── layout.js
+│   │   └── seo.js
+│   ├── images
+│   │   ├── gatsby-icon.png
+│   │   └── profile-pic.jpg
+│   ├── normalize.css
+│   ├── pages
+│   │   ├── 404.js
+│   │   ├── index.js
+│   │   └── using-typescript.tsx
+│   ├── style.css
+│   └── templates
+│       └── blog-post.js
+├── content
+│   └── blog
+│       ├── creating-blog
+│       │   └── index.md
+│       └── hello-world
+│           └── index.md
+├── public
+│   └──...
+└── static
+    └── ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All these files and directories have the following functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; – is a file that list project build config and dependencies.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-config.js&lt;/code&gt; – main configuration file of gatsby site, contains plugin declaration and setup.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-browser.js&lt;/code&gt; – allows customization/extension of default Gatsby settings affecting the browser.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; – the main module that will be run by Gatsby to build website’s pages.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; – derectory with the website’s javascript code that will be run by Gatsby and &lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; to render pages.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components&lt;/code&gt; – here we can put reusable react components.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/pages&lt;/code&gt; – code that will be used to render pages: each js file will generate it’s own page.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/teplates&lt;/code&gt; – similar to previous, but will be used for generating multiple pages (like blog posts).&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;content&lt;/code&gt; - contains directories with Markdown files that will be transformed into blog posts.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;public&lt;/code&gt; – output directory with generated website.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How it works&lt;/h3&gt;
+&lt;p&gt;This is what happens when you run &lt;code class=&quot;language-text&quot;&gt;gatsby develop&lt;/code&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Gatsby will run the code from &lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt;, and applies plugins and config provided in &lt;code class=&quot;language-text&quot;&gt;gatsby-config.js&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;gatsby-browser.js&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Gatsby will generate index and 404 pages using code defined in &lt;code class=&quot;language-text&quot;&gt;src/pages&lt;/code&gt; directory. They will be rendered with &lt;code class=&quot;language-text&quot;&gt;Layout&lt;/code&gt; component defined in &lt;code class=&quot;language-text&quot;&gt;src/components/layout.js&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Pluging will be applied at different steps of the build process.
+&lt;ul&gt;
+&lt;li&gt;Particularly, plugin &lt;code class=&quot;language-text&quot;&gt;gatsby-transformer-remark&lt;/code&gt; will scan &lt;code class=&quot;language-text&quot;&gt;contents&lt;/code&gt; folder and transform all markdown into structured data, that can be retrieved with GraphQL API.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-plugin-feed&lt;/code&gt; will generate RSS feed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; will query for all blog posts and generate pages for them during build time using &lt;code class=&quot;language-text&quot;&gt;src/templates/blog-post.js&lt;/code&gt; component.&lt;/li&gt;
+&lt;li&gt;Generated content is placed into &lt;code class=&quot;language-text&quot;&gt;public&lt;/code&gt; folder and served by local HTTP server at &lt;code class=&quot;language-text&quot;&gt;http://localhost:8000/&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Customizing your website&lt;/h3&gt;
+&lt;p&gt;The main focus for me was to get rid of old content and figure out how everything works by tweaking some things. All I did is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Removed old content and replaced with my own (inluding site meta data).&lt;/li&gt;
+&lt;li&gt;Fixed some CSS, e.g. fixed round avatar on Safari.&lt;/li&gt;
+&lt;li&gt;Added 2 meta paramaters to blog posts: “updated” and “draft” and used them in pages.&lt;/li&gt;
+&lt;li&gt;Added read time estimate (via plugin &lt;code class=&quot;language-text&quot;&gt;gatsby-remark-reading-time&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My initial impression of the code and project in general was pretty poor. I have only been using strongly typed languages, and when I first saw the code in the project, I thought it was a mess. I thought it would take me a lot of time to figure things out and get the blog going. Turned out, I quickly picked up the main idea of how it works and now it is not as scarry as it initially seemed.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I’ve set up Node.js on my Mac, installed gatsby and created a simple blog. In my next post I will describe how I published the website to GitHub Pages and set up auto deployment.&lt;/p&gt;
+&lt;p&gt;Thanks for reading.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[First blog post]]></title><description><![CDATA[I decided to teach myself some modern web technologies and put together a static blog based on Gatsby.js. Who am I? My name is Anton. I am a…]]></description><link>https://ntoskrnl.github.io/hello-world/</link><guid isPermaLink="false">https://ntoskrnl.github.io/hello-world/</guid><pubDate>Sat, 18 Sep 2021 17:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I decided to teach myself some modern web technologies and put together a static blog based on Gatsby.js.&lt;/p&gt;
 &lt;h3&gt;Who am I?&lt;/h3&gt;
 &lt;p&gt;My name is Anton. I am a professional Android developer.
 I am going to create a dedicated &lt;strong&gt;About&lt;/strong&gt; page with more information, but for now, I think this is enough.&lt;/p&gt;
