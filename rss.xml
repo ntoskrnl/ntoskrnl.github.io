@@ -1,4 +1,157 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 23 Sep 2021 02:51:19 GMT</lastBuildDate><item><title><![CDATA[Publishing Gatsby blog. Part 1.]]></title><description><![CDATA[As promised in my first blog post, I am sharing how I set up Gatsby blog and deployed it to Github Pages.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 25 Sep 2021 17:13:14 GMT</lastBuildDate><item><title><![CDATA[Upgraded my project to Android gradle plugin 7]]></title><description><![CDATA[It has never been like this and now it is exactly the same again. — Viktor Chernomyrdin I’ve spent several last week’s nights to get one of…]]></description><link>https://ntoskrnl.github.io/updating-to-android-gradle-plugin-7/</link><guid isPermaLink="false">https://ntoskrnl.github.io/updating-to-android-gradle-plugin-7/</guid><pubDate>Sat, 25 Sep 2021 15:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;It has never been like this and now it is exactly the same again.&lt;/strong&gt; — Viktor Chernomyrdin&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I’ve spent several last week’s nights to get one of my project’s CI pipeline back up on its feet after upgrading to latest Android gradle plugin (7.0.2). I usually try too keep versions up-to-date, but got distracted with other projects. As a result, the app was not updated for the last 4 months – just when Google suddenly released a bunch of updates to Android’s build tools, which broke everything…&lt;/p&gt;
+&lt;h2&gt;Breaking changes in Gradle 7.x&lt;/h2&gt;
+&lt;p&gt;Android Gradle Plugin now has the same major version number with Gradle, so its version jumped from 4.x to 7.0. This is a good thing, as there will be less confusion with the versions. In addition to breaking changes to the plugin APIs, which forced me to update several other third-party gradle plugins (e.g. Sentry), Android Gradle Plugin adds some requirements to the environment.&lt;/p&gt;
+&lt;h2&gt;Updating to JDK 11&lt;/h2&gt;
+&lt;p&gt;Previously, everything would compile with Java 8. Now Android Gradle Plugin requires JDK 11.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;An exception occurred applying plugin request [id: &apos;com.android.application&apos;]
+&gt; Failed to apply plugin &apos;com.android.internal.application&apos;.
+   &gt; Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8.
+     You can try some of the following options:
+       - changing the IDE settings.
+       - changing the JAVA_HOME environment variable.
+       - changing `org.gradle.java.home` in `gradle.properties`.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It can be installed with &lt;code class=&quot;language-text&quot;&gt;Homebrew&lt;/code&gt; with the following command: &lt;code class=&quot;language-text&quot;&gt;brew install --cask adoptopenjdk11&lt;/code&gt;. There is also a nice article on how enable quick &lt;a href=&quot;https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/#switch-between-different-jdk-versions&quot;&gt;switching between JDK versions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I thought this was it, I moved on with the feature development. However, when I was ready to present an early prototype to my teammates for testing, I found out that Jenkins (our CI server) was unable to build the app. All because CI was trying to build it with JDK 8. Luckily the we run our Android builds inside a docker container. And I thought to myself:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This where docker will show it’s power!&lt;/p&gt;
+&lt;p&gt;All I need to do is to replace package &lt;code class=&quot;language-text&quot;&gt;openjdk-8-jdk&lt;/code&gt; with &lt;code class=&quot;language-text&quot;&gt;openjdk-11-jdk&lt;/code&gt; in my Dockerfile, and everything should work, just like on my local machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Build failed again when SDK Manager was trying to install some packages, required for building Android apps.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Step 13/18 : RUN yes | sdkmanager --licenses
+Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema
+   at com.android.repository.api.SchemaModule$SchemaModuleVersion.&amp;lt;init&gt;(SchemaModule.java:156)
+   at com.android.repository.api.SchemaModule.&amp;lt;init&gt;(SchemaModule.java:75)
+    at com.android.sdklib.repository.AndroidSdkHandler.&amp;lt;clinit&gt;(AndroidSdkHandler.java:81)
+    at com.android.sdklib.tool.sdkmanager.SdkManagerCli.main(SdkManagerCli.java:73)
+    at com.android.sdklib.tool.sdkmanager.SdkManagerCli.main(SdkManagerCli.java:48)
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema
+    at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+   at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+    ... 5 more
+The command &apos;/bin/sh -c yes | sdkmanager --licenses&apos; returned a non-zero code: 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It looks like when I put together this build script more than a year ago, I probably used some outdated sources of information. It used &lt;a href=&quot;https://developer.android.com/studio/releases/sdk-tools&quot;&gt;deprecated SDK tools&lt;/a&gt;, which apparently doesn’t work with Java 11. I’ve spent quite some time trying to get it to work before I realized that this was the dead end and I have to move on to the new Android &lt;a href=&quot;https://developer.android.com/studio#cmdline-tools&quot;&gt;command-line tools&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My new Dockerfile with Android build environment for CI now looks like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;dockerfile&quot;&gt;&lt;pre class=&quot;language-dockerfile&quot;&gt;&lt;code class=&quot;language-dockerfile&quot;&gt;&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; ubuntu:18.04&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; LANG=&lt;span class=&quot;token string&quot;&gt;&apos;C&apos;&lt;/span&gt; LANGUAGE=&lt;span class=&quot;token string&quot;&gt;&apos;en&apos;&lt;/span&gt; LC_ALL=&lt;span class=&quot;token string&quot;&gt;&apos;C&apos;&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; DEBIAN_FRONTEND=noninteractive&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; GRADLE_HOME=/usr/bin/gradle&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; ANDROID_SDK_ROOT=/opt/android-sdk&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; apt-get update &amp;amp;&amp;amp; apt-get install -y &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        --allow-downgrades --allow-remove-essential --allow-change-held-packages &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        expect &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        git &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        mc &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        gradle &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        unzip &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        wget curl &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        openjdk-11-jdk &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; rm -f /etc/ssl/certs/java/cacerts; &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    /var/lib/dpkg/info/ca-certificates-java.postinst configure&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; PATH &lt;span class=&quot;token variable&quot;&gt;$PATH&lt;/span&gt;:/opt/tools&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; cd /opt &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; wget --output-document=android-commandline-tools.zip &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+        https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; mkdir -p &lt;span class=&quot;token variable&quot;&gt;${ANDROID_SDK_ROOT}&lt;/span&gt;/cmdline-tools &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; unzip android-commandline-tools.zip -d &lt;span class=&quot;token variable&quot;&gt;${ANDROID_SDK_ROOT}&lt;/span&gt;/cmdline-tools &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; mv &lt;span class=&quot;token variable&quot;&gt;${ANDROID_SDK_ROOT}&lt;/span&gt;/cmdline-tools/cmdline-tools &lt;span class=&quot;token variable&quot;&gt;${ANDROID_SDK_ROOT}&lt;/span&gt;/cmdline-tools/latest &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; rm -v android-commandline-tools.zip &lt;span class=&quot;token operator&quot;&gt;\&lt;/span&gt;
+    &amp;amp;&amp;amp; chown -R root.root /opt/android-sdk&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; ANDROID_HOME &lt;span class=&quot;token string&quot;&gt;&quot;${ANDROID_SDK_ROOT}&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; JAVA_HOME  /usr/lib/jvm/java-11-openjdk-amd64&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; PATH &lt;span class=&quot;token variable&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;token variable&quot;&gt;$JAVA_HOME&lt;/span&gt;/bin:&lt;span class=&quot;token variable&quot;&gt;$ANDROID_HOME&lt;/span&gt;/cmdline-tools/latest/bin&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; yes | sdkmanager --licenses&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; sdkmanager --update&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ADD&lt;/span&gt; packages.txt &lt;span class=&quot;token variable&quot;&gt;$ANDROID_SDK_ROOT&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; yes | sdkmanager --package_file=&lt;span class=&quot;token variable&quot;&gt;$ANDROID_SDK_ROOT&lt;/span&gt;/packages.txt&lt;/span&gt;
+
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;ENV&lt;/span&gt; PATH &lt;span class=&quot;token variable&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;token variable&quot;&gt;$ANDROID_HOME&lt;/span&gt;/tools:&lt;span class=&quot;token variable&quot;&gt;$ANDROID_HOME&lt;/span&gt;/tools/bin:&lt;span class=&quot;token variable&quot;&gt;$ANDROID_HOME&lt;/span&gt;/platform-tools&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Broken release build&lt;/h2&gt;
+&lt;p&gt;I finally had an environment on my CI that can build my app. But when it tried to make a release apk, it failed again.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/1cb21/broken-ci-build.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.810126582278485%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABdElEQVQozyWPiarbMBBF/f9f9iAQKG2TZvMuW5JlW5YUL2meT4k6MMxwN2aS7/ebfd/51LZtCCHwweO95/l8Yu0Y8XVdcd7FfZ5nxnHEOUfwHmstIQRC8CSfoO99573vzPNCnuX0pke2CtMZ6qomuMBkHUpqJjsxmIG2aVFdhzYG0bRR2+mOZCpyrGxZjcGNHWKsUU7Szx1qammGGhM07SRJZR45OUkaU+HqCptnjFlK7xT905CMf06Y+4WtLJh0SREymrlCbgIxl5Q+Q21NxNL+FqdYKqrxwfL7B8vxQDge0K5AbZKkPZ9oLifs/Yqqblz0ORqLKeVhrlzVmdw+SPs75+YX2XAnHe7c2hP255Hx8EV3+KLUF0pXkEgz0JuO17LhFxsvkrNAvyTtXFP5Ar21yEWQD4/IffDa5WhboMaMxjxQi6BbFUnTjdjJ8nq98aujCjlyaTBv9d8Yihiu1obqE7K1sT+vm7dGvSRiqaO+/9vxDzBYDOI4Xk9JAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Broken release apk build on CI&quot;
+        title=&quot;Broken release apk build on CI&quot;
+        src=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/f058b/broken-ci-build.png&quot;
+        srcset=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/c26ae/broken-ci-build.png 158w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/6bdcf/broken-ci-build.png 315w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/f058b/broken-ci-build.png 630w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/40601/broken-ci-build.png 945w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/78612/broken-ci-build.png 1260w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/1cb21/broken-ci-build.png 2586w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&gt; Task :app:addSentryProguardSettingsForRelease FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem was found with the configuration of task &apos;:app:addSentryProguardSettingsForRelease&apos; (type &apos;SentryProguardConfigTask&apos;).
+  - Type &apos;io.sentry.android.gradle.SentryProguardConfigTask&apos; property &apos;applicationVariant&apos; is missing an input or output annotation.
+
+    Reason: A property without annotation isn&apos;t considered during up-to-date checking.
+
+    Possible solutions:
+      1. Add an input or output annotation.
+      2. Mark it as @Internal.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Apparentrly, during last few months technologies made a big step forward. Gradle has removed some deprecated plugin API, used by older version of Sentry plugin. And the error only showed itself during release compilation.&lt;/p&gt;
+&lt;p&gt;Sentry released updates, so updating &lt;code class=&quot;language-text&quot;&gt;sentry-android-gradle-plugin&lt;/code&gt; from 1.7.36 to latest 2.1.4 solves the problems. I was also surprized that they bumped their SDK major version twice (from 3.2.0 to 5.2.0).&lt;/p&gt;
+&lt;h2&gt;Fixing R8 full mode&lt;/h2&gt;
+&lt;p&gt;After updating CI environment, I finally was able to build a proper release APK. However, when I run it, the app just crashed.&lt;/p&gt;
+&lt;p&gt;Turns out there was a problem with R8, which appeared after update. Deobfuscated stacktrace looked like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Caused by java.lang.ClassCastException: java.lang.Class cannot be cast to java.lang.reflect.ParameterizedType
+    at retrofit2.HttpServiceMethod.parseAnnotations(HttpServiceMethod.java:46)
+    at retrofit2.ServiceMethod.parseAnnotations(ServiceMethod.java:39)
+    at retrofit2.Retrofit.loadServiceMethod(Retrofit.java:202)
+    at retrofit2.Retrofit.validateServiceInterface(Retrofit.java:189)
+    at retrofit2.Retrofit.create(Retrofit.java:141)
+    ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The issue is not reproduced with &lt;code class=&quot;language-text&quot;&gt;android.enableR8.fullMode=false&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I almost decided to diable R8 full mode but suddenly I found a question with &lt;a href=&quot;https://stackoverflow.com/q/69098376/1199452&quot;&gt;similar problem&lt;/a&gt; on StackOverflow. The answer contains a bunch of ProGuard rules that work, but actually redundant.&lt;/p&gt;
+&lt;p&gt;It looks like in R8 full mode, in &lt;code class=&quot;language-text&quot;&gt;suspend&lt;/code&gt; methods of Retrofit service interface, generic type of implicit parameter &lt;code class=&quot;language-text&quot;&gt;kotlin.coroutines.Continuation&lt;/code&gt; gets erased. That’s why adding just this line ProGuard rules solves the above error:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Updated Google Play requirements&lt;/h2&gt;
+&lt;p&gt;Although I finally was able to fix my CI build pipeline and build rlease APK, the fight wasn’t over yet. Since August 2021 Google Play bumped the requirement for published apps to target Androdi SDK 31. It also now only accepts app bundles (.aab) instead of APKs.
+This is a smaller issue but yet another hurdle I need overcome in order to publish an update to Google Play.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I was not ready to spend that much time trying to make a new app release and it was a bit of a challenge. I did not expect that just after a few months of not working with the project, I would have to go through all this just to make things work. I was going to make this feature available for testing just with one weekend, but ended up working following weekdays’ evenings.&lt;/p&gt;
+&lt;p&gt;Many of these problems could have been avoided. All breaking changes to the APIs of the tools that we use do not happen overnight – they uaually are announced months and sometimes even years. These announcement should not be ignored, and actions should not be put off untill last minute.&lt;/p&gt;
+&lt;p&gt;Everything works now, so not all is bad. Plus, this little experience with scripts I had was quite educational. I was so empowered by it, that on the same evening, I was also able to automate the deployment of this blog to Github Pages.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Publishing Gatsby blog. Part 1.]]></title><description><![CDATA[As promised in my first blog post, I am sharing how I set up Gatsby blog and deployed it to Github Pages.
 There is a lot of material on the…]]></description><link>https://ntoskrnl.github.io/creating-blog/</link><guid isPermaLink="false">https://ntoskrnl.github.io/creating-blog/</guid><pubDate>Wed, 22 Sep 2021 22:30:00 GMT</pubDate><content:encoded>&lt;p&gt;As promised in my first blog post, I am sharing how I set up Gatsby blog and deployed it to Github Pages.
 There is a lot of material on the Internet on this particular topic, but I still want to document my experience in case I need to do it again.&lt;/p&gt;
 &lt;p&gt;I split this into two posts. Here is what we’ll cover in this one:&lt;/p&gt;
