@@ -1,4 +1,155 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 05 Oct 2021 03:10:41 GMT</lastBuildDate><item><title><![CDATA[Countdown timer with Jetpack Compose]]></title><description><![CDATA[In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for…]]></description><link>https://ntoskrnl.github.io/compose-timer-implementation</link><guid isPermaLink="false">https://ntoskrnl.github.io/compose-timer-implementation</guid><pubDate>Tue, 28 Sep 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for it. I looked online and found several good and bad implementations of it. So I decided to share my views and how I would go about this problem.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 17 Oct 2021 01:17:14 GMT</lastBuildDate><item><title><![CDATA[How to draw avatar placeholder in Jetpack Compose]]></title><description><![CDATA[When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list…]]></description><link>https://ntoskrnl.github.io/compose-user-avatar-placeholder</link><guid isPermaLink="false">https://ntoskrnl.github.io/compose-user-avatar-placeholder</guid><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list some people would mostly pay attention to the text, but some will look at images. That’s why a lot of apps that contain list of people, (e.g. a Contacts app), always provide an avatar.&lt;/p&gt;
+&lt;p&gt;Not all users might have avatars. If avatar is missing, it is often replaced with a placeholder. I find that the best placeholder should contain user initials and have different color per user. This way it is easier to identify different people in the list just by looking at the avatar placeholder.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/d1882/material-letter-icons.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 19.62025316455696%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAIAAAABPYjBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA/0lEQVQI1wH0AAv/AOL49ZTk2d/39P///6bsxLXuzf///9Tb/665/vb6///z8e2Wl/bLy//////UtP/MqP///PPe/9uU/vXj/wBDz7wAv6RG0MKR57YFyFYS0Fui29FVZ/8gQfqBnv/yc2nVCAncMjf6t5j/fRb/dQz9vZe8QP+rAfzCR/8AO825AL+kPc6/gOOsBshXDc9YktTKTmD/JEX5dZP/8GVb1AgJ2igt+ayJ/3cM/3EF/LOMuDP/qgD8vTn/ANP073bcztDz7/3//IrlsZvpvP///8bO/5in/u70///q5+h5evO5uf/////Emf+8jf//+O7O/9J3/vHU/6YAq+QqAuEOAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Material letter icons as avatar placeholders&quot;
+        title=&quot;Material letter icons as avatar placeholders&quot;
+        src=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/f058b/material-letter-icons.png&quot;
+        srcset=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/c26ae/material-letter-icons.png 158w,
+/static/7f63bef6c3b81bb0107600e4a734c676/6bdcf/material-letter-icons.png 315w,
+/static/7f63bef6c3b81bb0107600e4a734c676/f058b/material-letter-icons.png 630w,
+/static/7f63bef6c3b81bb0107600e4a734c676/40601/material-letter-icons.png 945w,
+/static/7f63bef6c3b81bb0107600e4a734c676/78612/material-letter-icons.png 1260w,
+/static/7f63bef6c3b81bb0107600e4a734c676/d1882/material-letter-icons.png 1562w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In this article we will look into how we can draw such an avatar placeholder in Jetpack Compose.&lt;/p&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;Just list a few requirements to our avatar placeholder:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It should display initials of the user on a circle with some background color.&lt;/li&gt;
+&lt;li&gt;Text must always be legible (good contrast ratio), e.g. black text on a brown background is no good.&lt;/li&gt;
+&lt;li&gt;If two users have same initials, color should be different.&lt;/li&gt;
+&lt;li&gt;For the same user it should use the same background color.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;Input: user ID and full name.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Convert user data to color using HSV color space.&lt;/li&gt;
+&lt;li&gt;Draw circle.&lt;/li&gt;
+&lt;li&gt;Draw Initials.&lt;/li&gt;
+&lt;li&gt;Put it all together.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Generating color by user name&lt;/h3&gt;
+&lt;p&gt;In our code we are used to represent color as an 32-bit integer (ARGB format). What if we use a hashcode of user name as color? This might work but we often end up with having colors that are too dark, too light or even too transparent.&lt;/p&gt;
+&lt;p&gt;Ideally, we want our color to have a fixed brightness – different users would have different color of the same brightness and saturation levels. Lucky for us there are color encodings that split the color into exactly these components.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;HSL&lt;/strong&gt; (for hue, saturation, lightness) and &lt;strong&gt;HSV&lt;/strong&gt; (for hue, saturation, value; also known as &lt;strong&gt;HSB&lt;/strong&gt;, for hue, saturation, brightness) are alternative representations of the &lt;strong&gt;RGB&lt;/strong&gt; color model, designed in the 1970s by computer graphics researchers to more closely align with the way human vision perceives color-making attributes. In these models, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. — &lt;a href=&quot;https://en.wikipedia.org/wiki/HSL_and_HSV&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We can use HSL color space and fix saturation and lightness. In my app I found that &lt;code class=&quot;language-text&quot;&gt;lightness = 0.4f&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;saturation = 0.5f&lt;/code&gt; work the best.&lt;/p&gt;
+&lt;p&gt;Here is how we can convert a &lt;code class=&quot;language-text&quot;&gt;String&lt;/code&gt; into a color in Android using &lt;code class=&quot;language-text&quot;&gt;HSL&lt;/code&gt; color space:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token annotation builtin&quot;&gt;@ColorInt&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;fun&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toHslColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    saturation&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Float &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.5f&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    lightness&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Float &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.4f&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Int &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; hashCode &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fold&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; acc&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; char &lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt; char&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;code &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; acc &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;37&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; hue &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;hue &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;360&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;absoluteValue&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toFloat&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; ColorUtils&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;HSLToColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;floatArrayOf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;hue&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; saturation&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lightness&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can then generate a color by user name:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// generate full name string&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lastName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;joinToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;separator &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;uppercase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toHslColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The only problem here is that users that share the same name will be given the same color. This can be fixed by adding user ID into the mix.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation variable&quot;&gt;$id&lt;/span&gt; / &lt;span class=&quot;token interpolation variable&quot;&gt;$name&lt;/span&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toHslColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Drawing background circle&lt;/h3&gt;
+&lt;p&gt;Now we can simply draw a circle for a given user full name on &lt;code class=&quot;language-text&quot;&gt;Canvas&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token function&quot;&gt;Canvas&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;modifier &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Modifier&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fillMaxSize&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;drawCircle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;SolidColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Draw initials&lt;/h3&gt;
+&lt;p&gt;To draw initials on top of our background, we need to wrap everithing inside a &lt;code class=&quot;language-text&quot;&gt;Box&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token function&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;contentAlignment &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Alignment&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Center&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; initials &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; lastName&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;uppercase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;text &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; initials&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Putting it all together&lt;/h3&gt;
+&lt;p&gt;When creating a component it would be a good idea to provide some basic customization. In my implementation I only need to have different size and text style.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token annotation builtin&quot;&gt;@Composable&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;UserHead&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    firstName&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    lastName&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    modifier&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Modifier &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Modifier&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    size&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Dp &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;dp&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    textStyle&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; TextStyle &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; MaterialTheme&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;typography&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;subtitle1&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;modifier&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; contentAlignment &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Alignment&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Center&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lastName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;joinToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;separator &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;uppercase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation variable&quot;&gt;$id&lt;/span&gt; / &lt;span class=&quot;token interpolation variable&quot;&gt;$name&lt;/span&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toHslColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; initials &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; lastName&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;uppercase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+            painter &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;ColorPainter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            modifier &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Modifier&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;clip&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;CircleShape&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            contentDescription &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Avatar&quot;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;Canvas&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;modifier &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Modifier&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fillMaxSize&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token function&quot;&gt;drawCircle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;SolidColor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;text &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; initials&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; style &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; textStyle&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Color&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;White&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here is how the component is rendered:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 428px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/47730/circle-avatar-placeholder.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABjklEQVQoz52Sy27aQBSGeYnAwilZgBmPZ4aZAVpRxTI3g4MByeGiVoIWRXmDSFlk0UdpniGrqIu821/NcZwoWUVZfDq/zpzzz+1UarUa6qenqHsexTOvgHKfoFKtVuE3m1BSQgiBpixwWpZI+QbxnFPv8q62Uj05AWcMptOBNQY/lcYPpUlra6G1LpqVejGy1lIMRbExrUkJY0xhGDAGaQ1uwzYeWBsPXONGajApcJGmOB6P2Gw22O12WK1WuMxz7Pd7bLdbHA4Hwq33er3CsMUYvmmNe9nB068rPP2+xl/ZgVEK8WCARZYhSRIsl0uMx2PEcUzGWZZRnE6nmM/nr4buhMoY/JEGj93v+NePcSc0uFKYJgnt7sxck2t2RrPZDHmeY7FYYL1eo9vt0tXfvOFXY3AlFI6hQs9atI1Bv9/HaDSiUw2HQ0RRRPo8ijCZTEinaUp17r3pl5uNBkQYIuAcjTAkOOcIOUcQBGCt1gvuNmVs+T5p3/epztVXyjn84uaQZtAjnC5n88N4Hv4DLbocTuFez+YAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Avatar placeholder with initials and color background example&quot;
+        title=&quot;Avatar placeholder with initials and color background example&quot;
+        src=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/47730/circle-avatar-placeholder.png&quot;
+        srcset=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/c26ae/circle-avatar-placeholder.png 158w,
+/static/41bfed567aabfc18eae15a48c53ef39c/6bdcf/circle-avatar-placeholder.png 315w,
+/static/41bfed567aabfc18eae15a48c53ef39c/47730/circle-avatar-placeholder.png 428w&quot;
+        sizes=&quot;(max-width: 428px) 100vw, 428px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;With just 20 lines of code we have created a simple Jetpack Compose component to display colorful placeholder for avatars with user initials. The full code can be found &lt;a href=&quot;https://gist.github.com/ntoskrnl/14622d88cad3387d14786aa259e4653f&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Countdown timer with Jetpack Compose]]></title><description><![CDATA[In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for…]]></description><link>https://ntoskrnl.github.io/compose-timer-implementation</link><guid isPermaLink="false">https://ntoskrnl.github.io/compose-timer-implementation</guid><pubDate>Tue, 28 Sep 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for it. I looked online and found several good and bad implementations of it. So I decided to share my views and how I would go about this problem.&lt;/p&gt;
 &lt;h2&gt;The problem&lt;/h2&gt;
 &lt;p&gt;Let’s set our goal first. We want to implement a component that allows you to display a countdown timer.&lt;/p&gt;
 &lt;ul&gt;
