@@ -1,26 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 27 Oct 2021 03:41:59 GMT</lastBuildDate><item><title><![CDATA[Effective team communication in Slack]]></title><description><![CDATA[Disclaimer: The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a…]]></description><link>https://ntoskrnl.github.io/blog/effective-team-communication-in-slack</link><guid isPermaLink="false">https://ntoskrnl.github.io/blog/effective-team-communication-in-slack</guid><pubDate>Wed, 27 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://ntoskrnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 30 Oct 2021 04:27:49 GMT</lastBuildDate><item><title><![CDATA[Effective team communication in Slack]]></title><description><![CDATA[Disclaimer: The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a…]]></description><link>https://ntoskrnl.github.io/blog/effective-team-communication-in-slack</link><guid isPermaLink="false">https://ntoskrnl.github.io/blog/effective-team-communication-in-slack</guid><pubDate>Sat, 30 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a paid ad, and I am not affiliated with Slack in any way.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Even though Slack has become one of the most popular messaging platforms used by tech companies all over the world, I was surprised to find out that lots of teams are still relying on emails, Skype, and other conventional communications tools. I understand that Slack is not a silver bullet and won’t solve all the communication issues in your team, but I still encourage you to try it.&lt;/p&gt;
 &lt;p&gt;At my previous workplace, we initially used Skype. But as the company grew, we quickly transitioned to Slack. Not everything was convenient at first, we had to restructure our chats several times and introduce some rules to make it work for us. But over 5 years there were no major problems and, in my opinion, moving all communications to slack has only benefited us.&lt;/p&gt;
-&lt;p&gt;In this article, I will try to give some tips on how to organize your Slack to make it work for your growing company.&lt;/p&gt;
-&lt;h2&gt;Who is this article for&lt;/h2&gt;
+&lt;p&gt;In this article, I will try to give some tips on how to organize your Slack to make it work for your growing company. It might be useful for:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Growing teams who are still using conventional messenger apps.&lt;/li&gt;
-&lt;li&gt;Teams that are already using Slack but want to improve communications there.&lt;/li&gt;
+&lt;li&gt;Teams that are already using Slack but want to improve their communications.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Problems of private groups and direct messaging&lt;/h2&gt;
-&lt;p&gt;I see a lot of problems that are caused by inefficiencies in internal communication in my current workplace. The company is split into teams by platform and functions (i.e. backend, web, Android, iOS, etc). Even though we have Slack in our company, many teams mostly interact over Skype through private groups and direct messages. In some situations, it takes much more time than it should to find answers or get help.&lt;/p&gt;
-&lt;h3&gt;Problem: Direct messages cause wasting time through redirects&lt;/h3&gt;
-&lt;p&gt;Many times I have a question about the API, but I don’t know exactly whom should I address it. Ideally, I just need to address my question to the backend team and don’t care who will reply. But because there is no public group where I can do it, I have to ask individual members of the backend team in direct messages. Let’s use the following example to illustrate the problem.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; It’s Thursday afternoon, Anton (Android) has a few questions about the API. He remembers, a month ago, similar functionality was done by Ivan on the server-side. He writes to Ivan, but Ivan is a busy man (just like his other peers on the backend team) and he works in a different time zone. Ivan replies with some reasonable delay and tells that it was not him who implemented this API. It’s better to ask Yuriy. Anton forwards the question to Yuriy, who often comes to work earlier and leaves earlier, so he is already off duty. Later turns out Yuriy has a day off on Friday. On Monday early morning, Yuriy replies. Because they both realized there is some problem, Yuriy adjusted the API a bit. Anton finishes his task and opens PR. After code review, the feature gets to QA on Tuesday morning.&lt;/p&gt;
-&lt;p&gt;This example is quite extreme but it happened before. We can see that we’ve wasted quite some time on redirects here. But if Anton wrote to Yuriy first, he would have had a higher chance to get his answer on Thursday speeding up the release of the feature by at least 1 day. But how would he know whom to write?&lt;/p&gt;
-&lt;h3&gt;Problem: Direct messages slow down knowledge sharing&lt;/h3&gt;
+&lt;p&gt;I see a lot of problems that are caused by inefficiencies in internal communication in my current workplace. The company is split into teams by platform and functions (i.e. backend, web, Android, iOS, etc). Even though we have Slack in our company, many teams mostly interact over Skype through private groups and direct messages. In some situations, it takes much more time than it should to find answers or get help, especially for new employees.&lt;/p&gt;
+&lt;p&gt;Below I will try to outline some problems that we have and how can we organize communications in the company to help mitigate them.&lt;/p&gt;
+&lt;h3&gt;Problem: Too many redirects&lt;/h3&gt;
+&lt;p&gt;Many times I have a question about the API, but I don’t know exactly whom should I address it. Ideally, I just need to address my question to the backend team and don’t care who will reply. But because there is no public group where I can do it (email doesn’t count), I have to ask individual members of the backend team in direct messages. This sometimes leads to redirects and I have to write the same thing to several people before I can get my answer. I hope the example bellow will better illustrate the situation.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/e04e6/communication-redirects.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 40.50632911392405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABFklEQVQoz02RXbKDIAyF2f/ibt+carX1DxWqoHYBufNlwPEhcEJOkpNgQggSY5R93/XGB2c/v93xnXPngU3btjIMgxzHId57qapKtpSUidu2XcnrukpZlvL9fhXfY3DNOI7y93hI9XpJiFG6vpe473L+fpcSknJxmo7WSj8MKmRxTgtfCgEUfb/f8vl8pOs6NRKstYqJ4fd9r9YST5j48/nURkxp8qgEnfeqBgM3TSPrtul4Ie3POSd2mnSSeZ7VB6MWnkEmSthdTHugCapIoAjEPNKyLLoe3V8I2tCnfcI1HCh0y6KJjD9Nk3aGhIEpnt8xclDl01Qx7dvkHzrPUzvUda3q8O+/RyN2DCZG0aIo9Gai/Gn/8FlVayY7bhYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Communication redirects causes development delay&quot;
+        title=&quot;Communication redirects causes development delay&quot;
+        src=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/f058b/communication-redirects.png&quot;
+        srcset=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/c26ae/communication-redirects.png 158w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/6bdcf/communication-redirects.png 315w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/f058b/communication-redirects.png 630w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/40601/communication-redirects.png 945w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/78612/communication-redirects.png 1260w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/e04e6/communication-redirects.png 2152w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; “Communication redirects”. It’s Thursday afternoon, &lt;strong&gt;AD&lt;/strong&gt; (Android) has a few questions about the API. He asks his team lead &lt;strong&gt;AH&lt;/strong&gt; about it, who remembers, a month ago, similar functionality was done by &lt;strong&gt;IK&lt;/strong&gt; on the server-side. Anton then writes to IK, but he is currently working on a high-priority task, and replies with a short delay. IK tells that it was not him who implemented this API, it’s better to ask &lt;strong&gt;YS&lt;/strong&gt;. Anton forwards the question to YS, who came to work earlier today and is already off duty. Later turns out YS has a day off on Friday. On Monday early morning, YS replies. Because they both realized there is some problem, YS adjusted the API a bit. AD finishes his task and opens PR. After code review, the build is ready for testing on Tuesday morning.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;This example is quite extreme but it has happened before. We can see that we’ve wasted quite some time on redirects here. But if Anton wrote to Yuriy first, he would have had a higher chance to get his answer on Thursday speeding up the release of the feature by at least 1 day. But how would he know whom to write?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Direct chats (and lack of public groups) cause wasted time through redirects.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;One of the solutions would be to have a public chat for backend team where anyone could ask question. Other people who are also interested in the topic, can see it and will be aware of what’s going on.&lt;/p&gt;
+&lt;h3&gt;Problem: No knowledge sharing&lt;/h3&gt;
 &lt;p&gt;Because a lot of cross-team communication is done in direct messages, other team members are unaware of conversations (and the decisions that happened during these conversations). If there is someone else involved (e.g., iOS), we have to tell them about it later – probably in yet another direct chat. This might come up as a bug in iOS or can be completely overlooked.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; TODO.&lt;/p&gt;
-&lt;h3&gt;Problem: Private chats slow down onboarding&lt;/h3&gt;
-&lt;p&gt;As someone new to the company, I won’t be able to learn how things work and why certain decisions were made by simply searching through the messaging history. It’s all in private chats.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; TODO.&lt;/p&gt;
+&lt;p&gt;We have many platform teams working on same projects, sometimes almost in parallel, sometimes with a substantial delay in time. Discussions with the UX designer can happen 1:1 and can result in some changes in the mockups. It is very easy to forget to notify other platform about the change. Let’s take a look at the following example.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt; &lt;strong&gt;Example 2.&lt;/strong&gt; “Changes in requirements are not always propagated”. &lt;strong&gt;PE&lt;/strong&gt; (Android) started working on the project first. He has implemented some features and sent them to QA for testing. iOS developer &lt;strong&gt;AB&lt;/strong&gt; started a bit later and found an edge case that was not covered by the mockup. He asked designer about it, and after a discussion they have updated the mockup. Unfortunately they forgot to notify PE about it (which can happen to anyone). As QA started testing Android, they found out that it doesn’t look exactly like the mockup and returned it as an implementation bug.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Although, no matter how hard we try to collaborate and discuss questions our peers from other platform, we can sometimes forget to do it. As a result, we have to waste some time on fixing more bugs and testing them. This problem is especially prominent in distributed teams.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Direct messages slow down knowledge sharing&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If all the communications with designer were conducted in a public channel, all interested parties would have been notified about the updated requirements automatically.&lt;/p&gt;
+&lt;h3&gt;Problem: Ineffective onboarding&lt;/h3&gt;
+&lt;p&gt;A growing company needs an effective onboarding process. And that’s not very easy to do, especially when you don’t have enough resources. If a new employee needs help, there should be a way for them to get it.&lt;/p&gt;
+&lt;p&gt;When nobody is maintaining plublic channels and just texts to each other directly, a newcomer doesn’t even know whom to ask, except their team lead. This puts a huge load on the team lead and makes onboarding process painfully slow.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Direct messages slow down onboarding&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Onboarding problem must be solved on a process level, but this will be never. What you can do now, is encourage discussions of work issues in public channels. This will bring a lot of benefits to onoarding of new employees.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Public channels will let new employees learn what is happening in the company.&lt;/li&gt;
+&lt;li&gt;In the team’s public channel, newcomers will be able to see how their team mates answer questions – next time they will know the answers themselves.&lt;/li&gt;
+&lt;li&gt;Having access to the entire public communication history of the company will enabled them find some answers without bothering their peers.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;Comparison of Slack with conventional messaging apps&lt;/h2&gt;
 &lt;p&gt;Before I go into how exactly we organized Slack communications in my previous workplace, I would like to compare Slack with personal messaging apps. Let’s first look at “conventional” messengers.&lt;/p&gt;
 &lt;h3&gt;Pros and cons of conventional messengers&lt;/h3&gt;
@@ -44,7 +96,7 @@
 &lt;h3&gt;Why Slack is better for growing teams&lt;/h3&gt;
 &lt;p&gt;The advantages of Slack compared to conventional messengers are:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Each “Organization” in Slack manages its own users.&lt;/li&gt;
+&lt;li&gt;Each “Organization” in Slack manages its users.&lt;/li&gt;
 &lt;li&gt;There are public and private “channels”.&lt;/li&gt;
 &lt;li&gt;In the channel, conversations may be organized by threads.&lt;/li&gt;
 &lt;li&gt;Slack supports many plugins, chatbots, and integrations with 3rd-party apps.&lt;/li&gt;
@@ -52,7 +104,7 @@
 &lt;li&gt;You can customize notifications based on mentions and keywords.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Disadvantages of Slack&lt;/h3&gt;
-&lt;p&gt;Slack is not for every company, as it has its own disadvantages (compared to conventional messengers). Here are the ones I could think of:&lt;/p&gt;
+&lt;p&gt;Slack is not for every company, as it has its disadvantages (compared to conventional messengers). Here are the ones I could think of:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Slack is quite expensive (with pricing per active user).&lt;/li&gt;
 &lt;li&gt;It has a limit of 15 people in video calls (e.g. Telegram supports more).&lt;/li&gt;
@@ -103,6 +155,14 @@
 #ios-private
 #qa-private
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;How to maintain a public channel&lt;/h3&gt;
+&lt;p&gt;To make communications in Slack more efficient, it is important to follow certain rules when chatting in public channels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Keep questions on the topic.&lt;/strong&gt; Make sure people don’t ask backend questions in &lt;code class=&quot;language-text&quot;&gt;#product&lt;/code&gt; channel. Add some guidelines to description. When question is asked in a wrong place, redirect them immediately to the right channel.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Reply in a thread.&lt;/strong&gt; When a question is asked in a public channel, reply in a thread. This will ensure other external members will not be notified.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Moderate conversations.&lt;/strong&gt; Make sure conversations are on a topic and professional (jokes and sarcasm must be redirected to appropriate channel). Don’t blame people for problems, suggest solutions and preventative measures.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. Ensure quick reaction.&lt;/strong&gt; It will all work better if questions are answered. Try to answer questions asap. If you don’t know the answer, but you know the person who does, reply to the question by mentioning that person. The team can also arrange a schedule for team members to answer questions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Mark questions as resolved.&lt;/strong&gt; Usually the one who asked should mark their question as resolved. If there are multiple questions, the channel owner team will not which questions are still waiting for an answer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Collect common questions and answers.&lt;/strong&gt;. You might see that questions repeat. Ask people to search before they ask, pin useful conversation threads/resources or put common answers to a Confluence page and place a link to the topic of the chat.&lt;/p&gt;
 &lt;h3&gt;How to stay responsive on Slack&lt;/h3&gt;
 &lt;p&gt;Here is how I would work with Slack to make sure it doesn’t distract me too much and I am still responsive.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1. Star important chats.&lt;/strong&gt; To be in close communication with people and teams that I work with, I will add them to favorites (“star” them). This way, they are displayed on top of the list and there is less chance to miss an important message.&lt;/p&gt;
@@ -123,14 +183,6 @@
 &lt;li&gt;Depending on my current tasks, I might sometimes need to join other public channels to ask questions.&lt;/li&gt;
 &lt;li&gt;I would Leave channels that I haven’t read for a while (Slack has reminders for that).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;How to maintain a public channel&lt;/h3&gt;
-&lt;p&gt;To make communications in Slack more efficient, it is important to follow certain rules when chatting in public channels.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Keep questions on the topic.&lt;/strong&gt; Make sure people don’t ask backend questions in &lt;code class=&quot;language-text&quot;&gt;#product&lt;/code&gt; channel. Redirect them immediately to the right place.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Reply in a thread.&lt;/strong&gt; When a question is asked in a public channel, reply in a thread. This will ensure other external members will not be notified.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Moderate conversations.&lt;/strong&gt; Make sure conversations are on a topic and professional (jokes and sarcasm must be redirected to appropriate channel). Don’t blame people for problems, suggest solutions and preventative measures.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. Ensure quick reaction.&lt;/strong&gt; It will all work better if questions are answered. Try to answer questions asap. If you don’t know the answer, but you know the person who does, reply to the question by mentioning that person. The team can also arrange a schedule for team members to answer questions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Mark questions as resolved.&lt;/strong&gt; Usually the one who asked should mark their question as resolved. If there are multiple questions, the channel owner team will not which questions are still waiting for an answer.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;6. Collect common questions and answers.&lt;/strong&gt;. You might see that questions repeat. Ask people to search before they ask, pin useful conversation threads/resources or put common answers to a Confluence page and place a link to the topic of the chat.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;If you decided to use Slack, I recommend placing this article in your company’s public knowledge base, such as Confluence. Ensure that everyone on your team is on the same page by letting them read the guidelines. Monitor how it works and listen to the feedback. Experiment and adjust the rules to suit your needs.&lt;/p&gt;
 &lt;p&gt;The presented structure of Slack channels may not work for every company. Some of the points may seem too obvious, but it is still useful to be aware of them. I hope someone will find this useful and improve their communication.&lt;/p&gt;
