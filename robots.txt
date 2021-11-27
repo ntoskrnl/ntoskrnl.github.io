@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://ntoskrnl.github.io/sitemap/sitemap-index.xml
-Host: https://ntoskrnl.github.io
+Sitemap: https://www.antondanshin.com/sitemap/sitemap-index.xml
+Host: https://www.antondanshin.com
