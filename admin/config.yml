@@ -17,7 +17,7 @@ collections:
     create: true
     media_folder: ""
     public_folder: ""
-    preview_path: blog/{{slug}}
+    preview_path: blog/{{dirname}}
     nested:
       depth: 10
     fields:
