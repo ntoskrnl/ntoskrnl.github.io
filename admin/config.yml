@@ -3,7 +3,7 @@ backend:
   repo: ntoskrnl/website
   branch: main
   squash_merges: true
-  preview_context: vercel/deployment
+  preview_context: vercel/deploy-preview
 
 publish_mode: editorial_workflow
 
@@ -17,6 +17,7 @@ collections:
     create: true
     media_folder: ""
     public_folder: ""
+    preview_path: blog/{{slug}}
     nested:
       depth: 10
     fields:
