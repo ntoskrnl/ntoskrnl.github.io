@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: ntoskrnl/website
+  branch: main
+  preview_context: my-provider/deployment
+
+publish_mode: editorial_workflow
+
+media_folder: static/assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: blog
+    label: Blog
+    folder: content/blog
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: title, label: Title }
+      - { name: date, label: Date, widget: datetime }
+      - { name: updated, label: Updated, widget: datetime }
+      - { name: draft, label: Draft, widget: boolean, default: true }
+      - { name: body, label: Body, widget: markdown }
