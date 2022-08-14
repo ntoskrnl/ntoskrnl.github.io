@@ -2,7 +2,8 @@ backend:
   name: github
   repo: ntoskrnl/website
   branch: main
-  preview_context: my-provider/deployment
+  squash_merges: true
+  preview_context: vercel/deployment
 
 publish_mode: editorial_workflow
 
@@ -14,10 +15,17 @@ collections:
     label: Blog
     folder: content/blog
     create: true
+    media_folder: ""
+    public_folder: ""
+    nested:
+      depth: 10
     fields:
-      - { name: path, label: Path }
       - { name: title, label: Title }
+      - { name: description, label: Summary }
       - { name: date, label: Date, widget: datetime }
       - { name: updated, label: Updated, widget: datetime }
       - { name: draft, label: Draft, widget: boolean, default: true }
       - { name: body, label: Body, widget: markdown }
+    # adding a meta object with a path property allows editing the path of entries
+    # moving an existing entry will move the entire sub tree of the entry to the new location
+    meta: { path: { widget: string, label: "Path", index_file: "index" } }
