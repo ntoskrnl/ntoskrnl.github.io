@@ -9,6 +9,7 @@ publish_mode: editorial_workflow
 
 media_folder: static/assets/uploads
 public_folder: /assets/uploads
+site_url: https://www.antondanshin.com/
 
 collections:
   - name: blog
