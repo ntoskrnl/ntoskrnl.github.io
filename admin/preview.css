@@ -1,0 +1,2876 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+pre[class*="language-"].line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+	position: relative;
+	white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	font-size: 100%;
+	left: -3.8em;
+	width: 3em; /* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+	.line-numbers-rows > span {
+		display: block;
+		counter-increment: linenumber;
+	}
+
+		.line-numbers-rows > span:before {
+			content: counter(linenumber);
+			color: #999;
+			display: block;
+			padding-right: 0.8em;
+			text-align: right;
+		}
+
+/*
+ * Site styles: design tokens, base elements, prose, components.
+ *
+ * Colors are theme tokens defined once with light-dark(light, dark). The
+ * theme is chosen by `data-theme` on <html> (set before first paint by
+ * src/theme/init-script.js); without it the browser follows the OS through
+ * `color-scheme: light dark`. Components use tokens only, never raw colors.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Color tokens */
+  --color-bg: light-dark(#ffffff, #0f1217);
+  --color-surface: light-dark(#f6f7f9, #171b22);
+  --color-border: light-dark(#e3e6eb, #2a303a);
+  --color-text: light-dark(#1f2430, #d9dde4);
+  --color-text-muted: light-dark(#5b6472, #9aa3b2);
+  --color-heading: light-dark(#11151c, #f1f3f6);
+  --color-primary: light-dark(#0b5cad, #6cb4ff);
+  --color-primary-soft: color-mix(
+    in srgb,
+    var(--color-primary) 7%,
+    var(--color-bg)
+  );
+  --color-danger: light-dark(#b00020, #ff8a9b);
+
+  /* Layout */
+  --maxWidth-wrapper: 44rem;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --radius: 0.5rem;
+
+  /* Typography */
+  --font-sans:
+    "Inter Variable", Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --fontWeight-normal: 400;
+  --fontWeight-medium: 500;
+  --fontWeight-semibold: 600;
+  --fontWeight-bold: 700;
+
+  /* One type scale (about 1.25), body 18px; small screens override --text-base */
+  --text-base: 1.125rem;
+  --text-sm: 0.875rem;
+  --fontSize-0: var(--text-sm);
+  --fontSize-1: 1rem;
+  --fontSize-2: 1.25rem;
+
+  /* One line-height system: body, headings, small print, code */
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+  --leading-small: 1.45;
+  --leading-code: 1.6;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --text-base: 1.0625rem;
+  }
+}
+
+/* Base */
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--fontWeight-normal);
+  line-height: var(--leading-body);
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+hr {
+  height: 1px;
+  margin: 2em 0;
+  border: 0;
+  background: var(--color-border);
+}
+
+/* Bold: in dark mode light text on a dark background looks heavier than it
+   is, so 600 vs 400 hardly reads as bold; there it gets a heavier weight, 650
+   (Inter is a variable font), and the brighter heading color. In light mode
+   600 in the text color is right (700 looks heavy). light-dark() cannot
+   switch a weight, so the dark weight is set per theme: data-theme, or the OS
+   when nothing is chosen. */
+:root {
+  --strong-weight: var(--fontWeight-semibold);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --strong-weight: 650;
+  }
+}
+
+:root[data-theme="dark"] {
+  --strong-weight: 650;
+}
+
+strong,
+b {
+  color: light-dark(currentcolor, var(--color-heading));
+  font-weight: var(--strong-weight);
+}
+
+/* inside a link keep the link color */
+a strong,
+a b {
+  color: inherit;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.4em 0 0.45em;
+  color: var(--color-heading);
+  font-family: var(--font-sans);
+  font-weight: var(--fontWeight-semibold);
+  line-height: var(--leading-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  margin: 0 0 0.5em;
+  font-size: clamp(2rem, 1.5rem + 2.4vw, 2.75rem);
+  font-weight: var(--fontWeight-bold);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  margin-top: 1.3em;
+  font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  letter-spacing: -0.015em;
+}
+
+h4 {
+  margin-top: 1.2em;
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Prose: one margin rhythm (em), one left edge */
+
+p,
+ul,
+ol,
+pre,
+figure,
+table,
+blockquote {
+  margin: 0 0 1.1em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  padding: 0 0 0 1.5em;
+  list-style-position: outside;
+}
+
+ol {
+  padding-left: 1.75em;
+  font-variant-numeric: tabular-nums;
+}
+
+li + li {
+  margin-top: 0.3em;
+}
+
+li::marker {
+  color: var(--color-text-muted);
+}
+
+li > p {
+  margin-bottom: 0.5em;
+}
+
+li > :last-child {
+  margin-bottom: 0;
+}
+
+li > ul,
+li > ol {
+  margin: 0.3em 0 0;
+  padding-left: 1.25em;
+}
+
+/* A list belongs to the sentence that introduces it: half the usual gap */
+
+p:has(+ ul, + ol) {
+  margin-bottom: 0.55em;
+}
+
+/* Callout (every blockquote: Disclaimer, Pro Tip, summary notes) */
+
+blockquote {
+  padding: 0.9em 1.1em;
+  background: var(--color-primary-soft);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--color-text);
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+blockquote > p:first-child > strong:first-child {
+  color: var(--color-primary);
+}
+
+/* A collapsed box ("For nerds" deep dives, personal backstory), written as raw
+   HTML in the markdown:
+   <details class="fold"><summary>…</summary> (blank line) markdown </details> */
+
+details.fold {
+  margin: 0 0 1.1em;
+  padding-bottom: 0.1px; /* keeps the last child's margin inside the card */
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+details.fold > summary {
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+  padding: 0.7em 1.1em;
+  color: var(--color-heading);
+  font-weight: var(--fontWeight-semibold);
+  list-style: none;
+  cursor: pointer;
+}
+
+details.fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.fold > summary::before {
+  content: "▸";
+  color: var(--color-primary);
+  transition: transform 0.15s;
+}
+
+details.fold[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+details.fold[open] > summary {
+  margin-bottom: 0.9em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+details.fold > :not(summary) {
+  margin-right: 1.1em;
+  margin-left: 1.1em;
+}
+
+details.fold > table {
+  width: calc(100% - 2.2em);
+}
+
+details.fold :not(pre) > code {
+  background: var(--color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details.fold > summary::before {
+    transition: none;
+  }
+}
+
+/* Links */
+
+a {
+  color: var(--color-primary);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Links to other sites in an article open in a new tab
+   (gatsby-remark-new-tab-links) and end with a small arrow. The arrow is a
+   mask filled with the link's own color, so it follows the theme; the alt
+   text after the slash tells screen readers about the new tab. Image links
+   (they open the original) get no arrow. */
+[itemprop="articleBody"]
+  a[target="_blank"]:not(.gatsby-resp-image-link):not(
+    :has(.gatsby-resp-image-wrapper)
+  )::after {
+  content: "";
+  content: "" / " (opens in a new tab)";
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.2em;
+  background-color: currentcolor;
+  opacity: 0.75;
+  /* the stroke color is only the mask shape, not a visible color */
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 2.5h8.5V11M13.5 2.5 2.5 13.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+/* Code (colors for highlighted blocks live in prism-theme.css) */
+
+:not(pre) > code {
+  padding: 0.1em 0.35em;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+/* Tables */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375em;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 0.5em 0.75em;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+th {
+  color: var(--color-heading);
+  font-weight: var(--fontWeight-semibold);
+}
+
+/* Images and captions. Images are left-aligned (see wrapperStyle in
+   gatsby-config.js) so image, caption and text share one left edge. */
+
+.gatsby-resp-image-wrapper {
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+/* Images with transparent pixels (PNG app screenshots, cut-outs) have no
+   frame: gatsby-remark-images leaves the blur-up placeholder's inline
+   background-image out for them (disableBgImageOnAlpha), so a wrapper whose
+   placeholder has none is a transparent image. backgroundColor: transparent
+   in gatsby-config.js removes the white fill. */
+.gatsby-resp-image-wrapper:has(
+  .gatsby-resp-image-background-image:not([style*="background-image"])
+) {
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+p:has(> small:only-child) {
+  margin-bottom: 1.5em;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-small);
+}
+
+/* A caption sits close under its image */
+p:has(> .gatsby-resp-image-wrapper) + p:has(> small:only-child) {
+  margin-top: -0.65em;
+}
+
+small {
+  font-size: inherit;
+}
+
+/* Layout */
+
+.global-wrapper {
+  margin: 0 auto;
+  max-width: var(--maxWidth-wrapper);
+  padding: var(--spacing-8) var(--spacing-5) var(--spacing-12);
+}
+
+.global-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  min-height: 2.5rem;
+  margin-bottom: var(--spacing-10);
+}
+
+.main-heading {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+  letter-spacing: -0.025em;
+}
+
+.header-link-home {
+  color: var(--color-heading);
+  font-weight: var(--fontWeight-semibold);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.header-link-home:hover {
+  color: var(--color-primary);
+}
+
+footer {
+  padding: 0;
+}
+
+.site-footer {
+  margin-top: var(--spacing-12);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* Theme toggle: quiet ghost icon button, glyph aligned to the column edge */
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 -0.6875rem 0 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--color-surface);
+  color: var(--color-heading);
+}
+
+.theme-toggle svg {
+  grid-area: 1 / 1;
+  width: 1.125rem;
+  height: 1.125rem;
+  transition:
+    opacity 0.2s,
+    transform 0.3s;
+}
+
+:root:not([data-theme="dark"]) .theme-toggle__sun,
+:root[data-theme="dark"] .theme-toggle__moon {
+  opacity: 0;
+  transform: rotate(-40deg) scale(0.6);
+}
+
+/* Needs JavaScript: hidden until the init script has set data-theme */
+:root:not([data-theme]) .theme-toggle {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle svg {
+    transition: none;
+  }
+}
+
+/* Post header and meta */
+
+.post-meta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-small);
+  letter-spacing: 0.01em;
+}
+
+.blog-post header {
+  margin-bottom: var(--spacing-6);
+}
+
+.blog-post header h1 {
+  margin: 0 0 var(--spacing-3);
+}
+
+.blog-post header p {
+  margin: 0;
+}
+
+.blog-post-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin: var(--spacing-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-post-nav li {
+  max-width: 48%;
+  margin: 0;
+}
+
+.blog-post-nav li:last-child {
+  margin-left: auto;
+  text-align: right;
+}
+
+.blog-post-nav a {
+  text-decoration: none;
+}
+
+.blog-post-nav a:hover {
+  text-decoration: underline;
+}
+
+.blog-post-comments {
+  margin-top: var(--spacing-12);
+}
+
+/* Home: bio and post list */
+
+.bio {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
+}
+
+.bio p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: var(--leading-small);
+}
+
+.bio p strong {
+  color: var(--color-heading);
+}
+
+.bio-avatar {
+  flex: none;
+  border-radius: 100%;
+}
+
+/* Safari fix */
+.bio-avatar img {
+  border-radius: 100%;
+}
+
+/* On the home page the name and bio read as one intro block */
+.global-wrapper[data-is-root-path="true"] .global-header {
+  margin-bottom: var(--spacing-5);
+}
+
+.global-wrapper[data-is-root-path="true"] .bio {
+  margin-bottom: var(--spacing-10);
+}
+
+.section-label {
+  margin: 0 0 var(--spacing-3);
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: var(--fontWeight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+}
+
+.post-list > li,
+.post-list > li + li {
+  margin: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Archive row: date and reading time in their own column, title and summary
+   beside them. The whole row is clickable through the title link. */
+.post-list-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0 var(--spacing-6);
+  margin: 0;
+  padding: var(--spacing-6) 0;
+}
+
+.post-list-item__meta {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-top: 0.3rem;
+  white-space: nowrap;
+}
+
+.post-list-item h3 {
+  margin: 0 0 var(--spacing-1);
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.post-list-item h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.post-list-item:hover h3 a {
+  color: var(--color-primary);
+}
+
+.post-list-item__body p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: var(--leading-small);
+}
+
+/* "Posts | Drafts" tabs (only where drafts are shown, see post-tabs.jsx) */
+.post-tabs ul {
+  display: flex;
+  gap: var(--spacing-6);
+  margin: 0 0 var(--spacing-3);
+  padding: 0;
+  list-style: none;
+}
+
+.post-tabs li {
+  margin: 0;
+}
+
+/* Current tab and link tab are both plain inline text with the same box, so
+   their baselines line up */
+.post-tabs__tab {
+  display: block;
+  margin: 0;
+  padding: var(--spacing-1) 0;
+  line-height: var(--leading-small);
+  border-bottom: 2px solid transparent;
+}
+
+a.post-tabs__tab {
+  text-decoration: none;
+}
+
+a.post-tabs__tab:hover {
+  color: var(--color-primary);
+}
+
+.post-tabs__tab--current {
+  color: var(--color-heading);
+  border-bottom-color: var(--color-primary);
+}
+
+@media (max-width: 40rem) {
+  .post-list-item {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-1);
+  }
+
+  .post-list-item__meta {
+    flex-direction: row;
+    padding-top: 0;
+  }
+
+  .post-list-item__meta span + span::before {
+    content: "·";
+    margin: 0 0.4em;
+  }
+}
+
+/* Widget placeholders (see plugins/gatsby-remark-widgets). Kept global and
+   tiny so there is no layout jump before the lazy widget code arrives. */
+
+.widget-placeholder {
+  margin: var(--spacing-6) 0;
+  min-height: 8rem;
+}
+
+.widget-placeholder[data-mounted] {
+  min-height: 0;
+  margin: 0;
+}
+
+.widget-placeholder[data-mounted] .widget-fallback {
+  display: none;
+}
+
+.widget-fallback {
+  color: var(--color-text-muted);
+}
+
+.widget-error {
+  margin: var(--spacing-6) 0;
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  color: var(--color-danger);
+  font-family: var(--font-mono);
+}
+
+/*
+ * Syntax highlighting (prismjs token classes) and code block chrome.
+ * Colors are light-dark() pairs, so the theme follows the site's data-theme.
+ * Palettes follow GitHub Primer; text on --color-surface keeps >= 4.5:1.
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--color-text);
+  background: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-code);
+  text-align: left;
+  text-shadow: none;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre[class*="language-"] {
+  margin: 0;
+  padding: 1em 1.25em;
+  overflow: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.gatsby-highlight {
+  margin: 0 0 1.1em;
+}
+
+/* Inline code that gatsby-remark-prismjs marks with a language */
+:not(pre) > code[class*="language-"] {
+  font-size: 0.875em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: light-dark(#59636e, #8b949e);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--color-text-muted);
+}
+
+.token.namespace {
+  opacity: 0.8;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.boolean,
+.token.number,
+.token.attr-name {
+  color: light-dark(#0550ae, #79c0ff);
+}
+
+.token.selector,
+.token.inserted {
+  color: light-dark(#116329, #7ee787);
+}
+
+.token.string,
+.token.char,
+.token.builtin,
+.token.attr-value,
+.token.url {
+  color: light-dark(#0a3069, #a5d6ff);
+}
+
+.token.operator,
+.token.entity {
+  color: light-dark(#0550ae, #79c0ff);
+  background: none;
+}
+
+.token.atrule,
+.token.keyword {
+  color: light-dark(#cf222e, #ff7b72);
+}
+
+.token.function,
+.token.class-name {
+  color: light-dark(#8250df, #d2a8ff);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: light-dark(#953800, #ffa657);
+}
+
+.token.deleted {
+  color: light-dark(#82071e, #ffa198);
+}
+
+.token.important,
+.token.bold {
+  font-weight: 600;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+/* Line numbers plugin */
+.line-numbers .line-numbers-rows {
+  padding-top: 1em;
+  border-right-color: var(--color-border);
+}
+
+.line-numbers-rows > span:before {
+  color: var(--color-text-muted);
+}
+
+/*
+ * Widget design tokens and kit styles.
+ * Kit components use ONLY the --widget-* tokens below. To restyle every
+ * widget on the site, change the token values (or remap them), nothing else.
+ */
+
+:root {
+  --widget-surface: var(--color-surface);
+  --widget-border: var(--color-border);
+  --widget-text: var(--color-text);
+  --widget-text-muted: var(--color-text-muted);
+  --widget-accent: var(--color-primary);
+  --widget-radius: var(--radius);
+  --widget-space: var(--spacing-4);
+  --widget-space-sm: var(--spacing-2);
+  --widget-control-size: 2.75rem;
+  --widget-focus-ring: 2px solid var(--widget-accent);
+  --widget-hist-luma: var(--color-text-muted);
+  --widget-hist-r: light-dark(#d64545, #ff6b6b);
+  --widget-hist-g: light-dark(#3a9d5d, #4cc77a);
+  --widget-hist-b: light-dark(#3b73d6, #6b9bff);
+  --widget-curve-line: var(--widget-accent);
+  --widget-curve-identity: var(--widget-text-muted);
+  --widget-plot-input: color-mix(
+    in srgb,
+    var(--widget-text-muted) 40%,
+    transparent
+  );
+  --widget-plot-output: color-mix(
+    in srgb,
+    var(--widget-accent) 50%,
+    transparent
+  );
+  --widget-track-size: 0.375rem;
+  --widget-track: color-mix(in srgb, var(--widget-text-muted) 35%, transparent);
+  --widget-thumb-size: 1.5rem;
+  --widget-thumb: var(--color-bg);
+  --widget-thumb-shadow: 0 1px 3px
+    color-mix(in srgb, var(--color-text) 40%, transparent);
+  --widget-halo: color-mix(in srgb, var(--widget-accent) 28%, transparent);
+  /* Color-space triangles on the gamut chart. They differ by dash pattern
+     as well as color, so the chart reads without telling colors apart. */
+  --widget-gamut-srgb: var(--color-heading);
+  --widget-gamut-p3: var(--widget-accent);
+  --widget-gamut-rec2020: var(--color-danger);
+  --widget-gamut-halo: var(--color-bg);
+  /* The five gradient paths on the Lab plane: color and dash pattern */
+  --widget-path-1: var(--color-heading);
+  --widget-path-2: var(--widget-accent);
+  --widget-path-3: var(--color-danger);
+  --widget-path-4: var(--widget-hist-g);
+  --widget-path-5: var(--widget-hist-b);
+  --widget-gamut-grid: color-mix(
+    in srgb,
+    var(--widget-text-muted) 30%,
+    transparent
+  );
+}
+
+.widget-frame {
+  margin: 0 0 1.5rem;
+  padding: var(--widget-space);
+  font-size: 1rem;
+  line-height: var(--leading-small);
+  background: var(--widget-surface);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  color: var(--widget-text);
+}
+
+.widget-frame__title {
+  margin: 0 0 var(--widget-space-sm);
+  font-size: var(--fontSize-1);
+}
+
+.widget-frame__caption {
+  margin: var(--widget-space-sm) 0 0;
+  font-size: var(--fontSize-0);
+  color: var(--widget-text-muted);
+}
+
+.w-slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0 var(--widget-space);
+}
+
+.w-slider__label {
+  font-weight: var(--fontWeight-medium);
+}
+
+.w-slider__value {
+  padding: 0.0625rem 0.625rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fontWeight-medium);
+  color: var(--widget-text);
+  background: var(--widget-track);
+  border-radius: 999px;
+}
+
+/* A native range input, restyled. WebKit and Firefox need separate rules; the
+   filled part of the track follows --w-fill (set from the value by Slider). */
+.w-slider__input {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: var(--widget-control-size);
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.w-slider__input:focus {
+  outline: none;
+}
+
+.w-slider__input::-webkit-slider-runnable-track {
+  height: var(--widget-track-size);
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--widget-accent) var(--w-fill, 0%),
+    var(--widget-track) var(--w-fill, 0%)
+  );
+}
+
+.w-slider__input::-moz-range-track {
+  height: var(--widget-track-size);
+  border-radius: 999px;
+  background: var(--widget-track);
+}
+
+.w-slider__input::-moz-range-progress {
+  height: var(--widget-track-size);
+  border-radius: 999px;
+  background: var(--widget-accent);
+}
+
+.w-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: var(--widget-thumb-size);
+  height: var(--widget-thumb-size);
+  margin-top: calc((var(--widget-track-size) - var(--widget-thumb-size)) / 2);
+  border: 2px solid var(--widget-accent);
+  border-radius: 50%;
+  background: var(--widget-thumb);
+  box-shadow: var(--widget-thumb-shadow);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.w-slider__input::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--widget-thumb-size);
+  height: var(--widget-thumb-size);
+  border: 2px solid var(--widget-accent);
+  border-radius: 50%;
+  background: var(--widget-thumb);
+  box-shadow: var(--widget-thumb-shadow);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.w-slider__input:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+
+.w-slider__input:hover::-moz-range-thumb {
+  transform: scale(1.1);
+}
+
+.w-slider__input:active::-webkit-slider-thumb,
+.w-slider__input:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    var(--widget-thumb-shadow),
+    0 0 0 0.375rem var(--widget-halo);
+}
+
+.w-slider__input:active::-moz-range-thumb,
+.w-slider__input:focus-visible::-moz-range-thumb {
+  box-shadow:
+    var(--widget-thumb-shadow),
+    0 0 0 0.375rem var(--widget-halo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w-slider__input::-webkit-slider-thumb,
+  .w-slider__input::-moz-range-thumb {
+    transition: none;
+  }
+}
+
+.w-readout {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.w-readout__row {
+  display: flex;
+  gap: var(--widget-space);
+}
+
+.w-readout dt {
+  min-width: 4.5rem;
+  color: var(--widget-text-muted);
+}
+
+.w-readout dd {
+  margin: 0;
+}
+
+.w-swatch {
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+}
+
+.w-image-panel__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--widget-radius);
+}
+
+.w-image-panel__error {
+  margin: 0;
+  color: var(--widget-text-muted);
+}
+
+.w-histogram {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  margin-top: var(--widget-space-sm);
+  background: var(--widget-surface);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+}
+
+.widget-frame__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--widget-space);
+}
+
+.widget-frame__button {
+  min-width: var(--widget-control-size);
+  min-height: var(--widget-control-size);
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  color: var(--widget-text);
+  font-size: var(--fontSize-2);
+  cursor: pointer;
+}
+
+.widget-frame__button:focus-visible {
+  outline: var(--widget-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Full-screen mode: the dialog fills the viewport and does not let a drag
+   on a slider scroll the page behind it. */
+.widget-dialog {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: var(--widget-space);
+  padding-top: max(var(--widget-space), env(safe-area-inset-top));
+  padding-bottom: max(var(--widget-space), env(safe-area-inset-bottom));
+  border: 0;
+  background: var(--widget-surface);
+  color: var(--widget-text);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.widget-dialog:not([open]) {
+  display: none;
+}
+
+.widget-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-dialog__body {
+  flex: 1;
+  min-height: 0;
+}
+
+.widget-dialog .w-slider__input {
+  touch-action: none;
+}
+
+.w-curve {
+  display: block;
+  width: 100%;
+  max-width: 12rem;
+  aspect-ratio: 1;
+  margin-top: var(--widget-space-sm);
+}
+
+.w-curve__frame {
+  fill: none;
+  stroke: var(--widget-border);
+  stroke-width: 1;
+}
+
+.w-curve__identity {
+  stroke: var(--widget-curve-identity);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.w-curve__line {
+  stroke: var(--widget-curve-line);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+/* A second curve to compare with, drawn over the first as a thin dashed line */
+.w-curve__line--alt {
+  stroke: var(--widget-curve-identity);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.w-compare {
+  display: grid;
+  gap: var(--widget-space);
+}
+
+@media (min-width: 40rem) {
+  .w-compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.w-compare__panel {
+  min-width: 0;
+}
+
+.w-compare__title {
+  margin: 0 0 var(--widget-space-sm);
+  font-weight: 700;
+}
+
+/*
+ * Adaptive layouts. A widget lays itself out by the width it actually has (its
+ * container), not by the screen, so the same widget works inline, in full
+ * screen and in a half-width compare panel. Narrow = stacked, with the control
+ * right under what it changes; wide = side by side.
+ */
+.widget-frame__body,
+.widget-dialog__body,
+.w-compare__panel {
+  container-type: inline-size;
+}
+
+/* Swatch beside its numbers */
+.w-preview {
+  display: flex;
+  align-items: stretch;
+  gap: var(--widget-space);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-preview .w-swatch {
+  flex: none;
+  align-self: stretch;
+  height: auto;
+  min-height: 4rem;
+}
+
+.w-preview .w-readout {
+  min-width: 0;
+}
+
+.w-previews {
+  display: grid;
+  gap: var(--widget-space);
+}
+
+/* The sRGB curve plot beside its numbers; stacked when narrow */
+.w-srgb {
+  display: grid;
+  gap: var(--widget-space);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-srgb .w-curve {
+  max-width: 16rem;
+  margin-top: 0;
+}
+
+@container (min-width: 30rem) {
+  .w-srgb {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+/* Image widgets: slider, picture, then the tone plot. Stacked in that order
+   when narrow; from 30rem the plot sits beside the picture. */
+.w-tone {
+  display: grid;
+  gap: var(--widget-space-sm) var(--widget-space);
+}
+
+.w-tone__media,
+.w-tone__slider,
+.w-tone__plot {
+  min-width: 0;
+}
+
+/* Pixel widgets: swatch + numbers, slider, curve */
+.w-pixel {
+  display: grid;
+  gap: var(--widget-space-sm) var(--widget-space);
+  grid-template-areas:
+    "preview"
+    "slider"
+    "curve";
+}
+
+.w-pixel__preview {
+  grid-area: preview;
+  margin-bottom: 0;
+}
+
+.w-pixel__slider {
+  grid-area: slider;
+}
+
+.w-pixel__curve {
+  grid-area: curve;
+}
+
+.w-pixel__curve .w-curve {
+  margin-top: 0;
+}
+
+@container (min-width: 30rem) {
+  .w-previews {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .w-pixel {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "preview curve"
+      "slider slider";
+    align-items: start;
+  }
+
+  .w-pixel__curve .w-curve {
+    width: 10rem;
+    max-width: 100%;
+  }
+}
+
+/* The tone plot: a square with the curve over the histograms of the original
+   and the result. The key and the clipped share are a small label over its
+   top-left corner (the curve rarely goes there). */
+.w-tone__plot {
+  max-width: 14rem;
+  margin-top: var(--widget-space-sm);
+}
+
+.w-toneplot {
+  position: relative;
+  margin: 0;
+}
+
+.w-toneplot__svg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.w-toneplot__input {
+  fill: var(--widget-plot-input);
+}
+
+.w-toneplot__output {
+  fill: var(--widget-plot-output);
+}
+
+.w-toneplot__legend {
+  position: absolute;
+  top: 0.375rem;
+  left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.125rem 0.375rem;
+  font-size: var(--fontSize-0);
+  line-height: var(--leading-small);
+  color: var(--widget-text-muted);
+  background: color-mix(in srgb, var(--widget-surface) 82%, transparent);
+  border-radius: var(--widget-radius);
+}
+
+.w-toneplot__legend .w-readout__row {
+  gap: 0.5rem;
+}
+
+.w-toneplot__legend .w-readout dt {
+  min-width: 0;
+  font-weight: var(--fontWeight-bold);
+}
+
+.w-toneplot__key::before {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.35em;
+  border-radius: 2px;
+}
+
+.w-toneplot__key--input::before {
+  background: var(--widget-plot-input);
+}
+
+.w-toneplot__key--output::before {
+  background: var(--widget-plot-output);
+}
+
+/* Wide: the slider above the picture, as wide as it; the plot beside the
+   picture, a square exactly as tall as it. Both follow from one height --w-h:
+   the picture is h x aspect wide and the plot h wide, so together they fill
+   the container: h = (container - gap) / (aspect + 1). It is capped so a tall
+   photo stays reasonable, and in full screen by the screen height. */
+@container (min-width: 30rem) {
+  .w-tone {
+    --w-gap: var(--widget-space);
+    --w-h-max: 26rem;
+    --w-h: min(
+      calc((100cqw - var(--w-gap)) / (var(--w-aspect) + 1)),
+      var(--w-h-max)
+    );
+    grid-template-columns: calc(var(--w-h) * var(--w-aspect)) var(--w-h);
+    grid-template-areas:
+      "slider ."
+      "media plot";
+    justify-content: start;
+    column-gap: var(--w-gap);
+    align-items: start;
+  }
+
+  .w-tone__slider {
+    grid-area: slider;
+  }
+
+  .w-tone__media {
+    grid-area: media;
+  }
+
+  .w-tone__plot {
+    grid-area: plot;
+    max-width: none;
+    margin-top: 0;
+  }
+
+  .widget-dialog .w-tone {
+    --w-h-max: max(10rem, calc(100dvh - 11rem));
+  }
+}
+
+/*
+ * Full screen: the picture is as large as fits. It leaves room in the screen
+ * height for the title bar (wide), or for the title bar, slider and plot under
+ * it (narrow); if it is limited by height it is centerd. A very short screen scrolls instead of squeezing the picture.
+ */
+.widget-dialog .w-image-panel__canvas {
+  height: auto;
+  max-height: max(10rem, calc(100dvh - 8rem));
+  object-fit: contain;
+  object-position: center top;
+}
+
+@container (max-width: 29.99rem) {
+  .widget-dialog .w-image-panel__canvas {
+    max-height: max(10rem, calc(100dvh - 26rem));
+  }
+}
+
+.widget-dialog .w-preview .w-swatch {
+  width: clamp(5rem, 20cqw, 9rem);
+}
+
+.widget-dialog .w-pixel__curve .w-curve {
+  width: min(22rem, max(12rem, 40cqw));
+  max-width: 100%;
+}
+
+/* Gamut chart: the horseshoe of visible color with color-space triangles */
+.w-gamut {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  overflow: visible;
+}
+
+.w-gamut__grid {
+  stroke: var(--widget-gamut-grid);
+  stroke-width: 1.5;
+}
+
+.w-gamut__tick,
+.w-gamut__label,
+.w-gamut__axis {
+  fill: var(--widget-text-muted);
+  font-size: 28px;
+}
+
+.w-gamut__label {
+  fill: var(--widget-text);
+  font-weight: var(--fontWeight-medium);
+  stroke: var(--widget-surface);
+  stroke-width: 7;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.w-gamut__axis {
+  font-style: italic;
+}
+
+.w-gamut__locus {
+  fill: none;
+  stroke: var(--widget-text);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+/* Each triangle is drawn twice: a wider background-colored line underneath
+   (the halo) keeps the dashed line readable over any fill color */
+.w-gamut__halo {
+  fill: none;
+  stroke: var(--widget-gamut-halo);
+  stroke-width: 10;
+  stroke-linejoin: round;
+  opacity: 0.45;
+}
+
+.w-gamut__tri {
+  fill: none;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.w-gamut__tri--srgb {
+  stroke: var(--widget-gamut-srgb);
+}
+
+.w-gamut__tri--p3 {
+  stroke: var(--widget-gamut-p3);
+  stroke-dasharray: 26 14;
+}
+
+.w-gamut__tri--rec2020 {
+  stroke: var(--widget-gamut-rec2020);
+  stroke-dasharray: 3 14;
+}
+
+.w-gamut__white {
+  fill: var(--widget-surface);
+  stroke: var(--widget-text);
+  stroke-width: 4;
+}
+
+.w-gamut__dot {
+  fill: var(--widget-text);
+  stroke: var(--widget-surface);
+  stroke-width: 2;
+}
+
+.w-gamutwidget {
+  display: grid;
+  gap: var(--widget-space-sm);
+}
+
+.w-gamut__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem var(--widget-space);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.w-gamut__legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.w-gamut__key {
+  width: 3rem;
+  height: 0.75rem;
+}
+
+.w-gamut__key .w-gamut__tri {
+  stroke-width: 4;
+}
+
+@container (min-width: 30rem) {
+  .w-gamutwidget {
+    grid-template-columns: minmax(0, 28rem) auto;
+    align-items: start;
+  }
+
+  .w-gamut__legend {
+    flex-direction: column;
+  }
+}
+
+/* RGB cube diagram: side view and top view */
+.w-cube {
+  display: grid;
+  gap: var(--widget-space-sm);
+}
+
+.w-cube__view {
+  display: block;
+  width: 100%;
+  max-width: 18rem;
+  height: auto;
+}
+
+.w-cube__edge {
+  stroke: var(--widget-text-muted);
+  stroke-width: 1.5;
+}
+
+.w-cube__axis {
+  stroke: var(--widget-text);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.w-cube__hexagon {
+  fill: color-mix(in srgb, var(--widget-text-muted) 12%, transparent);
+  stroke: var(--widget-text-muted);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.w-cube__corner {
+  stroke: var(--widget-text);
+  stroke-width: 1.5;
+}
+
+.w-cube__center {
+  fill: var(--widget-text);
+}
+
+.w-cube__label {
+  fill: var(--widget-text);
+  font-size: 11px;
+}
+
+.w-cube__label--muted {
+  fill: var(--widget-text-muted);
+}
+
+@container (min-width: 30rem) {
+  .w-cube {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+}
+
+/* hsl-steps: the color's dot on the hexagon */
+.w-hexplot {
+  display: block;
+  width: 100%;
+  max-width: 10rem;
+  height: auto;
+  margin-top: var(--widget-space-sm);
+}
+
+.w-hexplot__dot {
+  stroke: var(--widget-text);
+  stroke-width: 2;
+}
+
+.w-pixel__slider .w-slider + .w-slider {
+  margin-top: var(--widget-space-sm);
+}
+
+@container (min-width: 30rem) {
+  .w-pixel__curve .w-hexplot {
+    width: 10rem;
+    margin-top: 0;
+  }
+}
+
+/* Toggle: a native checkbox with a large hit area */
+.w-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: var(--widget-control-size);
+}
+
+.w-toggle__input {
+  flex: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0;
+  accent-color: var(--widget-accent);
+  cursor: pointer;
+}
+
+.w-toggle__input:focus-visible {
+  outline: var(--widget-focus-ring);
+  outline-offset: 2px;
+}
+
+.w-toggle__label {
+  cursor: pointer;
+}
+
+/* hsl-lies: three color tiles */
+.w-lies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-lies__tile .w-swatch {
+  width: 100%;
+  height: 4.5rem;
+}
+
+.w-lies__tile p {
+  margin: 0.25rem 0 0;
+}
+
+.w-lies__hex {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fontWeight-medium);
+}
+
+.w-lies__line {
+  font-size: var(--fontSize-0);
+  color: var(--widget-text-muted);
+}
+
+.w-lies__line--lab {
+  color: var(--widget-text);
+  font-weight: var(--fontWeight-medium);
+}
+
+@container (max-width: 29.99rem) {
+  .w-lies {
+    grid-template-columns: 1fr;
+  }
+
+  .w-lies__tile {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    column-gap: var(--widget-space);
+    align-items: center;
+  }
+
+  .w-lies__tile .w-swatch {
+    grid-row: 1 / span 3;
+    height: 4.5rem;
+  }
+}
+
+/* srgb-vs-p3: the same numbers in two spaces */
+.w-p3 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-p3__tile .w-swatch {
+  width: 100%;
+  height: 5rem;
+}
+
+.w-p3__tile p {
+  margin: 0.25rem 0 0;
+  font-size: var(--fontSize-0);
+}
+
+.w-p3__note {
+  margin: var(--widget-space-sm) 0 0;
+  color: var(--widget-text-muted);
+  font-size: var(--fontSize-0);
+}
+
+/* dot-grid: dots on the xy chart plus a small readout */
+.w-dots {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-dots .w-gamut {
+  max-width: 18rem;
+}
+
+@container (min-width: 30rem) {
+  .w-dots {
+    grid-template-columns: minmax(0, 18rem) 1fr;
+    align-items: center;
+  }
+}
+
+/* Full screen: the chart is as large as fits, never taller than the screen */
+.widget-dialog .w-gamut {
+  max-width: min(100%, 40rem);
+  max-height: max(10rem, calc(100dvh - 9rem));
+}
+
+/* Gamut chart overlays: extra polygons, a trail, a marker and draggable handles */
+.w-gamut__poly {
+  fill: color-mix(in srgb, var(--widget-accent) 14%, transparent);
+  stroke: var(--widget-accent);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.w-gamut__trail {
+  fill: none;
+  stroke: var(--widget-text);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.w-gamut__purple {
+  stroke: var(--widget-text-muted);
+  stroke-width: 4;
+  stroke-dasharray: 10 10;
+}
+
+.w-gamut__marker {
+  stroke: var(--widget-text);
+  stroke-width: 5;
+  fill: var(--widget-surface);
+}
+
+.w-gamut__handle {
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+
+.w-gamut__hit {
+  fill: transparent;
+}
+
+.w-gamut__grip {
+  fill: var(--widget-surface);
+  stroke: var(--widget-text);
+  stroke-width: 5;
+}
+
+.w-gamut__grip-label {
+  fill: var(--widget-text);
+  font-size: 22px;
+  font-weight: var(--fontWeight-medium);
+  pointer-events: none;
+}
+
+.w-gamut__handle:focus-visible .w-gamut__grip {
+  stroke: var(--widget-accent);
+  stroke-width: 9;
+}
+
+/* A drag on the chart must not scroll the page */
+.w-gamut:has(.w-gamut__handle) {
+  touch-action: none;
+}
+
+/* draw-the-horseshoe: the chart, a readout and one bar per cone type */
+.w-draw {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-draw .w-gamut {
+  max-width: 20rem;
+}
+
+.w-cones {
+  display: grid;
+  gap: 0.375rem;
+  margin-top: var(--widget-space-sm);
+  --widget-cone-l: var(--widget-hist-r);
+  --widget-cone-m: var(--widget-hist-g);
+  --widget-cone-s: var(--widget-hist-b);
+}
+
+.w-cones__row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr 3rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.w-cones__name {
+  font-size: var(--fontSize-0);
+}
+
+.w-cones__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fontSize-0);
+}
+
+.w-cones__track {
+  display: block;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: var(--widget-track);
+  overflow: hidden;
+}
+
+.w-cones__bar {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.w-cones__bar--l {
+  background: var(--widget-cone-l);
+}
+
+.w-cones__bar--m {
+  background: var(--widget-cone-m);
+}
+
+.w-cones__bar--s {
+  background: var(--widget-cone-s);
+}
+
+@container (min-width: 30rem) {
+  .w-draw {
+    grid-template-columns: minmax(0, 20rem) 1fr;
+    align-items: center;
+  }
+}
+
+/* cone-sensitivities: three overlapping curves and a wavelength marker */
+.w-cone {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-conechart {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  --widget-cone-l: var(--widget-hist-r);
+  --widget-cone-m: var(--widget-hist-g);
+  --widget-cone-s: var(--widget-hist-b);
+}
+
+.w-conegrid {
+  stroke: var(--widget-gamut-grid);
+  stroke-width: 1;
+}
+
+.w-conetick {
+  fill: var(--widget-text-muted);
+  font-size: 10px;
+}
+
+.w-conecurve {
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.w-conecurve--l {
+  stroke: var(--widget-cone-l);
+}
+
+.w-conecurve--m {
+  stroke: var(--widget-cone-m);
+  stroke-dasharray: 8 4;
+}
+
+.w-conecurve--s {
+  stroke: var(--widget-cone-s);
+  stroke-dasharray: 2 4;
+}
+
+.w-conemarker {
+  stroke: var(--widget-text);
+  stroke-width: 1.5;
+}
+
+.w-cone__note {
+  margin: 0 0 var(--widget-space-sm);
+  font-size: var(--fontSize-0);
+  color: var(--widget-text-muted);
+}
+
+/* Labels in these readouts are longer than the 4.5rem minimum; keep them whole */
+.w-draw .w-readout dt,
+.w-cone .w-readout dt {
+  flex: none;
+}
+
+/* xy-to-uv: one chart that morphs between two coordinate systems */
+.w-xyuv {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-xyuv__chart {
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  height: auto;
+}
+
+.w-xyuv .w-readout dt {
+  flex: none;
+}
+
+@container (min-width: 30rem) {
+  .w-xyuv {
+    grid-template-columns: minmax(0, 20rem) 1fr;
+    align-items: center;
+  }
+}
+
+/* Button */
+.w-button {
+  min-height: var(--widget-control-size);
+  padding: 0 var(--widget-space);
+  font: inherit;
+  font-weight: var(--fontWeight-medium);
+  color: var(--widget-text);
+  background: var(--widget-surface);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  cursor: pointer;
+}
+
+.w-button:hover:not(:disabled) {
+  border-color: var(--widget-accent);
+}
+
+.w-button:focus-visible {
+  outline: var(--widget-focus-ring);
+  outline-offset: 2px;
+}
+
+.w-button:disabled {
+  color: var(--widget-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.w-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--widget-space-sm);
+  margin-top: var(--widget-space-sm);
+}
+
+/* Tool page: gamut explorer and primaries playground */
+.w-explorer {
+  display: grid;
+  gap: var(--widget-space);
+}
+
+.w-explorer .w-gamut,
+.w-playground .w-gamut {
+  max-width: 32rem;
+}
+
+.w-explorer__note {
+  margin: var(--widget-space-sm) 0;
+  font-weight: var(--fontWeight-medium);
+}
+
+.w-explorer .w-readout dt {
+  flex: none;
+}
+
+@container (min-width: 44rem) {
+  .w-explorer,
+  .w-playground {
+    grid-template-columns: minmax(0, 32rem) 1fr;
+    align-items: start;
+  }
+}
+
+/* hsl-vs-lab-lightness: twelve colors in a grid */
+.w-hues {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-hues__tile .w-swatch {
+  width: 100%;
+  height: 3rem;
+}
+
+.w-hues__tile p {
+  margin: 0.125rem 0 0;
+  font-size: var(--fontSize-0);
+  font-variant-numeric: tabular-nums;
+}
+
+.w-hues__hue {
+  color: var(--widget-text-muted);
+}
+
+.w-hues__l {
+  font-weight: var(--fontWeight-medium);
+}
+
+@container (min-width: 22rem) {
+  .w-hues {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 40rem) {
+  .w-hues {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* lightness-curve: L* against luminance */
+.w-lcurve {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-lcurve__plot {
+  max-width: 16rem;
+  margin-top: 0;
+}
+
+.w-lcurve__mark {
+  fill: var(--widget-surface);
+  stroke: var(--widget-text);
+  stroke-width: 2;
+}
+
+.w-lcurve__point {
+  fill: var(--widget-accent);
+  stroke: var(--widget-surface);
+  stroke-width: 2;
+}
+
+.w-lcurve .w-readout dt {
+  flex: none;
+}
+
+@container (min-width: 30rem) {
+  .w-lcurve {
+    grid-template-columns: 16rem 1fr;
+    align-items: center;
+  }
+}
+
+/* Gradient bars: one per color space, the same two colors */
+.w-gbars {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-gbar__name {
+  margin: 0;
+  font-size: var(--fontSize-0);
+  font-weight: var(--fontWeight-medium);
+}
+
+.w-gbar__bar {
+  position: relative;
+  height: var(--widget-control-size);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+}
+
+/* A thin line with a halo in the surface color reads on any bar color */
+.w-gbar__marker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 0;
+  border-left: 2px solid var(--widget-text);
+  box-shadow: 0 0 0 1.5px var(--widget-surface);
+  transform: translateX(-1px);
+}
+
+.w-gbar__value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.125rem 0 0;
+  font-size: var(--fontSize-0);
+  font-variant-numeric: tabular-nums;
+}
+
+.w-gbar__swatch {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--widget-border);
+  border-radius: 3px;
+}
+
+.w-gbar__note {
+  color: var(--widget-text-muted);
+}
+
+/* Color input: a picker with its hex */
+.w-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--widget-space);
+  margin-bottom: var(--widget-space-sm);
+}
+
+.w-color {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.w-color__label {
+  font-weight: var(--fontWeight-medium);
+}
+
+.w-color__picker {
+  width: var(--widget-control-size);
+  height: var(--widget-control-size);
+  padding: 0;
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.w-color__text {
+  width: 6.5rem;
+  min-height: var(--widget-control-size);
+  padding: 0 0.5rem;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: var(--widget-text);
+  background: var(--widget-surface);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+}
+
+.w-color__picker:focus-visible,
+.w-color__text:focus-visible {
+  outline: var(--widget-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Tool page: CSS snippets under the gradient comparison */
+.w-snippets {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin: var(--widget-space) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.w-snippet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 var(--widget-space-sm);
+  align-items: center;
+  margin: 0;
+}
+
+.w-snippet__name {
+  grid-column: 1 / -1;
+  font-size: var(--fontSize-0);
+  color: var(--widget-text-muted);
+}
+
+.w-snippet__code {
+  min-width: 0;
+  overflow-x: auto;
+  padding: var(--widget-space-sm);
+  white-space: nowrap;
+  font-size: var(--fontSize-0);
+  background: var(--widget-surface);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+}
+
+/* Lab explorer: the plane of a-star and b-star over a hatched "outside sRGB" background */
+.w-labexplorer {
+  display: grid;
+  gap: var(--widget-space);
+}
+
+.w-labplane {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--widget-gamut-grid) 0 2px,
+    transparent 2px 9px
+  );
+  overflow: hidden;
+}
+
+.w-labplane--pick {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.w-labplane__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.w-labplane__axis {
+  stroke: var(--widget-gamut-grid);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.w-labplane__path {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.w-labplane__path--1 {
+  stroke: var(--widget-path-1);
+}
+
+.w-labplane__path--2 {
+  stroke: var(--widget-path-2);
+  stroke-dasharray: 8 4;
+}
+
+.w-labplane__path--3 {
+  stroke: var(--widget-path-3);
+  stroke-dasharray: 2 4;
+}
+
+.w-labplane__path--4 {
+  stroke: var(--widget-path-4);
+  stroke-dasharray: 10 3 2 3;
+}
+
+.w-labplane__path--5 {
+  stroke: var(--widget-path-5);
+  stroke-dasharray: 5 3 5 3 1 3;
+}
+
+.w-labplane__dot {
+  stroke: var(--widget-text);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke;
+}
+
+.w-pathlegend {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin: 0 0 var(--widget-space-sm);
+  padding: 0;
+  list-style: none;
+}
+
+.w-pathlegend__row {
+  display: grid;
+  grid-template-columns: 2.5rem auto 1.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0 var(--widget-space-sm);
+  margin: 0;
+  font-size: var(--fontSize-0);
+}
+
+.w-pathlegend__line {
+  width: 2.5rem;
+  height: 0.5rem;
+}
+
+.w-pathlegend__name {
+  white-space: nowrap;
+}
+
+.w-pathlegend__value {
+  min-width: 0;
+  color: var(--widget-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.w-labplane__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.w-labplane__marker {
+  position: absolute;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--widget-text);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--widget-surface);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.w-labexplorer .w-readout dt {
+  flex: none;
+}
+
+@container (min-width: 44rem) {
+  .w-labexplorer {
+    grid-template-columns: minmax(0, 20rem) 1fr;
+    align-items: start;
+  }
+}

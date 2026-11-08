@@ -1,4 +1,351 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog RSS Feed]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://www.antondanshin.com</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 03 Oct 2022 03:24:05 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><description><![CDATA[I have interviewed more than 100 different people throughout my 7-year career as an Android engineer. In this blog post, I would like to…]]></description><link>https://www.antondanshin.com/blog/easy-interview-questions</link><guid isPermaLink="false">https://www.antondanshin.com/blog/easy-interview-questions</guid><pubDate>Sun, 14 Aug 2022 23:23:51 GMT</pubDate><content:encoded>&lt;p&gt;I have interviewed more than 100 different people throughout my 7-year career as an Android engineer. In this blog post, I would like to share some very easy questions that I often asked during phone screens and even some normal interview rounds.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog RSS Feed]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://www.antondanshin.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 08 Nov 2026 05:55:49 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><description><![CDATA[I got into virtual photography recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure…]]></description><link>https://www.antondanshin.com/blog/exposure-vs-brightness</link><guid isPermaLink="false">https://www.antondanshin.com/blog/exposure-vs-brightness</guid><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I got into &lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_photography&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;virtual photography&lt;/a&gt; recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure, Brightness, Levels, Curves. Everything made my dark screenshots lighter, so I assumed they were more or less the same thing with different names. At some point I was using gamma because I was told to, and Brightness because it was right there.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;My story: how I got into in-game photography&lt;/summary&gt;
+&lt;p&gt;This part is personal and not needed for the rest of the article, so feel free to skip it.&lt;/p&gt;
+&lt;p&gt;I had a few screenshots that I thought were cool, and instead of letting them collect dust I wanted to share them on Instagram.&lt;/p&gt;
+&lt;p&gt;That’s how I discovered a huge community of in-game photographers. And I realized that people almost never post raw captures. There is always some post-processing involved, and everyone is trying to give their photos a certain look. I wanted to learn to do that too! That’s when I started digging.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I decided to learn editing properly, and I started digging into the tools and techniques with Claude.&lt;/strong&gt; Very quickly I realized how much I don’t understand about digital photography. I had no idea how the tools work on a fundamental level.&lt;/p&gt;
+&lt;p&gt;Learning by doing plus books used to be my main way to learn anything. This time Claude is my main companion instead, because AI has become smart enough that I wanted to see how far it can take me. The price is that I can’t know for sure that everything I learn this way is right. For now, I am willing to take that risk.&lt;/p&gt;
+&lt;p&gt;I did look into a few books and video tutorials, but most of them are based on vibes: push this slider until it feels right. They don’t really teach the fundamentals. I come from a technical background, and I can’t just rely on vibes. I need to understand how things work.&lt;/p&gt;
+&lt;p&gt;That need to understand is how this article happened.&lt;/p&gt;
+&lt;p&gt;I think I will write another article about the whole journey at some point: the community, my Instagram channel, and everything I had to learn about how Instagram works (reels, carousels and the infamous “algorithm”).&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Then I got curious and decided to measure what these sliders actually do. In this article I want to share what I found in Affinity Photo 3. Some of it surprised me.&lt;/p&gt;
+&lt;p&gt;A word on how I am learning this. My main companion on this journey is Claude, an AI, and I don’t have a textbook to check it against. That is why I measured things myself instead of just asking, and why the disclaimer below matters.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I’m still learning photography. Everything below comes from my own tests, run with Claude or under Claude’s guidance, on one computer, in Affinity Photo 3, with 8-bit sRGB images. Other versions or other apps may behave differently, and I may have gotten something wrong.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can play with every number in this article. The small widgets are real: they do the same math I measured.&lt;/p&gt;
+&lt;p&gt;Where it gets technical, there is a collapsed &lt;strong&gt;For nerds&lt;/strong&gt; box. You can skip them and the article still works. Those parts were explained to me by Claude (an AI), not measured by me, and each box says where it comes from.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Key takeaways:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;A pixel is not light.&lt;/strong&gt; Each pixel is three numbers from 0 to 255 (red, green and blue). A stored 128 is only about 22% of the light of 255.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exposure&lt;/strong&gt; multiplies each channel’s stored value by about 1.37 per stop and cuts off anything above 255. When one channel clips first, the color shifts: orange turns yellow.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Brightness&lt;/strong&gt; is a curve that keeps black and white where they are, lifts the middle and squeezes the highlights. It bends colors as it goes, and every app has its own version.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Both work on each channel separately,&lt;/strong&gt; which is why colors move when you push them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;What I use:&lt;/strong&gt; Levels gamma or Curves to lift a dark 8-bit screenshot. In an app with only Exposure and Brightness, Exposure for dark images and Brightness for ones with bright areas. Exposure is the one for RAW or HDR files, but I don’t work with those.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Two words, many meanings&lt;/h2&gt;
+&lt;p&gt;“Brightness” and “exposure” sound familiar because we use them every day.&lt;/p&gt;
+&lt;p&gt;On a phone or a TV, &lt;strong&gt;brightness&lt;/strong&gt; is how strong the backlight is. In a photo editor from a few years ago, it is a slider that makes the picture lighter or darker. On Instagram and in the iOS Photos app it is still there.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exposure&lt;/strong&gt; is a camera word. It is how much light reaches the sensor (or the film), and it depends on the aperture, the shutter speed and the ISO. In physics it is light multiplied by time. A “stop” of exposure means twice as much light.&lt;/p&gt;
+&lt;p&gt;In a photo editor, the Exposure slider tries to do what the camera would have done if you had let in more or less light. Brightness just makes the picture lighter. These two behave differently, as we’ll see.&lt;/p&gt;
+&lt;h2&gt;A pixel is not light&lt;/h2&gt;
+&lt;p&gt;Before we touch any slider, there is one thing that confused me for a long time: what is actually inside an image file.&lt;/p&gt;
+&lt;p&gt;A normal JPEG or PNG (and a game screenshot) stores each pixel as three whole numbers, one for red, one for green and one for blue. Each goes from 0 to 255. These are the &lt;strong&gt;stored values&lt;/strong&gt;. For example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;0 · 0 · 0&lt;/code&gt; is black and &lt;code class=&quot;language-text&quot;&gt;255 · 255 · 255&lt;/code&gt; is white.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;128 · 128 · 128&lt;/code&gt; is a middle gray.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;224 · 140 · 9&lt;/code&gt; is the orange glow on the hand in the photo below: a lot of red, some green, almost no blue.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Those numbers are what the file contains, and what every slider in an editor changes. But they are &lt;strong&gt;not amounts of light&lt;/strong&gt;. A gray with the stored value 128 is not “half as much light as white”. It is much less than half.&lt;/p&gt;
+&lt;p&gt;I always imagined the values stored in the R, G and B channels as light intensity, and I thought they would translate to lightness in a linear fashion: twice the number, twice the light. It turned out this is not the case. Finding that out opened a Pandora’s box of color profiles and color spaces that I couldn’t close again. Maybe I’ll write about it next time.&lt;/p&gt;
+&lt;p&gt;Roughly, the light is the stored value (as a fraction from 0 to 1) to the power of 2.2. That 2.2 is the “gamma” of the sRGB standard, which almost every screenshot and JPEG uses. Drag the slider and watch the second line.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-light&quot; data-props=&quot;{&amp;quot;v&amp;quot;:128}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-light). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;A few examples, so it sinks in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stored 128 is only about &lt;strong&gt;22%&lt;/strong&gt; of the light of white.&lt;/li&gt;
+&lt;li&gt;Stored 64 is about 5%. Doubling the number from 64 to 128 gives about &lt;strong&gt;4.6 times&lt;/strong&gt; more light, not 2 times.&lt;/li&gt;
+&lt;li&gt;To get 50% of the light you need to store 186, not 128.&lt;/li&gt;
+&lt;li&gt;To double the light of a mid gray (one stop, which we’ll meet in a minute) you have to go from 128 to about 175. For a dark pixel the same doubling is a much smaller step: 51 becomes 70.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Why would a file do this? Our eyes are much more sensitive to differences in dark tones than in bright ones. That’s also why we all love OLED displays: they give you “blacker” blacks. A file only has 256 values to spend, so the numbers are spent where we notice them. Half of all the values (0 to 128) describe the darkest 22% of the light. If the numbers were plain amounts of light, those shadows would get only 56 values and you’d see ugly steps in dark areas.&lt;/p&gt;
+&lt;p&gt;It is a clever trick, but it has a side effect: doing math on the stored numbers is not the same as doing math on light. Adding 20 to a dark pixel (30 to 50) triples its light, even though it hardly looks brighter, while adding 20 to a bright one (200 to 220) adds only about a quarter. This is where exposure and brightness part ways: Brightness works on the stored RGB numbers, while Exposure uses clever math on them to mimic physical light.&lt;/p&gt;
+&lt;p&gt;Try it yourself. Both pixels get the same number added, and the readout shows how many times more light each one gets.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-add&quot; data-props=&quot;{&amp;quot;dark&amp;quot;:30,&amp;quot;bright&amp;quot;:200,&amp;quot;max&amp;quot;:55}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-add). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; When you brighten a photo, watch the highlights first. Dark values have plenty of room, but light ones run into 255 and turn white quickly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: the real sRGB curve&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;Claude explained this to me. The full definition is on &lt;a href=&quot;https://en.wikipedia.org/wiki/SRGB&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I said the light is the stored value to the power of 2.2. That is the short version. The real sRGB rule has two parts. Take the stored value &lt;code class=&quot;language-text&quot;&gt;s&lt;/code&gt; as a fraction from 0 to 1:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Up to &lt;code class=&quot;language-text&quot;&gt;s = 0.04045&lt;/code&gt; (a stored value of about 10): &lt;code class=&quot;language-text&quot;&gt;light = s / 12.92&lt;/code&gt;. A straight line.&lt;/li&gt;
+&lt;li&gt;Above that: &lt;code class=&quot;language-text&quot;&gt;light = ((s + 0.055) / 1.055) ^ 2.4&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The second part has an exponent of 2.4, but with the offsets it behaves overall like a power of about 2.2, which is why “gamma 2.2” is the usual nickname.&lt;/p&gt;
+&lt;p&gt;Here are both curves. Over the whole range they are almost the same line. Slide left to zoom into the darkest tones, where they part.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;srgb-curve&quot; data-props=&quot;{}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (srgb-curve). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The straight piece near black is there for a technical reason. A pure power curve is extremely steep at zero when you go from light back to stored values, so a tiny bit of noise in the shadows would turn into a big jump. The straight piece avoids that.&lt;/p&gt;
+&lt;p&gt;The curve is usually explained as a leftover from CRT monitors, whose brightness followed roughly a power of the input voltage. Encoding files with the opposite curve canceled it out, and as a bonus it spends the 256 values where our eyes are most sensitive.&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2&gt;Exposure: multiply the light&lt;/h2&gt;
+&lt;p&gt;In Affinity Photo 3, Exposure is a single slider.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d4d1d9e5c84cc5f61b0ed341b9293078/f7616/affinity-exposure.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.75903614457831%; position: relative; bottom: 0; left: 0; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;The Exposure adjustment panel in Affinity Photo 3, with one slider set to 0&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d4d1d9e5c84cc5f61b0ed341b9293078/31493/affinity-exposure.png&quot;
+        srcset=&quot;/static/d4d1d9e5c84cc5f61b0ed341b9293078/e72ac/affinity-exposure.png 166w,
+/static/d4d1d9e5c84cc5f61b0ed341b9293078/f8dc5/affinity-exposure.png 332w,
+/static/d4d1d9e5c84cc5f61b0ed341b9293078/31493/affinity-exposure.png 664w,
+/static/d4d1d9e5c84cc5f61b0ed341b9293078/f7616/affinity-exposure.png 766w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Affinity Photo 3, Exposure adjustment.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;One stop of exposure doubles the light. Since light is the stored value to the power of 2.2, doubling the light multiplies the stored value by 2 to the power of 1/2.2, about 1.37. That is what I measured in Affinity Photo 3: for every channel,&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;new value = old value × 2^(EV / 2.2)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;and anything above 255 is cut off at 255. I checked it against exports of a test image and it matched within about 2 values out of 255 (more about how I measured it at the end).&lt;/p&gt;
+&lt;p&gt;This is a plain power of 2.2, which is a small simplification. The exact sRGB curve has a short straight piece near black, and following it would give a few values more in the deepest shadows (one stop on a stored 10 would give 18 instead of 14). Affinity’s numbers matched the simple formula, so that’s what it seems to use. From the mid-tones up the two agree within a value or two.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: where a stop is not exactly a stop&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;This one is from Claude, and I have no source for it. The numbers come from the sRGB formulas in the box above.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;A camera records linear light, where one stop is simply “times 2”. The textbook way to do that in an editor is: turn the stored values into light with the sRGB rule, multiply by 2 for each stop, and turn them back into stored values. What Affinity’s numbers match is a shortcut: multiply the stored values directly by 2^(1/2.2) ≈ 1.37. The two are the same only if the encoding is exactly a power of 2.2.&lt;/p&gt;
+&lt;p&gt;Here is one stop both ways:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Stored value&lt;/th&gt;
+&lt;th&gt;Exact sRGB&lt;/th&gt;
+&lt;th&gt;Affinity (× 1.37)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;31&lt;/td&gt;
+&lt;td&gt;27&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;138&lt;/td&gt;
+&lt;td&gt;137&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;128&lt;/td&gt;
+&lt;td&gt;176&lt;/td&gt;
+&lt;td&gt;175&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;They only come apart in the deepest shadows. A stored 10 becomes 14 with the shortcut, which is about 1.4 times the light instead of 2 times. Values that low are almost black, and in an 8-bit file they are mostly noise and banding anyway, so I wouldn’t worry about it.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Here is the photo I’ll use in this article. It’s a screenshot from Cyberpunk 2077: Phantom Liberty, taken on a PS5 in photo mode with no filters. It’s very dark, which makes it a good test.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.024096385542165%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABxWrmQFD/xAAXEAEBAQEAAAAAAAAAAAAAAAAAARAR/9oACAEBAAEFAo4qLn//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAaEAACAgMAAAAAAAAAAAAAAAAAARAxEUFh/9oACAEBAAE/IcNjRPhYsi0f/9oADAMBAAIAAwAAABDoP//EABcRAAMBAAAAAAAAAAAAAAAAAAABESH/2gAIAQMBAT8Qa0h//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAHBAAAgICAwAAAAAAAAAAAAAAAREAITFREHGh/9oACAEBAAE/EK7IblwILJ4cyoAdT0ShLfH/2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;A dark, teal-lit corridor in Cyberpunk 2077 with a character sitting by the wall&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg&quot;
+        srcset=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/27c2d/cyberpunk-corridor.jpg 166w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/71bac/cyberpunk-corridor.jpg 332w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg 664w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/a820a/cyberpunk-corridor.jpg 996w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/be0f2/cyberpunk-corridor.jpg 1328w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg 2000w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Cyberpunk 2077: Phantom Liberty, © CD Projekt Red. Unedited PS5 photo mode capture.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Let’s start with one pixel from the orange glow on the hand, a very saturated color. Move the slider up.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-exposure&quot; data-props=&quot;{&amp;quot;r&amp;quot;:224,&amp;quot;g&amp;quot;:140,&amp;quot;b&amp;quot;:9,&amp;quot;min&amp;quot;:0,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-exposure). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The red channel hits 255 before you even reach +0.5 stop, and then it has nowhere to go while green and blue keep growing. That’s &lt;strong&gt;clipping&lt;/strong&gt;. And because only one channel clipped, the color changes: the orange becomes more and more yellow. At +2 stops it is &lt;code class=&quot;language-text&quot;&gt;255 · 255 · 17&lt;/code&gt;, pure yellow. The hue went from 37° to 60° just by “making it brighter”.&lt;/p&gt;
+&lt;p&gt;The same happens with other colors, only with another channel. The teal of the pipes (this one is close to it) has green and blue high, so green clips first and the color slides toward cyan and then white.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-exposure&quot; data-props=&quot;{&amp;quot;r&amp;quot;:100,&amp;quot;g&amp;quot;:230,&amp;quot;b&amp;quot;:200,&amp;quot;min&amp;quot;:0,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-exposure). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Now the whole photo. The histogram shows how many pixels have each brightness, from black on the left to white on the right. The small plot is the curve: input on the horizontal axis, output on the vertical one. For exposure it is a straight line that hits the ceiling and goes flat. Look at “Clipped pixels” as you drag.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;image-exposure&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Cyberpunk 2077: Phantom Liberty (CD Projekt Red), PS5 photo mode, no filters.&amp;quot;,&amp;quot;min&amp;quot;:-1,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (image-exposure). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; On an 8-bit file, Affinity’s Exposure gives the same pixels as moving the white point in Levels (when you brighten, within the noise of my measurement). It’s a straight stretch of the values with a camera-style name. For +1 stop, set White Level in Affinity’s Levels panel (shown further down) to 73%, which is 186 out of 255, or 255 ÷ 1.37. If an editor has no Exposure slider, this is the same thing.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Where Exposure really pays off, as far as I understand, is RAW files. A RAW file keeps light beyond what the screen can show, so you can pull the highlights back. A game screenshot has none of that: the clipped values are already gone.&lt;/p&gt;
+&lt;h2&gt;Brightness: a curve with fixed ends&lt;/h2&gt;
+&lt;p&gt;Now Brightness. I was convinced it was just gamma. It isn’t, and it’s hard to find out how it works, because there’s no standard. Every app picks its own curve. So I measured Affinity’s.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c8d26190264d111d1b36499d72afab0d/f7616/affinity-brightness.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.21686746987952%; position: relative; bottom: 0; left: 0; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;The Brightness Contrast adjustment panel in Affinity Photo 3, with Brightness and Contrast sliders and a Linear checkbox&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c8d26190264d111d1b36499d72afab0d/31493/affinity-brightness.png&quot;
+        srcset=&quot;/static/c8d26190264d111d1b36499d72afab0d/e72ac/affinity-brightness.png 166w,
+/static/c8d26190264d111d1b36499d72afab0d/f8dc5/affinity-brightness.png 332w,
+/static/c8d26190264d111d1b36499d72afab0d/31493/affinity-brightness.png 664w,
+/static/c8d26190264d111d1b36499d72afab0d/f7616/affinity-brightness.png 766w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Affinity Photo 3, Brightness Contrast adjustment. I only measured the Brightness slider and the Linear checkbox.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;The method was simple: I made an image with all 256 grays, applied Brightness at -100, -75, … +100, exported each one and read the values back. That’s why the widgets below only offer these nine positions: I didn’t want to show you numbers I never measured.&lt;/p&gt;
+&lt;p&gt;Here is the same orange pixel.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-brightness&quot; data-props=&quot;{&amp;quot;r&amp;quot;:224,&amp;quot;g&amp;quot;:140,&amp;quot;b&amp;quot;:9,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;What I noticed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Black stays black and white stays white, at every setting.&lt;/li&gt;
+&lt;li&gt;It lifts the middle most. At +50 the mid gray 128 becomes 185.&lt;/li&gt;
+&lt;li&gt;The shape changes when you drag. Where the lift is strongest moves toward the shadows as you go up, so it isn’t a single curve that just gets stronger.&lt;/li&gt;
+&lt;li&gt;Colors still move. The orange slides toward yellow here too (37° at 0, 52° at +75), and the red barely reaches 253 there. The dim channels get lifted more than the bright one, so the proportions change.&lt;/li&gt;
+&lt;li&gt;It clips too, just later and softer than Exposure. At +25 the top few values (253 and up) already become 255, at +50 it’s 247 and up, and at +100 everything from 202 up.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Mostly it squeezes the highlights together instead of cutting them off. At +75, for example, everything from 200 up ends up between 250 and 255.&lt;/p&gt;
+&lt;p&gt;And here is the whole photo.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;image-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo, Brightness slider. Notice how the histogram bunches up on the right.&amp;quot;,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (image-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Affinity also has a “Linear” checkbox in the Brightness Contrast panel (under the Contrast slider). I measured it too: it’s just &lt;code class=&quot;language-text&quot;&gt;value + 2.55 × slider&lt;/code&gt;, a flat offset, clipped at 255. Black turns gray. I’d skip it.&lt;/p&gt;
+&lt;p&gt;To put the two side by side, here is one photo with both sliders. They’re separate on purpose: there’s no fair way to say “Brightness 30 equals Exposure 0.7”, because they are different curves.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;compare-exposure-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo twice, one slider for each tool.&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (compare-exposure-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2&gt;One curve, three channels&lt;/h2&gt;
+&lt;p&gt;I skipped over something important: &lt;strong&gt;both sliders work on each color channel separately.&lt;/strong&gt; The red, green and blue values of a pixel each go through the same curve. Affinity never looks at the color as a whole.&lt;/p&gt;
+&lt;p&gt;I checked this. I put eight color squares in my test image, applied the adjustment and compared them with what the gray curve predicted for each channel on its own. For Exposure and for Brightness (at all eight settings from -100 to +100) the difference was at most 2.5 values out of 255, which is just the noise in my measurement. So the curve you see in the widgets is applied three times, once per channel.&lt;/p&gt;
+&lt;p&gt;Why do I care? Two reasons.&lt;/p&gt;
+&lt;p&gt;First, clipping happens per channel. A pixel doesn’t “become too bright”. One of its channels reaches 255 first and stops, and the other two keep going. That’s why the orange turned yellow and the teal turned cyan. The “Clipped” line in the widgets tells you which channel stopped.&lt;/p&gt;
+&lt;p&gt;Second, the shape of the curve decides what happens to your colors. Take a dark teal, &lt;code class=&quot;language-text&quot;&gt;51 · 80 · 92&lt;/code&gt;. Exposure only multiplies, so every channel grows by the same factor and the proportions between them stay the same (until something clips). At +1 stop it’s &lt;code class=&quot;language-text&quot;&gt;70 · 110 · 126&lt;/code&gt;, and the hue doesn’t move and the saturation (HSL) stays at 29%.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-exposure&quot; data-props=&quot;{&amp;quot;r&amp;quot;:51,&amp;quot;g&amp;quot;:80,&amp;quot;b&amp;quot;:92,&amp;quot;min&amp;quot;:0,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-exposure). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Brightness bends the values instead of scaling them, and a bend lifts a dark channel more than a bright one. The proportions change, and so does the color. The same teal at +50 is &lt;code class=&quot;language-text&quot;&gt;86 · 128 · 143&lt;/code&gt; and the saturation (HSL) drops from 29% to 25%. At +100 it’s &lt;code class=&quot;language-text&quot;&gt;151 · 198 · 211&lt;/code&gt;, and the saturation goes up to 41%. Nothing clipped there, the color just moved.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-brightness&quot; data-props=&quot;{&amp;quot;r&amp;quot;:51,&amp;quot;g&amp;quot;:80,&amp;quot;b&amp;quot;:92,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Exposure keeps the proportions between the channels, so the hue holds until something clips. Brightness changes the color by bending the curve. Either way, it’s worth looking at a neon sign or a skin tone after you touch one of them.&lt;/p&gt;
+&lt;p&gt;One caveat about saturation numbers: HSL measures saturation against how close the color is to white or black. A color that starts just below mid gray, like &lt;code class=&quot;language-text&quot;&gt;100 · 130 · 150&lt;/code&gt;, goes from 20% to 41% saturation at +1 stop of Exposure (&lt;code class=&quot;language-text&quot;&gt;137 · 178 · 206&lt;/code&gt;), with the same hue and the same proportions between the channels. It crossed mid gray on the way up. My dark teal above stays well below it, so nothing happens there. Don’t read too much into a saturation number on its own.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: why HSL saturation moves when you only scale&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;From Claude. The definitions are on &lt;a href=&quot;https://en.wikipedia.org/wiki/HSL_and_HSV&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Wikipedia’s HSL and HSV page&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Take &lt;code class=&quot;language-text&quot;&gt;max&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;min&lt;/code&gt; as the biggest and smallest channel (as fractions from 0 to 1) and the lightness &lt;code class=&quot;language-text&quot;&gt;L = (max + min) / 2&lt;/code&gt;. HSL saturation is &lt;code class=&quot;language-text&quot;&gt;(max − min) / (1 − |2L − 1|)&lt;/code&gt;, and the bottom part changes shape at mid gray:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;At &lt;code class=&quot;language-text&quot;&gt;L ≤ 0.5&lt;/code&gt; it is &lt;code class=&quot;language-text&quot;&gt;(max − min) / (max + min)&lt;/code&gt;. Multiply all channels by the same number and it cancels out, so the saturation stays put. That is the dark teal staying at 29%.&lt;/li&gt;
+&lt;li&gt;Above &lt;code class=&quot;language-text&quot;&gt;L = 0.5&lt;/code&gt; it is &lt;code class=&quot;language-text&quot;&gt;(max − min) / (2 − max − min)&lt;/code&gt;. Multiplying makes the top bigger and the bottom smaller, so the saturation climbs. &lt;code class=&quot;language-text&quot;&gt;100 · 130 · 150&lt;/code&gt; has &lt;code class=&quot;language-text&quot;&gt;L&lt;/code&gt; = 0.49 and 20%. After one stop, &lt;code class=&quot;language-text&quot;&gt;137 · 178 · 206&lt;/code&gt; has &lt;code class=&quot;language-text&quot;&gt;L&lt;/code&gt; = 0.67 and 41%.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HSV saturation, &lt;code class=&quot;language-text&quot;&gt;(max − min) / max&lt;/code&gt;, doesn’t change when you scale. So which model a program shows you decides whether Exposure “changes saturation”. Neither is a measure of how saturated a color looks.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Two limits. I only used color squares for these two tools. I measured gamma on grays only, so I expect Levels in its normal RGB mode to behave the same way, but I didn’t check. And every tool I measured works per channel. Tools that work on lightness only (an HSL or Lab based adjustment, for example) should leave the hue alone, but I didn’t test any of those in Affinity, so I can’t tell you how they behave.&lt;/p&gt;
+&lt;h2&gt;What to use instead of Brightness&lt;/h2&gt;
+&lt;p&gt;Brightness is quick, and for a small nudge it’s fine. But I don’t love that it’s a black box: another app has a different curve, so a recipe like “Brightness +30” doesn’t carry over. Two options where you know exactly what happens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Levels, Gamma slider.&lt;/strong&gt; One number, and the curve is simple: &lt;code class=&quot;language-text&quot;&gt;new value = old value ^ gamma&lt;/code&gt;. In Affinity, a gamma below 1 makes the picture lighter. Careful, in Photoshop it is the other way around. It keeps black and white fixed and it is predictable, which is why I use it for dark scenes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Curves.&lt;/strong&gt; When you want to lift only the shadows, or protect the highlights, draw the curve yourself. It takes some practice, but you decide exactly what happens. Curves in its normal RGB mode should work per channel too, so it can nudge colors as well. A trick for that is to set the Curves adjustment layer to the Luminosity blend mode, so the change should only affect lightness and not color.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6ea72b52f2b5db356808908d77d20478/f7616/affinity-levels.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 119.87951807228916%; position: relative; bottom: 0; left: 0; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;The Levels adjustment panel in Affinity Photo 3, with a histogram and Black Level, White Level, Gamma and output level sliders&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6ea72b52f2b5db356808908d77d20478/31493/affinity-levels.png&quot;
+        srcset=&quot;/static/6ea72b52f2b5db356808908d77d20478/e72ac/affinity-levels.png 166w,
+/static/6ea72b52f2b5db356808908d77d20478/f8dc5/affinity-levels.png 332w,
+/static/6ea72b52f2b5db356808908d77d20478/31493/affinity-levels.png 664w,
+/static/6ea72b52f2b5db356808908d77d20478/f7616/affinity-levels.png 766w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Affinity Photo 3, Levels adjustment (RGB, Master). Gamma is the slider I use, and 1 means no change.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Try gamma on a dark pixel from the wall. Going below 1 lifts it.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-gamma&quot; data-props=&quot;{&amp;quot;r&amp;quot;:15,&amp;quot;g&amp;quot;:22,&amp;quot;b&amp;quot;:15,&amp;quot;min&amp;quot;:0.1,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-gamma). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And on the photo:&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;image-gamma&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo, Levels gamma. Below 1 is lighter.&amp;quot;,&amp;quot;min&amp;quot;:0.1,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (image-gamma). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;I left out gamma 0. In Affinity it turns the whole picture white.&lt;/p&gt;
+&lt;h2&gt;What the other editors do&lt;/h2&gt;
+&lt;p&gt;Brightness has disappeared from most serious editors. Lightroom removed it in Lightroom 4 (Process Version 2012), together with Recovery and Fill Light, and added Highlights, Shadows and Whites. I could not find an Adobe page that says why, so these are third-party sources: &lt;a href=&quot;https://peachpit.com/articles/article.aspx?p=1843881&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Peachpit&lt;/a&gt;, &lt;a href=&quot;https://cambridgeincolour.com/forums/thread653-3.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;a Cambridge in Colour forum thread&lt;/a&gt; (people there say the old Exposure and Brightness sliders did an overlapping job) and &lt;a href=&quot;https://laurashoe.com/2013/06/26/where-are-my-lightroom-4-or-5-develop-controls-and-whats-that-lightning-bolt-below-the-histogram&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Laura Shoe’s guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also looked at &lt;a href=&quot;https://github.com/storytold/lightcraft&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;LightCraft&lt;/a&gt;, a new open-source Lightroom-style editor. It has an Exposure slider from -5 to +5 stops (&lt;a href=&quot;https://github.com/storytold/lightcraft/blob/472560b30936259fe50f8df67b9ad57ea8ef7a6d/crates/develop/src/controls.rs#L178&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;controls.rs&lt;/code&gt;&lt;/a&gt;), and no plain Brightness slider in its normal Light section, only Contrast, Highlights, Shadows, Whites and Blacks. In its shader, the local exposure is a multiplication of the color by &lt;code class=&quot;language-text&quot;&gt;exp2(stops)&lt;/code&gt; (&lt;a href=&quot;https://github.com/storytold/lightcraft/blob/472560b30936259fe50f8df67b9ad57ea8ef7a6d/crates/gpu/src/wgsl/finish.wgsl#L480&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;finish.wgsl&lt;/code&gt;&lt;/a&gt;), which is the “double the light per stop” idea in one line. I didn’t trace how the global slider is applied, so I won’t claim more than that.&lt;/p&gt;
+&lt;p&gt;Instagram and the iOS Photos app still have Brightness. I didn’t measure them, so I can’t tell you what their curves look like. I may test them at some point.&lt;/p&gt;
+&lt;h2&gt;So, which one should I use?&lt;/h2&gt;
+&lt;p&gt;This is what I do now. Remember that it is my opinion, based on 8-bit game screenshots.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;8-bit screenshot, too dark:&lt;/strong&gt; lift with Levels gamma or Curves. They squeeze the highlights instead of burning them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;An app with only Exposure and Brightness&lt;/strong&gt; (Instagram, the iOS Photos app): it depends on the image.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dark image:&lt;/strong&gt; use Exposure. Nothing is near 255, so there is little risk of clipping, and the hue doesn’t move.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Image with bright areas:&lt;/strong&gt; use Brightness. It squeezes the highlights instead of cutting them off, so it avoids clipping (in Affinity at +25 it only clips the values from 253 up).&lt;/li&gt;
+&lt;li&gt;I only measured Affinity’s, so for the other apps this is an educated bet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;8-bit screenshot, too bright:&lt;/strong&gt; Exposure is fine. Going down never clips.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linear Brightness:&lt;/strong&gt; skip it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RAW or HDR file:&lt;/strong&gt; start with Exposure. There is room above white, so it is safe, and it behaves like the camera would have. I don’t work with RAW myself, so this one is theory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; If a bright neon sign turns yellow when you brighten a photo, one channel clipped. Go back and use gamma or Curves instead.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I didn’t test what Exposure does in 16-bit or 32-bit documents, so I can’t say anything about those.&lt;/p&gt;
+&lt;h2&gt;How I measured this&lt;/h2&gt;
+&lt;p&gt;If you want to repeat it: I made an image with 256 gray squares (value 0 to 255) plus a few color squares. I applied one adjustment at a time in Affinity Photo 3, exported a PNG, and read the exact values back with a small script. Exporting the untouched image gave values that were off by about 1, so treat every number here as accurate to about 2 out of 255.&lt;/p&gt;
+&lt;p&gt;I think there is more to find in how Affinity handles Contrast and bit depth. Maybe next time.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[I have interviewed more than 100 different people throughout my 7-year career as an Android engineer. In this blog post, I would like to…]]></description><link>https://www.antondanshin.com/blog/easy-interview-questions</link><guid isPermaLink="false">https://www.antondanshin.com/blog/easy-interview-questions</guid><pubDate>Sun, 14 Aug 2022 23:23:51 GMT</pubDate><content:encoded>&lt;p&gt;I have interviewed more than 100 different people throughout my 7-year career as an Android engineer. In this blog post, I would like to share some very easy questions that I often asked during phone screens and even some normal interview rounds.&lt;/p&gt;
 &lt;p&gt;These are all fundamental stuff that I wish all Java/Kotlin programmers knew, but practice shows that still many people are not able to give a complete or correct answer to them. I hope someone finds it useful for their interview preparation and won’t make mistakes in these basic questions.&lt;/p&gt;
 &lt;h2&gt;Intro&lt;/h2&gt;
 &lt;h3&gt;Introductory pitch&lt;/h3&gt;
@@ -35,10 +382,10 @@
 &lt;p&gt;&lt;strong&gt;Question.&lt;/strong&gt; What is Any, Unit, and Nothing in Kotlin?&lt;/p&gt;
 &lt;p&gt;How can you use it all the time and still be unable to give a complete and correct answer about it?!&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;. Study the basics of your programming language.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; Study the basics of your programming language.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;Network basics&lt;/h3&gt;
-&lt;p&gt;Android engineers often build apps that interact with multiple API. We have to understand the basics of networking. To check that, I typically ask what happens when you go via URL in your browser.&lt;/p&gt;
+&lt;p&gt;Android engineers often build apps that interact with multiple APIs. We have to understand the basics of networking. To check that, I typically ask what happens when you go via URL in your browser.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Question.&lt;/strong&gt; What happens when you enter a URL in your browser and hit ENTER?&lt;/p&gt;
 &lt;p&gt;Even better:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Question.&lt;/strong&gt; What happens when I call an API method in my Retrofit API?&lt;/p&gt;
@@ -46,44 +393,44 @@
 &lt;p&gt;Depending if this is a technical phone screen or an on-site round the expectations are different. On the phone screen, I’m satisfied if we just touch on the basics. &lt;/p&gt;
 &lt;p&gt;On the on-site, we usually go deeper and talk about reflection, error handling strategies, how OkHttp client works, types of APIs, serialization, HTTP and other protocols, data encryption and security, caching, DNS, and all the other networking stuff… &lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Pro Tip.&lt;/strong&gt; Know what happens during client/server communication.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; Know what happens during client/server communication.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;Programming skills&lt;/h3&gt;
 &lt;p&gt;Some of my colleagues like to ask FizzBuzz to sanity check a person’s ability to think and code. I find it too common and replace it with another trivial problem.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Question.&lt;/strong&gt; Given a 32-bit integer, return it with its digits reversed. You can use any function from the standard library.&lt;/p&gt;
-&lt;p&gt;This is a &lt;a href=&quot;https://leetcode.com/problems/reverse-integer/&quot;&gt;Leetcode Easy&lt;/a&gt; problem, with all conditions dropped. It can be solved either in a mathematical way with division by 10 or by reversing a string, both of which can be written in under 10 lines of code. Only 50% of the people I interviewed were able to write a working solution in 15 minutes.&lt;/p&gt;
-&lt;p&gt;Yes, in real work you won’t be reversing integers. However, you will be working with numbers and strings, parsing data from files and network streams. This &lt;em&gt;type&lt;/em&gt; of problem might come up during your work. Remember, I don’t only focus on the solution itself, but also on how arrived at it, what type of questions they ask and how they write their code. Clarifying questions, thinking about edge cases, communicating well, and writing simple readable code is as important as having a working solution.&lt;/p&gt;
+&lt;p&gt;This is a &lt;a href=&quot;https://leetcode.com/problems/reverse-integer/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Leetcode Easy&lt;/a&gt; problem, with all conditions dropped. It can be solved either in a mathematical way with division by 10 or by reversing a string, both of which can be written in under 10 lines of code. Only 50% of the people I interviewed were able to write a working solution in 15 minutes.&lt;/p&gt;
+&lt;p&gt;Yes, in real work you won’t be reversing integers. However, you will be working with numbers and strings, parsing data from files and network streams. This &lt;em&gt;type&lt;/em&gt; of problem might come up during your work. Remember, I don’t only focus on the solution itself, but also on how they arrived at it, what type of questions they ask and how they write their code. Clarifying questions, thinking about edge cases, communicating well, and writing simple readable code is as important as having a working solution.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Pro Tip.&lt;/strong&gt; Approach the problem as if it is your work project.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pro Tip:&lt;/strong&gt; Approach the problem as if it is your work project.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Final thoughts&lt;/h2&gt;
 &lt;p&gt;While the listed questions are quite easy, not everyone can confidently answer them. What I often see during the interviews, is that people try to guess the answer or have some invalid assumptions in their head about how things are. As a result, they are just giving incorrect answers. It is ok to not know something, nobody is perfect. But you should be honest with your interviewer and make sure to tell them that your answer is based on an assumption or you are just trying to guess it.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[Many Android projects contain more than one module (subproject). In a product oriented project, it will be one app module and many library…]]></description><link>https://www.antondanshin.com/blog/gradle-convention-plugins</link><guid isPermaLink="false">https://www.antondanshin.com/blog/gradle-convention-plugins</guid><pubDate>Fri, 10 Dec 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Many Android projects contain more than one module (subproject). In a product oriented project, it will be one app module and many library modules. When the team is developing white-label apps, it will be many apps on top of many library modules.&lt;/p&gt;
-&lt;p&gt;Here is what I often see in our project. When creating a new module, some developers would use Android Studio GUI and then adjust it according to what they need. Others would simply copy-paste some existing module and change it. Some people would even write build configuration from scratch. Generally, there is nothing wrong with this. Bu over time, this practice had caused us several issues:&lt;/p&gt;
+&lt;p&gt;Here is what I often see in our project. When creating a new module, some developers would use Android Studio GUI and then adjust it according to what they need. Others would simply copy-paste some existing module and change it. Some people would even write build configuration from scratch. Generally, there is nothing wrong with this. But over time, this practice had caused us several issues:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Inconsistencies.&lt;/strong&gt; Build configuration might differ from module to module (e.g., could have different &lt;code class=&quot;language-text&quot;&gt;compileSdkVersion&lt;/code&gt;).&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Poor maintainability.&lt;/strong&gt; If we need to apply some new setting to all modules, we will have to change them all.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Redundant logic.&lt;/strong&gt; Build configuration may contain redundant parameters / code, developers are afraid to remove it to break something.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Since we are making wite-labels apps, we have created a script that automates some of the copy-paste we have to do in order to bootstrap the boilerplate for new apps. The amount of duplication in the build logic grows even faster.&lt;/p&gt;
-&lt;h2&gt;Sharing external dependencies and versions accross Gradle modules&lt;/h2&gt;
-&lt;p&gt;One of the common things developers do, is introducing constants for external libraries. In many projects I see on Github, all versions and library locators are placed to &lt;code class=&quot;language-text&quot;&gt;versions.gradle&lt;/code&gt; in the project’s root directory. The file typically declares version of different libraries and plugins, and also groups all libraries by vendor Then, all the versions and dependencse are placed into Gradle’s &lt;a href=&quot;https://docs.gradle.org/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html&quot;&gt;ExtraPropertiesExtension&lt;/a&gt;, aka &lt;code class=&quot;language-text&quot;&gt;ext&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since we are making white-label apps, we have created a script that automates some of the copy-paste we have to do in order to bootstrap the boilerplate for new apps. The amount of duplication in the build logic grows even faster.&lt;/p&gt;
+&lt;h2&gt;Sharing external dependencies and versions across Gradle modules&lt;/h2&gt;
+&lt;p&gt;One of the common things developers do, is introducing constants for external libraries. In many projects I see on GitHub, all versions and library locators are placed to &lt;code class=&quot;language-text&quot;&gt;versions.gradle&lt;/code&gt; in the project’s root directory. The file typically declares version of different libraries and plugins, and also groups all libraries by vendor. Then, all the versions and dependencies are placed into Gradle’s &lt;a href=&quot;https://docs.gradle.org/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;ExtraPropertiesExtension&lt;/a&gt;, aka &lt;code class=&quot;language-text&quot;&gt;ext&lt;/code&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I’ve heard that using &lt;code class=&quot;language-text&quot;&gt;ext&lt;/code&gt; to keep common parameters across subprojects is not a very good practice. I don’t know why exactly… I could certainly find some of its drawbacks if I try. However, our project is currenly using this approach.&lt;/p&gt;
+&lt;p&gt;I’ve heard that using &lt;code class=&quot;language-text&quot;&gt;ext&lt;/code&gt; to keep common parameters across subprojects is not a very good practice. I don’t know why exactly… I could certainly find some of its drawbacks if I try. However, our project is currently using this approach.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Gradle team noticed the trend and came up with a solution called &lt;a href=&quot;https://docs.gradle.org/current/userguide/platforms.html&quot;&gt;Version Catalogs&lt;/a&gt;, which is currently a feature preview. The feature allows you to define versions and libraries in a &lt;code class=&quot;language-text&quot;&gt;*.toml&lt;/code&gt; file. Gradle will generate type-safe accessors based on the declarations in the file.&lt;/p&gt;
-&lt;p&gt;You could try using it for new projects. However, if you already have your own “version catalog” that works for you, I don’t really see a need to migrate to the Gradle solution. Compared to defining versions in a Gradle or Kotlin script with IDE support, I found it quite annoying that you have to edit &lt;code class=&quot;language-text&quot;&gt;*.toml&lt;/code&gt;. Apart from syntax highlighing, IDE doesn’t help you with the code completion (at least as of the time of writing this post there was an &lt;a href=&quot;https://youtrack.jetbrains.com/issue/IDEA-262280&quot;&gt;open issue&lt;/a&gt; about that), and you can easily mess it up.&lt;/p&gt;
-&lt;h2&gt;Sharing common build logic accross Gradle modules&lt;/h2&gt;
+&lt;p&gt;Gradle team noticed the trend and came up with a solution called &lt;a href=&quot;https://docs.gradle.org/current/userguide/platforms.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Version Catalogs&lt;/a&gt;, which is currently a feature preview. The feature allows you to define versions and libraries in a &lt;code class=&quot;language-text&quot;&gt;*.toml&lt;/code&gt; file. Gradle will generate type-safe accessors based on the declarations in the file.&lt;/p&gt;
+&lt;p&gt;You could try using it for new projects. However, if you already have your own “version catalog” that works for you, I don’t really see a need to migrate to the Gradle solution. Compared to defining versions in a Gradle or Kotlin script with IDE support, I found it quite annoying that you have to edit &lt;code class=&quot;language-text&quot;&gt;*.toml&lt;/code&gt;. Apart from syntax highlighting, IDE doesn’t help you with the code completion (at least as of the time of writing this post there was an &lt;a href=&quot;https://youtrack.jetbrains.com/issue/IDEA-262280&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;open issue&lt;/a&gt; about that), and you can easily mess it up.&lt;/p&gt;
+&lt;h2&gt;Sharing common build logic across Gradle modules&lt;/h2&gt;
 &lt;p&gt;Common pattern that people do here, is either putting the code into &lt;code class=&quot;language-text&quot;&gt;subprojects {}&lt;/code&gt; block of root &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; file, or put configuration logic into a separate gradle file and apply it to specific module via &lt;code class=&quot;language-text&quot;&gt;apply from: &apos;file.gradle&apos;&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This is a solution, but because you cannot often split root &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; into separate files, the file becomes inflated. This also causes subprojects to implicitly &lt;strong&gt;rely&lt;/strong&gt; on configuration logic written in the root &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Fortunately, now there is an easy way split the common build logic into separate gradle files (plugins) that also make subprojects explicitely declare that they are using this configuration. This approach is based on a Gradle feature &lt;a href=&quot;https://docs.gradle.org/current/userguide/custom_plugins.html#sec:precompiled_plugins&quot;&gt;Precompiled Script Plugins&lt;/a&gt; and this is now a recommend way for sharing build logic accorss modules in larger projects. Such precompiled plugins that contain pieces of shared build logic are often referred to as &lt;em&gt;Convention plugins&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;If you don’t have many modules, I think it still OK writing your common build logic the old way. But as project grows, you may not notice how your 10 modules became 30, and 30 become 50… So, why not invest a little bit of time and set up a future proof structure at the early?&lt;/p&gt;
+&lt;p&gt;Fortunately, now there is an easy way to split the common build logic into separate gradle files (plugins) that also make subprojects explicitly declare that they are using this configuration. This approach is based on a Gradle feature &lt;a href=&quot;https://docs.gradle.org/current/userguide/custom_plugins.html#sec:precompiled_plugins&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Precompiled Script Plugins&lt;/a&gt; and this is now a recommended way for sharing build logic across modules in larger projects. Such precompiled plugins that contain pieces of shared build logic are often referred to as &lt;em&gt;Convention plugins&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;If you don’t have many modules, I think it’s still OK writing your common build logic the old way. But as project grows, you may not notice how your 10 modules became 30, and 30 become 50… So, why not invest a little bit of time and set up a future proof structure at the early?&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Before applying it to your project, always check whether the benefits that the convention plugins bring outweigh the drawbacks (e.g. potentially slower build or some other issue).&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;The benefits&lt;/strong&gt; of using convention plugins are:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Just like with &lt;code class=&quot;language-text&quot;&gt;subprojects { }&lt;/code&gt; configuration block, you will be able to extract common logic in one place.&lt;/li&gt;
-&lt;li&gt;You will be able separate common logic into completely independent bits, which should be easier to maintain.&lt;/li&gt;
+&lt;li&gt;You will be able to separate common logic into completely independent bits, which should be easier to maintain.&lt;/li&gt;
 &lt;li&gt;You explicitly apply different convention plugins to different modules.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -91,12 +438,12 @@
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;The drawbacks&lt;/strong&gt; that I noticed are:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;It requires you to use newer Gradle, as well as new &lt;code class=&quot;language-text&quot;&gt;pluginManagement {}&lt;/code&gt;, which has some issues when used together with the older &lt;code class=&quot;language-text&quot;&gt;builscript&lt;/code&gt;. Ideally, all projects should migrate to new approach.&lt;/li&gt;
+&lt;li&gt;It requires you to use newer Gradle, as well as new &lt;code class=&quot;language-text&quot;&gt;pluginManagement {}&lt;/code&gt;, which has some issues when used together with the older &lt;code class=&quot;language-text&quot;&gt;buildscript&lt;/code&gt;. Ideally, all projects should migrate to new approach.&lt;/li&gt;
 &lt;li&gt;It will take a little extra time to compile included build.&lt;/li&gt;
 &lt;li&gt;This is not the default way, so when you introduce new team members to the project, they will have to learn your new “conventions”.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;How to add simple convention plugin&lt;/h2&gt;
-&lt;p&gt;Convention plugins are placed into an &lt;a href=&quot;https://docs.gradle.org/current/userguide/composite_builds.html&quot;&gt;included build&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Convention plugins are placed into an &lt;a href=&quot;https://docs.gradle.org/current/userguide/composite_builds.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;included build&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The idea is to put all your build logic into special project, which you can call &lt;code class=&quot;language-text&quot;&gt;build-logic&lt;/code&gt;. It is going to be a standalone gradle project, with its own &lt;code class=&quot;language-text&quot;&gt;settings.gradle&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; scripts and submodules. It can then be declared as an included build in root project’s &lt;code class=&quot;language-text&quot;&gt;settings.gradle&lt;/code&gt;. Alternatively, it can also be included at build time via command line parameter: &lt;code class=&quot;language-text&quot;&gt;./gradlew --include-build build-logic&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;Project structure&lt;/h3&gt;
 &lt;p&gt;Here is how the project structure would look like:&lt;/p&gt;
@@ -129,7 +476,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;pluginManagement&lt;/code&gt; block is important. Without it convention plugins won’t work.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;There is an &lt;a href=&quot;https://youtrack.jetbrains.com/issue/IDEA-262528&quot;&gt;issue&lt;/a&gt; with IDEA that causes wrong gradle wrapper to be used when running tests from IDE. It can be fixed by setting version of Gradle Wrapper in the root &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; script:&lt;/p&gt;
+&lt;p&gt;There is an &lt;a href=&quot;https://youtrack.jetbrains.com/issue/IDEA-262528&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;issue&lt;/a&gt; with IDEA that causes wrong gradle wrapper to be used when running tests from IDE. It can be fixed by setting version of Gradle Wrapper in the root &lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; script:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;groovy&quot;&gt;&lt;pre class=&quot;language-groovy&quot;&gt;&lt;code class=&quot;language-groovy&quot;&gt;tasks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;withType&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Wrapper&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;configureEach &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     distributionType &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Wrapper&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;DistributionType&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;BIN
     gradleVersion &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token interpolation-string&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&quot;7.3.1&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// set the same version as in gradle/wrapper/gradle-wrapper.properties&lt;/span&gt;
@@ -156,7 +503,7 @@ dependencyResolutionManagement &lt;span class=&quot;token punctuation&quot;&gt;{
 &lt;p&gt;Here we define repositories where to find plugins and dependencies for our included build. We also declare a subproject that will contain our convention plugins.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;build.gradle&lt;/code&gt; can be empty.&lt;/p&gt;
 &lt;h3&gt;Simple convention plugin&lt;/h3&gt;
-&lt;p&gt;Inside &lt;code class=&quot;language-text&quot;&gt;build-logic/convention-plugins/build.gradle.kts&lt;/code&gt; we need to apply &lt;code class=&quot;language-text&quot;&gt;kotlin-dsl&lt;/code&gt; plugin and add a depdendency on Android Gradle Plugin.&lt;/p&gt;
+&lt;p&gt;Inside &lt;code class=&quot;language-text&quot;&gt;build-logic/convention-plugins/build.gradle.kts&lt;/code&gt; we need to apply &lt;code class=&quot;language-text&quot;&gt;kotlin-dsl&lt;/code&gt; plugin and add a dependency on Android Gradle Plugin.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;plugins &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     `kotlin&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;dsl`
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
@@ -180,20 +527,20 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;groovy&quot;&gt;&lt;pre class=&quot;language-groovy&quot;&gt;&lt;code class=&quot;language-groovy&quot;&gt;plugins &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     id &lt;span class=&quot;token string&quot;&gt;&apos;convention.android-app&apos;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The convention plugin will apply Android Aplication plugin and will also set &lt;code class=&quot;language-text&quot;&gt;defaultConfig&lt;/code&gt; that we defined.&lt;/p&gt;
+&lt;p&gt;The convention plugin will apply Android Application plugin and will also set &lt;code class=&quot;language-text&quot;&gt;defaultConfig&lt;/code&gt; that we defined.&lt;/p&gt;
 &lt;h2&gt;Resources&lt;/h2&gt;
-&lt;p&gt;Before you start digging into this topic, I recommend reading the intro to &lt;a href=&quot;https://docs.gradle.org/current/userguide/custom_plugins.html#sec:precompiled_plugins&quot;&gt;Precompiled Script Plugins&lt;/a&gt; from Gradle. Then explore the examples below:&lt;/p&gt;
+&lt;p&gt;Before you start digging into this topic, I recommend reading the intro to &lt;a href=&quot;https://docs.gradle.org/current/userguide/custom_plugins.html#sec:precompiled_plugins&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Precompiled Script Plugins&lt;/a&gt; from Gradle. Then explore the examples below:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://docs.gradle.org/current/samples/sample_convention_plugins.html&quot;&gt;Convention plugins&lt;/a&gt; – Oficial sample from Gradle.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dsvoronin/march-meetup-gradle&quot;&gt;Android Sample&lt;/a&gt; – More realistic sample with of Android project.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/avito-tech/avito-android/tree/develop/build-logic&quot;&gt;Real project usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.gradle.org/current/samples/sample_convention_plugins.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Convention plugins&lt;/a&gt; – Official sample from Gradle.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dsvoronin/march-meetup-gradle&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Android Sample&lt;/a&gt; – More realistic sample of an Android project.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/avito-tech/avito-android/tree/develop/build-logic&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Real project usage&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Also, I would highly recommend reading Gradle &lt;a href=&quot;https://docs.gradle.org/current/userguide/task_configuration_avoidance.html&quot;&gt;Task Configuration Avoidance&lt;/a&gt; guidelines. Might be useful when writing custom plugins.&lt;/p&gt;
-&lt;p&gt;Special thanks to &lt;a href=&quot;https://github.com/dsvoronin&quot;&gt;Dmitriy Voronin&lt;/a&gt; for inspiration and samples.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[Disclaimer: The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a…]]></description><link>https://www.antondanshin.com/blog/effective-team-communication-in-slack</link><guid isPermaLink="false">https://www.antondanshin.com/blog/effective-team-communication-in-slack</guid><pubDate>Sat, 30 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;Also, I would highly recommend reading Gradle &lt;a href=&quot;https://docs.gradle.org/current/userguide/task_configuration_avoidance.html&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Task Configuration Avoidance&lt;/a&gt; guidelines. Might be useful when writing custom plugins.&lt;/p&gt;
+&lt;p&gt;Special thanks to &lt;a href=&quot;https://github.com/dsvoronin&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Dmitriy Voronin&lt;/a&gt; for inspiration and samples.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[Disclaimer: The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a…]]></description><link>https://www.antondanshin.com/blog/effective-team-communication-in-slack</link><guid isPermaLink="false">https://www.antondanshin.com/blog/effective-team-communication-in-slack</guid><pubDate>Sat, 30 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; The goal of this article is to share my experience of working with Slack. Everything below is just my opinion. This is not a paid ad, and I am not affiliated with Slack in any way.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Even though Slack has become one of the most popular messaging platforms used by tech companies all over the world, I was surprised to find out that lots of teams are still relying on emails, Skype, and other conventional communications tools. I understand that Slack is not a silver bullet and won’t solve all the communication issues in your team, but I still encourage you to try it.&lt;/p&gt;
-&lt;p&gt;At my previous workplace, we initially used Skype. But as the company grew, we quickly transitioned to Slack. Not everything was convenient at first, we had to restructure our chats several times and introduce some rules to make it work for us. But over 5 years there were no major problems and, in my opinion, moving all communications to slack has only benefited us.&lt;/p&gt;
+&lt;p&gt;At my previous workplace, we initially used Skype. But as the company grew, we quickly transitioned to Slack. Not everything was convenient at first, we had to restructure our chats several times and introduce some rules to make it work for us. But over 5 years there were no major problems and, in my opinion, moving all communications to Slack has only benefited us.&lt;/p&gt;
 &lt;p&gt;In this article, I will try to give some tips on how to organize your Slack to make it work for your growing company. It might be useful for:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Growing teams who are still using conventional messenger apps.&lt;/li&gt;
@@ -203,10 +550,10 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;I see a lot of problems that are caused by inefficiencies in internal communication in my current workplace. The company is split into teams by platform and functions (i.e. backend, web, Android, iOS, etc). Even though we have Slack in our company, many teams mostly interact over Skype through private groups and direct messages. In some situations, it takes much more time than it should to find answers or get help, especially for new employees.&lt;/p&gt;
 &lt;p&gt;Below I will try to outline some problems that we have and how can we organize communications in the company to help mitigate them.&lt;/p&gt;
 &lt;h3&gt;Problem: Too many redirects&lt;/h3&gt;
-&lt;p&gt;Many times I have a question about the API, but I don’t know exactly whom should I address it. Ideally, I just need to address my question to the backend team and don’t care who will reply. But because there is no public group where I can do it (email doesn’t count), I have to ask individual members of the backend team in direct messages. This sometimes leads to redirects and I have to write the same thing to several people before I can get my answer. I hope the example bellow will better illustrate the situation.&lt;/p&gt;
+&lt;p&gt;Many times I have a question about the API, but I don’t know exactly whom should I address it. Ideally, I just need to address my question to the backend team and don’t care who will reply. But because there is no public group where I can do it (email doesn’t count), I have to ask individual members of the backend team in direct messages. This sometimes leads to redirects and I have to write the same thing to several people before I can get my answer. I hope the example below will better illustrate the situation.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -217,28 +564,28 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 40.50632911392405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABFklEQVQoz02RXbKDIAyF2f/ibt+carX1DxWqoHYBufNlwPEhcEJOkpNgQggSY5R93/XGB2c/v93xnXPngU3btjIMgxzHId57qapKtpSUidu2XcnrukpZlvL9fhXfY3DNOI7y93hI9XpJiFG6vpe473L+fpcSknJxmo7WSj8MKmRxTgtfCgEUfb/f8vl8pOs6NRKstYqJ4fd9r9YST5j48/nURkxp8qgEnfeqBgM3TSPrtul4Ie3POSd2mnSSeZ7VB6MWnkEmSthdTHugCapIoAjEPNKyLLoe3V8I2tCnfcI1HCh0y6KJjD9Nk3aGhIEpnt8xclDl01Qx7dvkHzrPUzvUda3q8O+/RyN2DCZG0aIo9Gai/Gn/8FlVayY7bhYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 40.361445783132524%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABI0lEQVQoz12SSXbDMAxDdf+7NYtm4djPUzyP8nABhp+1+twu5AdDIARScuu6ivdejuOQbdtkWRbZ9/3Pgg/YK57nWQ7F1PzXuqqqpCxLOc7TjOM4lkUPCQKK4O84ThLph8GMCQQfzN0wjvL1eMj38ynjNEn5fgvcrgLSYjApD14Vj7pX17UUGgJt07YyqPl6hXB8+r63lAjeuiggedd19p8XxQ938WCMWl38J5oY01O7NEPcETAfWj+vdIUawfnbDGmz0wCNHkZadK1i6unE0Tvu0etlswsXRGJEtIlJuBiKmDPjIQgL44l5qtb5qyDMiTZpJQwcjj0OZQ/MHnzTNGaGLhzowu3Zs1Gc5bmkaWqt/z4H3WPOWZZZIVpMoygy/v58PkrSVfe5NZASAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Communication redirects causes development delay&quot;
-        title=&quot;Communication redirects causes development delay&quot;
-        src=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/f058b/communication-redirects.png&quot;
-        srcset=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/c26ae/communication-redirects.png 158w,
-/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/6bdcf/communication-redirects.png 315w,
-/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/f058b/communication-redirects.png 630w,
-/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/40601/communication-redirects.png 945w,
-/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/78612/communication-redirects.png 1260w,
+        title=&quot;&quot;
+        src=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/31493/communication-redirects.png&quot;
+        srcset=&quot;/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/e72ac/communication-redirects.png 166w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/f8dc5/communication-redirects.png 332w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/31493/communication-redirects.png 664w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/5caea/communication-redirects.png 996w,
+/static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/6569d/communication-redirects.png 1328w,
 /static/9f6c3e2ca8b0ef0b33dcbcb106a0bce4/e04e6/communication-redirects.png 2152w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; “Communication redirects”. It’s Thursday afternoon, &lt;strong&gt;AD&lt;/strong&gt; (Android) has a few questions about the API. He asks his team lead &lt;strong&gt;AH&lt;/strong&gt; about it, who remembers, a month ago, similar functionality was done by &lt;strong&gt;IK&lt;/strong&gt; on the server-side. Anton then writes to IK, but he is currently working on a high-priority task, and replies with a short delay. IK tells that it was not him who implemented this API, it’s better to ask &lt;strong&gt;YS&lt;/strong&gt;. Anton forwards the question to YS, who came to work earlier today and is already off duty. Later turns out YS has a day off on Friday. On Monday early morning, YS replies. Because they both realized there is some problem, YS adjusted the API a bit. AD finishes his task and opens PR. After code review, the build is ready for testing on Tuesday morning.&lt;/small&gt;&lt;/p&gt;
-&lt;p&gt;This example is quite extreme but it has happened before. We can see that we’ve wasted quite some time on redirects here. But if Anton wrote to Yuriy first, he would have had a higher chance to get his answer on Thursday speeding up the release of the feature by at least 1 day. But how would he know whom to write?&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; “Communication redirects”. It’s Thursday afternoon, &lt;strong&gt;AD&lt;/strong&gt; (Android) has a few questions about the API. He asks his team lead &lt;strong&gt;AH&lt;/strong&gt; about it, who remembers, a month ago, similar functionality was done by &lt;strong&gt;IK&lt;/strong&gt; on the server-side. AD then writes to IK, but he is currently working on a high-priority task, and replies with a short delay. IK tells that it was not him who implemented this API, it’s better to ask &lt;strong&gt;YS&lt;/strong&gt;. AD forwards the question to YS, who came to work earlier today and is already off duty. Later turns out YS has a day off on Friday. On Monday early morning, YS replies. Because they both realized there is some problem, YS adjusted the API a bit. AD finishes his task and opens PR. After code review, the build is ready for testing on Tuesday morning.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;This example is quite extreme but it has happened before. We can see that we’ve wasted quite some time on redirects here. But if AD wrote to YS first, he would have had a higher chance to get his answer on Thursday speeding up the release of the feature by at least 1 day. But how would he know whom to write?&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Direct chats (and lack of public groups) cause wasted time through redirects.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -254,15 +601,15 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;If all the communications with designer were conducted in a public channel, all interested parties would have been notified about the updated requirements automatically.&lt;/p&gt;
 &lt;h3&gt;Problem: Ineffective onboarding&lt;/h3&gt;
 &lt;p&gt;A growing company needs an effective onboarding process. And that’s not very easy to do, especially when you don’t have enough resources. If a new employee needs help, there should be a way for them to get it.&lt;/p&gt;
-&lt;p&gt;When nobody is maintaining plublic channels and just texts to each other directly, a newcomer doesn’t even know whom to ask, except their team lead. This puts a huge load on the team lead and makes onboarding process painfully slow.&lt;/p&gt;
+&lt;p&gt;When nobody is maintaining public channels and just texts to each other directly, a newcomer doesn’t even know whom to ask, except their team lead. This puts a huge load on the team lead and makes onboarding process painfully slow.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Direct messages slow down onboarding&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Onboarding problem must be solved on a process level, but this will be never. What you can do now, is encourage discussions of work issues in public channels. This will bring a lot of benefits to onoarding of new employees.&lt;/p&gt;
+&lt;p&gt;Onboarding problem must be solved on a process level, but this will be never. What you can do now, is encourage discussions of work issues in public channels. This will bring a lot of benefits to onboarding of new employees.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Public channels will let new employees learn what is happening in the company.&lt;/li&gt;
 &lt;li&gt;In the team’s public channel, newcomers will be able to see how their team mates answer questions – next time they will know the answers themselves.&lt;/li&gt;
-&lt;li&gt;Having access to the entire public communication history of the company will enabled them find some answers without bothering their peers.&lt;/li&gt;
+&lt;li&gt;Having access to the entire public communication history of the company will enable them to find some answers without bothering their peers.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Comparison of Slack with conventional messaging apps&lt;/h2&gt;
 &lt;p&gt;Before I go into how exactly we organized Slack communications in my previous workplace, I would like to compare Slack with personal messaging apps. Let’s first look at “conventional” messengers.&lt;/p&gt;
@@ -352,12 +699,12 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;&lt;strong&gt;2. Reply in a thread.&lt;/strong&gt; When a question is asked in a public channel, reply in a thread. This will ensure other external members will not be notified.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;3. Moderate conversations.&lt;/strong&gt; Make sure conversations are on a topic and professional (jokes and sarcasm must be redirected to appropriate channel). Don’t blame people for problems, suggest solutions and preventative measures.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;4. Ensure quick reaction.&lt;/strong&gt; It will all work better if questions are answered. Try to answer questions asap. If you don’t know the answer, but you know the person who does, reply to the question by mentioning that person. The team can also arrange a schedule for team members to answer questions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Mark questions as resolved.&lt;/strong&gt; Usually the one who asked should mark their question as resolved. If there are multiple questions, the channel owner team will not which questions are still waiting for an answer.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;6. Collect common questions and answers.&lt;/strong&gt;. You might see that questions repeat. Ask people to search before they ask, pin useful conversation threads/resources or put common answers to a Confluence page and place a link to the topic of the chat.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Mark questions as resolved.&lt;/strong&gt; Usually the one who asked should mark their question as resolved. If there are multiple questions, the channel owner team will not know which questions are still waiting for an answer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Collect common questions and answers.&lt;/strong&gt; You might see that questions repeat. Ask people to search before they ask, pin useful conversation threads/resources or put common answers to a Confluence page and place a link to the topic of the chat.&lt;/p&gt;
 &lt;h3&gt;How to stay responsive on Slack&lt;/h3&gt;
 &lt;p&gt;Here is how I would work with Slack to make sure it doesn’t distract me too much and I am still responsive.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1. Star important chats.&lt;/strong&gt; To be in close communication with people and teams that I work with, I will add them to favorites (“star” them). This way, they are displayed on top of the list and there is less chance to miss an important message.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Setup notifications.&lt;/strong&gt; I might set all notifications for important channels, set keyword notifications / direct mentions in some channels. Experiment and find what works for you and what doesn’t.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Set up notifications.&lt;/strong&gt; I might set all notifications for important channels, set keyword notifications / direct mentions in some channels. Experiment and find what works for you and what doesn’t.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;3. Mute all unimportant channels.&lt;/strong&gt; I will mute channels that are not important (if I haven’t left them) to reduce distraction.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;4. Reply in threads.&lt;/strong&gt; When replying to messages in public channels, I will always do it in a thread.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;5. Sort out messages in the morning.&lt;/strong&gt; I will check Slack in the morning and try to reply to all messages.&lt;/p&gt;
@@ -372,115 +719,16 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;li&gt;As an Android developer, I should be a member of a public channel &lt;code class=&quot;language-text&quot;&gt;#android&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;#android-private&lt;/code&gt; channels. I need to watch them regularly to be able to help my team and answer questions from other teams.&lt;/li&gt;
 &lt;li&gt;Because I often need to work with the iOS team on the same tasks and interact with the server APIs, I would also join, &lt;strong&gt;mute&lt;/strong&gt; and occasionally read &lt;code class=&quot;language-text&quot;&gt;#ios&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;#backend&lt;/code&gt; public channels, just to be aware of what’s going on (people ask questions I might be interested to know the answer). I would probably also let Slack notify me of any mentions of the word “android” in these channels.&lt;/li&gt;
 &lt;li&gt;Depending on my current tasks, I might sometimes need to join other public channels to ask questions.&lt;/li&gt;
-&lt;li&gt;I would Leave channels that I haven’t read for a while (Slack has reminders for that).&lt;/li&gt;
+&lt;li&gt;I would leave channels that I haven’t read for a while (Slack has reminders for that).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;If you decided to use Slack, I recommend placing this article in your company’s public knowledge base, such as Confluence. Ensure that everyone on your team is on the same page by letting them read the guidelines. Monitor how it works and listen to the feedback. Experiment and adjust the rules to suit your needs.&lt;/p&gt;
 &lt;p&gt;The presented structure of Slack channels may not work for every company. Some of the points may seem too obvious, but it is still useful to be aware of them. I hope someone will find this useful and improve their communication.&lt;/p&gt;
-&lt;p&gt;Thanks for reading.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[I have been working as an Android developer professionally for more than 6 years now. While it is not huge compared to many people out there…]]></description><link>https://www.antondanshin.com/blog/tips-for-junior-developers</link><guid isPermaLink="false">https://www.antondanshin.com/blog/tips-for-junior-developers</guid><pubDate>Mon, 25 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I have been working as an Android developer professionally for more than 6 years now. While it is not huge compared to many people out there, however, there are even more people who are just starting their software development career and might find my experience useful.&lt;/p&gt;
-&lt;p&gt;In this article, I want to share my advice to all junior software developers that would help them work more efficiently and move faster along the career ladder.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; The following tips are based on my own experience and express my own opinion that I had at the moment of writing. Other people might have completely different views, and that’s ok!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;General tips&lt;/h2&gt;
-&lt;p&gt;Just some basic tips that any (especially) beginner developer should always follow, that would make an impact on your career.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Be proficient in your programming language.&lt;/strong&gt; At work you will be dealing with high-level problems and thinking about how to write a for-loop, or “why this doesn’t compile?” will slow you down. Just like musicians, programmers must know their instrument and be able to write code with their eyes closed (e.g. without the help of the IDE). So, learn fundamentals, know how to write basic algorithms, know the standard library of your programming language, learn tools that you need to work with.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Always stay curious.&lt;/strong&gt; Look in the internals and try to get the basic idea of how it works. If you don’t understand – ask. It is often important to know not just how something works but &lt;strong&gt;why&lt;/strong&gt; it is done this way. So, don’t forget about the “why” question. It will help you to make your own decisions in the future.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Admit that you don’t know or understand something.&lt;/strong&gt; No one knows everything, even senior developers. You are expected to have gaps in knowledge and can misunderstand something. Be honest with yourself, admit what you don’t know, and learn from your peers.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. Learn about the product you are building.&lt;/strong&gt; Understand what are the typical users and how they are interacting with the product. Learn about the product roadmap. Participate in feature discussions and try to contribute to the backlog by suggesting your ideas.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Don’t be shy to ask for help.&lt;/strong&gt; If you are stuck, follow the tips below but always remember not to be afraid to ask your teammates for help. I think some people are just shy and don’t want to disturb senior peers, but this is a mistake. Juniors are expected to be asking questions. If you indeed ask too many questions, we will let you know.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;6. Keep an eye on what’s happening around you.&lt;/strong&gt; If you are working in the office, don’t ignore what’s happening around you. Some of my colleagues used to listen to music and missed out on some information that was briefly said by other team members. Make sure you have some idea of what’s going on in your team and the company, what are the priorities.&lt;/p&gt;
-&lt;h2&gt;Get familiar with the company’s processes&lt;/h2&gt;
-&lt;p&gt;When you start working in a company, it is important to learn about how things are done there.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Look into task workflows.&lt;/strong&gt; Understand what are the main types of tasks you and your team have to deal with. Learn the workflow for each type of task. Pay special attention to how tasks are assigned, who is supposed to transition tasks from one status to another, and how tasks are resolved.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Understand how QA is done.&lt;/strong&gt; All tasks undergo some kind of verification process. It will be extremely important to know how this is done in the company. Depending on when and how QA is involved in the development process, you might need to provide certain information to the QA, so that they can do their job more efficiently. Alternatively, you get test cases from QA to help you understand the requirements.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Understand the release process.&lt;/strong&gt; Learn what happens to the featrue after development and QA are done. Depending on the company and the product, the release process maybe fullly automated or it can be done manually. In any case, it’s important to know how it happend the developed feature is delivered to the end used.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. Learn git workflows in your team.&lt;/strong&gt; Ask your team lead about git workflows. You will need to know what are the main and development branches and what you need to do when you start development. There might be conventions in naming branches as well as requirements for commit messages. Does the team use allow rebase? Do you need to squash commits, add tags? When shoud you delete your feature branch?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Follow the coding conventions of your team.&lt;/strong&gt; TODO.&lt;/p&gt;
-&lt;h2&gt;Get familiar with tools&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;1. Use the same tools that your team is using.&lt;/strong&gt; TODO.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Learn how to debug project on the local machine.&lt;/strong&gt; TODO.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Learn about development / testing environments (if any).&lt;/strong&gt; TODO.&lt;/p&gt;
-&lt;h2&gt;Before starting new task&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Understand the problem (what and why).&lt;/li&gt;
-&lt;li&gt;Discuss the scope of work (what should be included what shouldn’t)&lt;/li&gt;
-&lt;li&gt;Make sure you understand how it is supposed to be done.&lt;/li&gt;
-&lt;li&gt;Learn about how it is going to be tested, released.&lt;/li&gt;
-&lt;li&gt;If something is missing – Ask questions!&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;When working on the task&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Work on your own branch, make commits.&lt;/li&gt;
-&lt;li&gt;Tell about your progress / blockers to your mentor at least once a day.&lt;/li&gt;
-&lt;li&gt;If you work on the task for several days, pull changes from parent once a day.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Troubleshoot if something doesn’t work&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;If it worked before – try to comment out some changes you made and see if it fixes the issue&lt;/li&gt;
-&lt;li&gt;Use logging to identify where the problem starts to appear in the code&lt;/li&gt;
-&lt;li&gt;Make sure your changes are applied: restart dev server / virtual machine, restart IDE, clear caches, reinitialize project&lt;/li&gt;
-&lt;li&gt;Look at other examples of the same functionality in the project codebase or on the Internet and note the differences with your code.&lt;/li&gt;
-&lt;li&gt;Go through the code from very start, verify logic, track data / event flow, make sure it is correct.&lt;/li&gt;
-&lt;li&gt;Do not waste too much time (time limit troubleshooting process)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;If you are stuck you have several options (choose any)&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;If it is late night – stop, there is high chance you will figure it out next morning.&lt;/li&gt;
-&lt;li&gt;If the issue is not a blocker – switch something else for a while, then come back to it.&lt;/li&gt;
-&lt;li&gt;Tell your peers about the problem in a team’s group chat, ask for help (sometimes while you explain the problem, you will realize where the issue is).&lt;/li&gt;
-&lt;li&gt;Tell your mentor about the problem, ask for help&lt;/li&gt;
-&lt;li&gt;Try to reproduce a bug in a simple setup (sandbox project), it can give you a clue.&lt;/li&gt;
-&lt;li&gt;Ask question on stack overflow&lt;/li&gt;
-&lt;li&gt;Don’t fix it, look for workarounds / alternative ways to implement this&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Before you make a pull-request&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Review your own code!&lt;/li&gt;
-&lt;li&gt;Remove all commented-out code&lt;/li&gt;
-&lt;li&gt;Try not to change unrelated files (unless necessary)&lt;/li&gt;
-&lt;li&gt;Format your code, make sure it follows same code style.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Pull request&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Write short description about your change.&lt;/li&gt;
-&lt;li&gt;Reference an issue / ticket that your PR is related to.&lt;/li&gt;
-&lt;li&gt;Add a screenshot (if it is a UI change)&lt;/li&gt;
-&lt;li&gt;Look how other people do PRs for reference.&lt;/li&gt;
-&lt;li&gt;Leave comments to your code in PR to bring attention of the reviewers to particular places in the code.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Replying to code review comments&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;If you don’t understand clearly what comment asks you to do – ask for clarification.&lt;/li&gt;
-&lt;li&gt;If you don’t understand why comment requests you to do it – ask why?&lt;/li&gt;
-&lt;li&gt;Learn from your mistakes and try not to repeat them.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;After you are done with the task&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Take next one that was assigned to you.&lt;/li&gt;
-&lt;li&gt;Ask your mentor / team lead for a new task.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;If you don’t have a task&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Continue learning through documentation / articles / books / online courses&lt;/li&gt;
-&lt;li&gt;Contribute to code review – review other people’s PRs&lt;/li&gt;
-&lt;li&gt;Look into project’s code base, learn how things work.&lt;/li&gt;
-&lt;li&gt;Try to find a task for yourself in the project’s backlog.&lt;/li&gt;
-&lt;li&gt;Find obvious issues in the code (it could be just code style issues) and fix it.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Reviewing other people’s code&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Look at other people’s PR, learn from their code&lt;/li&gt;
-&lt;li&gt;If you see places you don’t understand, you can leave a comment.&lt;/li&gt;
-&lt;li&gt;If you notice violation of coding conventions – point it out in the comment.&lt;/li&gt;
-&lt;li&gt;If you see something can be improved, always give reasons why you think so and try to suggest a better way.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;TODO.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list…]]></description><link>https://www.antondanshin.com/blog/compose-user-avatar-placeholder</link><guid isPermaLink="false">https://www.antondanshin.com/blog/compose-user-avatar-placeholder</guid><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list some people would mostly pay attention to the text, but some will look at images. That’s why a lot of apps that contain list of people, (e.g. a Contacts app), always provide an avatar.&lt;/p&gt;
+&lt;p&gt;Thanks for reading.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list…]]></description><link>https://www.antondanshin.com/blog/compose-user-avatar-placeholder</link><guid isPermaLink="false">https://www.antondanshin.com/blog/compose-user-avatar-placeholder</guid><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When you want to display different users in your app, it is a good idea to provide an image. For example, when scrolling through the list some people would mostly pay attention to the text, but some will look at images. That’s why a lot of apps that contain list of people, (e.g. a Contacts app), always provide an avatar.&lt;/p&gt;
 &lt;p&gt;Not all users might have avatars. If the avatar is missing, it is often replaced with a placeholder. I find that the best placeholder should contain user initials and have a different color per user. This way, it is easier to identify different people in the list just by looking at the avatar placeholder.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -491,20 +739,20 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 19.62025316455696%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAIAAAABPYjBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA/0lEQVQI1wH0AAv/AOL49ZTk2d/39P///6bsxLXuzf///9Tb/665/vb6///z8e2Wl/bLy//////UtP/MqP///PPe/9uU/vXj/wBDz7wAv6RG0MKR57YFyFYS0Fui29FVZ/8gQfqBnv/yc2nVCAncMjf6t5j/fRb/dQz9vZe8QP+rAfzCR/8AO825AL+kPc6/gOOsBshXDc9YktTKTmD/JEX5dZP/8GVb1AgJ2igt+ayJ/3cM/3EF/LOMuDP/qgD8vTn/ANP073bcztDz7/3//IrlsZvpvP///8bO/5in/u70///q5+h5evO5uf/////Emf+8jf//+O7O/9J3/vHU/6YAq+QqAuEOAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 19.879518072289155%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAIAAAABPYjBAAAACXBIWXMAAAsSAAALEgHS3X78AAAA/0lEQVQI1wH0AAv/AN3284/j2OD39P///qDqv7Tuzf///9HY/6y3/vT5//7u7OyRkvfLy//////Qrf/Lp////vLZ/9qQ//bk/wA+zrsBv6NJ0MOK5rEJyVkV0F2f2dBNX/8jRfuGnf/uaWLVDAzcNTv7t5T/ehX/dxD7u5q6Of+rA/zCR/8AOs24Ar6jQs/BfeKnDMlZE89aktPKSFn/KEn7fZX/611W1g8P2iwz+q6H/3UP/3QM+rOStjH/qgL7vj7/ANDz7njdz9T08Pv++4rlsKHqwP///8TN/pyp/e71//7m4+l7fPS9vf/////DmP6+kf//+u7M/9N6/vLY/18jq8DA2kWDAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Material letter icons as avatar placeholders&quot;
-        title=&quot;Material letter icons as avatar placeholders&quot;
-        src=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/f058b/material-letter-icons.png&quot;
-        srcset=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/c26ae/material-letter-icons.png 158w,
-/static/7f63bef6c3b81bb0107600e4a734c676/6bdcf/material-letter-icons.png 315w,
-/static/7f63bef6c3b81bb0107600e4a734c676/f058b/material-letter-icons.png 630w,
-/static/7f63bef6c3b81bb0107600e4a734c676/40601/material-letter-icons.png 945w,
-/static/7f63bef6c3b81bb0107600e4a734c676/78612/material-letter-icons.png 1260w,
+        title=&quot;&quot;
+        src=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/31493/material-letter-icons.png&quot;
+        srcset=&quot;/static/7f63bef6c3b81bb0107600e4a734c676/e72ac/material-letter-icons.png 166w,
+/static/7f63bef6c3b81bb0107600e4a734c676/f8dc5/material-letter-icons.png 332w,
+/static/7f63bef6c3b81bb0107600e4a734c676/31493/material-letter-icons.png 664w,
+/static/7f63bef6c3b81bb0107600e4a734c676/5caea/material-letter-icons.png 996w,
+/static/7f63bef6c3b81bb0107600e4a734c676/6569d/material-letter-icons.png 1328w,
 /static/7f63bef6c3b81bb0107600e4a734c676/d1882/material-letter-icons.png 1562w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
@@ -532,7 +780,7 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;In our code, we represent color as a 32-bit integer (ARGB format). What if we use a hashcode of the user name as color? It might work, but we often end up having colors that are too dark, too light, or even too transparent.&lt;/p&gt;
 &lt;p&gt;Ideally, we want our color to have a fixed brightness – different users would have different color of the same brightness and saturation levels. Lucky for us there are color encodings that split the color into exactly these components.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;HSL&lt;/strong&gt; (for hue, saturation, lightness) and &lt;strong&gt;HSV&lt;/strong&gt; (for hue, saturation, value; also known as &lt;strong&gt;HSB&lt;/strong&gt;, for hue, saturation, brightness) are alternative representations of the &lt;strong&gt;RGB&lt;/strong&gt; color model, designed in the 1970s by computer graphics researchers to more closely align with the way human vision perceives color-making attributes. In these models, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. — &lt;a href=&quot;https://en.wikipedia.org/wiki/HSL_and_HSV&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HSL&lt;/strong&gt; (for hue, saturation, lightness) and &lt;strong&gt;HSV&lt;/strong&gt; (for hue, saturation, value; also known as &lt;strong&gt;HSB&lt;/strong&gt;, for hue, saturation, brightness) are alternative representations of the &lt;strong&gt;RGB&lt;/strong&gt; color model, designed in the 1970s by computer graphics researchers to more closely align with the way human vision perceives color-making attributes. In these models, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. — &lt;a href=&quot;https://en.wikipedia.org/wiki/HSL_and_HSV&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;We can use HSL color space and fix saturation and lightness. In my app I found that &lt;code class=&quot;language-text&quot;&gt;lightness = 0.4f&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;saturation = 0.5f&lt;/code&gt; work the best.&lt;/p&gt;
 &lt;p&gt;Here is how we can convert a &lt;code class=&quot;language-text&quot;&gt;String&lt;/code&gt; into a color in Android using &lt;code class=&quot;language-text&quot;&gt;HSL&lt;/code&gt; color space:&lt;/p&gt;
@@ -598,7 +846,7 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;Here is how the component is rendered:&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 428px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 428px; margin-left: 0; margin-right: 0;&quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -609,15 +857,15 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABjklEQVQoz52Sy27aQBSGeYnAwilZgBmPZ4aZAVpRxTI3g4MByeGiVoIWRXmDSFlk0UdpniGrqIu821/NcZwoWUVZfDq/zpzzz+1UarUa6qenqHsexTOvgHKfoFKtVuE3m1BSQgiBpixwWpZI+QbxnFPv8q62Uj05AWcMptOBNQY/lcYPpUlra6G1LpqVejGy1lIMRbExrUkJY0xhGDAGaQ1uwzYeWBsPXONGajApcJGmOB6P2Gw22O12WK1WuMxz7Pd7bLdbHA4Hwq33er3CsMUYvmmNe9nB068rPP2+xl/ZgVEK8WCARZYhSRIsl0uMx2PEcUzGWZZRnE6nmM/nr4buhMoY/JEGj93v+NePcSc0uFKYJgnt7sxck2t2RrPZDHmeY7FYYL1eo9vt0tXfvOFXY3AlFI6hQs9atI1Bv9/HaDSiUw2HQ0RRRPo8ijCZTEinaUp17r3pl5uNBkQYIuAcjTAkOOcIOUcQBGCt1gvuNmVs+T5p3/epztVXyjn84uaQZtAjnC5n88N4Hv4DLbocTuFez+YAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 46.3855421686747%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABh0lEQVQoz52Sy07CUBCGeQnKBkRF6L095ZYmlbSUS7jT0LIoISxcGBcuXbn0Ldy61rWJ0Wf7nXOgBHbGxZ9/5nT6zZxLrlAooFwqoVwsCl0eVP6ncpIk4aZSgaHr0DUNVX0vHmfi306lqepZntVwz0n5PJRaDU69DttxENsMicXgUMxINmMwDENI5wDyOtVy13hDWjNNU+SMao9Ao+7gUbfwLlv4UBmeDBsqFfbCENvtFqvVCuv1GvP5HMvlEmmaIkkSbDYboTiO0W6398AaAZtEf9UZftIdvnd3eLObaFBXv9tFRIDhcIjFYoF+vw/f9xFFEabTqfDRaCTiI5BPaNL2nk2Gz5aHr9sQLwTX+YS9nphuNpuJHzlwPB5jMBiISSeTiYA2Gg2x9SOQ0bm0aMp7zcSDZsClBhblrusKKJ8qpO13Oh0EFHPn0CAIBNTzPNi2fX7LKh3yNTkXP3CDpNKNyrIMhYsaK4qyj8mz9Vq1KurELWfv8OLkHV4dYrHG3+gfdHGo/wVbdBzxVhIPzgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Avatar placeholder with initials and color background example&quot;
-        title=&quot;Avatar placeholder with initials and color background example&quot;
+        title=&quot;&quot;
         src=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/47730/circle-avatar-placeholder.png&quot;
-        srcset=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/c26ae/circle-avatar-placeholder.png 158w,
-/static/41bfed567aabfc18eae15a48c53ef39c/6bdcf/circle-avatar-placeholder.png 315w,
+        srcset=&quot;/static/41bfed567aabfc18eae15a48c53ef39c/e72ac/circle-avatar-placeholder.png 166w,
+/static/41bfed567aabfc18eae15a48c53ef39c/f8dc5/circle-avatar-placeholder.png 332w,
 /static/41bfed567aabfc18eae15a48c53ef39c/47730/circle-avatar-placeholder.png 428w&quot;
         sizes=&quot;(max-width: 428px) 100vw, 428px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
@@ -627,10 +875,10 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;With just 20 lines of code, we have created a simple Jetpack Compose component to display a colorful avatar placeholder with user initials. Follow &lt;a href=&quot;https://gist.github.com/ntoskrnl/14622d88cad3387d14786aa259e4653f&quot;&gt;this link&lt;/a&gt; to see all the code.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for…]]></description><link>https://www.antondanshin.com/blog/compose-timer-implementation</link><guid isPermaLink="false">https://www.antondanshin.com/blog/compose-timer-implementation</guid><pubDate>Tue, 28 Sep 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for it. I looked online and found several good and bad implementations of it. So I decided to share my views and how I would go about this problem.&lt;/p&gt;
+&lt;p&gt;With just 20 lines of code, we have created a simple Jetpack Compose component to display a colorful avatar placeholder with user initials. Follow &lt;a href=&quot;https://gist.github.com/ntoskrnl/14622d88cad3387d14786aa259e4653f&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;this link&lt;/a&gt; to see all the code.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for…]]></description><link>https://www.antondanshin.com/blog/compose-timer-implementation</link><guid isPermaLink="false">https://www.antondanshin.com/blog/compose-timer-implementation</guid><pubDate>Tue, 28 Sep 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In my app I need to display some sort of timers and clocks in several places, so I thought it would be nice to make a stateful component for it. I looked online and found several good and bad implementations of it. So I decided to share my views and how I would go about this problem.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -641,27 +889,27 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 45.56962025316456%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAVAQEBAAAAAAAAAAAAAAAAAAACAf/aAAwDAQACEAMQAAABfJ3Fl0Gij//EABsQAAAHAQAAAAAAAAAAAAAAAAABAgQREzES/9oACAEBAAEFAnN1suAieFaCz//EABURAQEAAAAAAAAAAAAAAAAAABAS/9oACAEDAQE/AaP/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAaEAACAgMAAAAAAAAAAAAAAAAAEQEgIjFC/9oACAEBAAY/AsGjoh7p/8QAGhAAAgMBAQAAAAAAAAAAAAAAAAERMXEhUf/aAAgBAQABPyF08vkMnuOMwZSXCKD/2gAMAwEAAgADAAAAED//AP/EABgRAAMBAQAAAAAAAAAAAAAAAAABESEx/9oACAEDAQE/EFGQfT//xAAVEQEBAAAAAAAAAAAAAAAAAAAQEf/aAAgBAgEBPxCH/8QAGxAAAgMBAQEAAAAAAAAAAAAAAREAITGhYcH/2gAIAQEAAT8QPiZpRQatoysAs0p+zUu09VzmmzOAT//Z&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 45.78313253012048%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAABfJ3Fl0Ghj//EABsQAAAHAQAAAAAAAAAAAAAAAAABAgQREzES/9oACAEBAAEFAnN1suAieF6Cz//EABURAQEAAAAAAAAAAAAAAAAAABAS/9oACAEDAQE/AaP/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAbEAACAQUAAAAAAAAAAAAAAAAAEQEgIjFCYf/aAAgBAQAGPwKxrhsQ80f/xAAaEAACAwEBAAAAAAAAAAAAAAAAARExcSFR/9oACAEBAAE/IXTy+SJ7jjM2Ulgig//aAAwDAQACAAMAAAAQtB//xAAYEQADAQEAAAAAAAAAAAAAAAAAAREhMf/aAAgBAwEBPxBRkH0//8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQIBAT8Qh//EABwQAAICAgMAAAAAAAAAAAAAAAERACExoUFhwf/aAAgBAQABPxB+M0ogPloysAsyU+zJXedq5pTOaAn/2Q==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Countdown timer&quot;
-        title=&quot;Countdown timer&quot;
-        src=&quot;/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/828fb/countdown-timer.jpg&quot;
-        srcset=&quot;/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/ff44c/countdown-timer.jpg 158w,
-/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/a6688/countdown-timer.jpg 315w,
-/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/828fb/countdown-timer.jpg 630w,
-/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/0ede0/countdown-timer.jpg 945w,
-/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/3ac88/countdown-timer.jpg 1260w,
+        title=&quot;&quot;
+        src=&quot;/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/3517e/countdown-timer.jpg&quot;
+        srcset=&quot;/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/27c2d/countdown-timer.jpg 166w,
+/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/71bac/countdown-timer.jpg 332w,
+/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/3517e/countdown-timer.jpg 664w,
+/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/a820a/countdown-timer.jpg 996w,
+/static/0bfe4fbd4ef1f0920b486881f6c2f6d5/be0f2/countdown-timer.jpg 1328w,
 /static/0bfe4fbd4ef1f0920b486881f6c2f6d5/3acf0/countdown-timer.jpg 2000w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;small&gt; — Design vector created by pikisuperstar &lt;a href=&quot;https://www.freepik.com/vectors/design&quot;&gt;www.freepik.com&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt; — Design vector created by pikisuperstar &lt;a href=&quot;https://www.freepik.com/vectors/design&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;www.freepik.com&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 &lt;h2&gt;The problem&lt;/h2&gt;
 &lt;p&gt;Let’s set our goal first. We want to implement a component that allows you to display a countdown timer.&lt;/p&gt;
 &lt;ul&gt;
@@ -695,7 +943,7 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;p&gt;It will work, but it has several obvious problems:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The last delay could be longer than actually needed, so &lt;code class=&quot;language-text&quot;&gt;0&lt;/code&gt; state will be rendered with up to 99 ms delay.&lt;/li&gt;
-&lt;li&gt;There is not account of time that took to execute &lt;code class=&quot;language-text&quot;&gt;onTick()&lt;/code&gt;, and there is no guarantee that &lt;code class=&quot;language-text&quot;&gt;delay(n)&lt;/code&gt; will return resume after exactly &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; ms.&lt;/li&gt;
+&lt;li&gt;There is no account of time that took to execute &lt;code class=&quot;language-text&quot;&gt;onTick()&lt;/code&gt;, and there is no guarantee that &lt;code class=&quot;language-text&quot;&gt;delay(n)&lt;/code&gt; will resume after exactly &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; ms.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The first problem can be quickly fixed by making sure we never &lt;code class=&quot;language-text&quot;&gt;delay&lt;/code&gt; by more than &lt;code class=&quot;language-text&quot;&gt;timeLeft&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber 0&quot; class=&quot;language-kotlin line-numbers&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token annotation builtin&quot;&gt;@Composable&lt;/span&gt;
@@ -714,7 +962,7 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To fix second problem we need to use system clock.&lt;/p&gt;
 &lt;h2&gt;Better solution – Using SystemClock&lt;/h2&gt;
-&lt;p&gt;Instead of &lt;code class=&quot;language-text&quot;&gt;System.currentTimeMillis()&lt;/code&gt; available in Java, for this particular task it is recommented to use some monotonic time source, such as Android &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Instead of &lt;code class=&quot;language-text&quot;&gt;System.currentTimeMillis()&lt;/code&gt; available in Java, for this particular task it is recommended to use some monotonic time source, such as Android &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The idea is to remember when we started our timer in &lt;code class=&quot;language-text&quot;&gt;startTime&lt;/code&gt; and on each cycle of the loop check how much time has actually passed (&lt;code class=&quot;language-text&quot;&gt;duration&lt;/code&gt;).&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber 0&quot; class=&quot;language-kotlin line-numbers&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;&lt;span class=&quot;token annotation builtin&quot;&gt;@Composable&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;rememberCountdownTimerState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
@@ -733,7 +981,7 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; timeLeft
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The solution solution works perfectly fine, but if we were to publish it as a library and let other people use it, we would probably want to add some tests to it (e.g. screenshot tests). To make it testable we can pass a lambda as our time source, which would default to &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The solution works perfectly fine, but if we were to publish it as a library and let other people use it, we would probably want to add some tests to it (e.g. screenshot tests). To make it testable we can pass a lambda as our time source, which would default to &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Alternative solution – Using withFrameMillis&lt;/h2&gt;
 &lt;p&gt;If we dig into how animated components are tested, we can find that compose has its own built-in monotonic time source – &lt;code class=&quot;language-text&quot;&gt;MonotonicFrameClock&lt;/code&gt;. It is an abstraction over Choreographer, if we provide another implementation in unit-tests, it will allow to control time there.&lt;/p&gt;
 &lt;p&gt;Here is how we can rewrite our component to use this &lt;code class=&quot;language-text&quot;&gt;withFrameMillis()&lt;/code&gt;:&lt;/p&gt;
@@ -757,15 +1005,15 @@ android &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; timeLeft
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The advantage of this implementation is that it can be tested using &lt;code class=&quot;language-text&quot;&gt;ComposeTestRule&lt;/code&gt; just like other components with animations.
-Hovever, I also see several issues with this approach:&lt;/p&gt;
+However, I also see several issues with this approach:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;The timer is tied to the display refresh rate, which means no mater how small we set the step, the loop will suspend on each frame (this could be a good thing). However, for that reason, the timer will probably be less presize.&lt;/li&gt;
+&lt;li&gt;The timer is tied to the display refresh rate, which means no matter how small we set the step, the loop will suspend on each frame (this could be a good thing). However, for that reason, the timer will probably be less precise.&lt;/li&gt;
 &lt;li&gt;It probably introduces more overhead due to abstractions and callback (compared to system call to &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;It would probably be an overkill to write a timer this way, but inspite of all this, I still had a lot of fun digging into it.&lt;/p&gt;
+&lt;p&gt;It would probably be an overkill to write a timer this way, but in spite of all this, I still had a lot of fun digging into it.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;We’ve looked into several implementations of a countdown timer in Jetpack Compose. I am sure there are more and we just scratched the surface. I would personally use the approach with &lt;code class=&quot;language-text&quot;&gt;SystemClock.uptimeMillis()&lt;/code&gt;, but I think that &lt;code class=&quot;language-text&quot;&gt;withFrameMillis()&lt;/code&gt; isn’t such a bad idea either. Let me know what you think. :)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[Android Gradle Plugin requires Java 11 to run. You are currently using java 1.8. I’ve spent several nights this week to get one of my…]]></description><link>https://www.antondanshin.com/blog/updating-to-android-gradle-plugin-7</link><guid isPermaLink="false">https://www.antondanshin.com/blog/updating-to-android-gradle-plugin-7</guid><pubDate>Sat, 25 Sep 2021 15:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;Android Gradle Plugin requires Java 11 to run. You are currently using java 1.8.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I’ve spent several nights this week to get one of my project’s CI pipeline back up on its feet after upgrading to the latest Android gradle plugin (7.0.2). I usually try to keep versions of tools and lbraries up-to-date, but after haven’t got time to work on the project and couldn’t keep up. As a result, the app was not updated for the last 4 months – the time when Google suddenly released a bunch of updates to Android’s build tools, which broke everything…&lt;/p&gt;
+&lt;p&gt;I’ve spent several nights this week to get one of my project’s CI pipeline back up on its feet after upgrading to the latest Android gradle plugin (7.0.2). I usually try to keep versions of tools and libraries up-to-date, but after haven’t got time to work on the project and couldn’t keep up. As a result, the app was not updated for the last 4 months – the time when Google suddenly released a bunch of updates to Android’s build tools, which broke everything…&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;It has never been like this and now it is exactly the same again.&lt;/strong&gt; — Viktor Chernomyrdin&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -780,10 +1028,10 @@ Hovever, I also see several issues with this approach:&lt;/p&gt;
        - changing the IDE settings.
        - changing the JAVA_HOME environment variable.
        - changing `org.gradle.java.home` in `gradle.properties`.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On MacOS tt can be installed with &lt;code class=&quot;language-text&quot;&gt;Homebrew&lt;/code&gt; with the following command: &lt;code class=&quot;language-text&quot;&gt;brew install --cask adoptopenjdk11&lt;/code&gt;. There is also a nice article on how to enable quick &lt;a href=&quot;https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/#switch-between-different-jdk-versions&quot;&gt;switching between JDK versions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;On macOS it can be installed with &lt;code class=&quot;language-text&quot;&gt;Homebrew&lt;/code&gt; with the following command: &lt;code class=&quot;language-text&quot;&gt;brew install --cask adoptopenjdk11&lt;/code&gt;. There is also a nice article on how to enable quick &lt;a href=&quot;https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/#switch-between-different-jdk-versions&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;switching between JDK versions&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I thought this was it, so I moved on with the development of my feature. Later, when I was ready to present an early prototype for testing, I found out that our CI server was unable to build the app. All because CI was trying to build it with JDK 8. Luckily, we run our Android builds inside a docker container. And I thought to myself:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This where docker will show it’s power!
+&lt;p&gt;This is where docker will show its power!
 All I need to do is to replace package &lt;code class=&quot;language-text&quot;&gt;openjdk-8-jdk&lt;/code&gt; with &lt;code class=&quot;language-text&quot;&gt;openjdk-11-jdk&lt;/code&gt; in my Dockerfile, and everything should work, just like on my local machine.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Build failed again when running Android &lt;code class=&quot;language-text&quot;&gt;sdkmanager&lt;/code&gt;.&lt;/p&gt;
@@ -800,7 +1048,7 @@ Caused by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema
     at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
     ... 5 more
 The command &apos;/bin/sh -c yes | sdkmanager --licenses&apos; returned a non-zero code: 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It looks like when I put together this build script more than a year ago, I probably used some outdated sources of information. It used &lt;a href=&quot;https://developer.android.com/studio/releases/sdk-tools&quot;&gt;deprecated SDK tools&lt;/a&gt;, which apparently doesn’t work with Java 11 and haven’t been updated for a long time. I’ve spent quite some time trying to make it work before I realized that this was the dead end and I had to move on to the new Android &lt;a href=&quot;https://developer.android.com/studio#cmdline-tools&quot;&gt;command-line tools&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It looks like when I put together this build script more than a year ago, I probably used some outdated sources of information. It used &lt;a href=&quot;https://developer.android.com/studio/releases/sdk-tools&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;deprecated SDK tools&lt;/a&gt;, which apparently doesn’t work with Java 11 and haven’t been updated for a long time. I’ve spent quite some time trying to make it work before I realized that this was the dead end and I had to move on to the new Android &lt;a href=&quot;https://developer.android.com/studio#cmdline-tools&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;command-line tools&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;My new Dockerfile with Android build environment for CI now looks like this:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;dockerfile&quot;&gt;&lt;pre class=&quot;language-dockerfile&quot;&gt;&lt;code class=&quot;language-dockerfile&quot;&gt;&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; ubuntu:18.04&lt;/span&gt;
 
@@ -852,7 +1100,7 @@ Caused by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema
 &lt;p&gt;So, I finally had an environment on my CI that can build my app. But when it tried to make a release apk, it failed again.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -863,20 +1111,20 @@ Caused by: java.lang.ClassNotFoundException: javax.xml.bind.annotation.XmlSchema
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 34.810126582278485%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABdElEQVQozyWPiarbMBBF/f9f9iAQKG2TZvMuW5JlW5YUL2meT4k6MMxwN2aS7/ebfd/51LZtCCHwweO95/l8Yu0Y8XVdcd7FfZ5nxnHEOUfwHmstIQRC8CSfoO99573vzPNCnuX0pke2CtMZ6qomuMBkHUpqJjsxmIG2aVFdhzYG0bRR2+mOZCpyrGxZjcGNHWKsUU7Szx1qammGGhM07SRJZR45OUkaU+HqCptnjFlK7xT905CMf06Y+4WtLJh0SREymrlCbgIxl5Q+Q21NxNL+FqdYKqrxwfL7B8vxQDge0K5AbZKkPZ9oLifs/Yqqblz0ORqLKeVhrlzVmdw+SPs75+YX2XAnHe7c2hP255Hx8EV3+KLUF0pXkEgz0JuO17LhFxsvkrNAvyTtXFP5Ar21yEWQD4/IffDa5WhboMaMxjxQi6BbFUnTjdjJ8nq98aujCjlyaTBv9d8Yihiu1obqE7K1sT+vm7dGvSRiqaO+/9vxDzBYDOI4Xk9JAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 34.33734939759036%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABcklEQVQozyVRh27rMAz0//9Z0YWHV8RNk3jbGpa1LK+mzpVWBRAkj8epZN93PB4PHG/bVjRNg3Ec4UePaZpgjCF8w7qu8N5He5onaK3hnEMgriVOCCFKchT6oaI/jx3zvKAsKgxqgOASqldo6oaSApz1EXPGxTjrOKRSEH2PjjHiDpGf2CKHZR1WCo5GorMN5MgxzD2EZ+S3UJMEcxy5KGKMk90NNUJbw2YZXJFBeQ69DEjM5wnqesZWlXCyRBEydHMNvrZo5wqVz8G3NmI3dYm6IalNhvXjH5a3Z4T3ZwiXQ9w5EpamYOcT7PUCXl9wlimy4YKSCDf1hS+RorQZcn1F2n5EfSO5shPc/3folyfI1ydU4ox6rJAIZaCHAfftG+PqUIcCYu2gvgX4QlOGKtoHVpo8ajYTPpaQnjaxBZjOII+cu6QJj4JG0+/d4RaL0meUQHfc6H4Treb/GhzFj0n50kX/WL3fJZ2DxQY9rat3hV8+9QzxQget4wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Broken release apk build on CI&quot;
-        title=&quot;Broken release apk build on CI&quot;
-        src=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/f058b/broken-ci-build.png&quot;
-        srcset=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/c26ae/broken-ci-build.png 158w,
-/static/07db1087d81e271fbdf20d5a7de3b3f8/6bdcf/broken-ci-build.png 315w,
-/static/07db1087d81e271fbdf20d5a7de3b3f8/f058b/broken-ci-build.png 630w,
-/static/07db1087d81e271fbdf20d5a7de3b3f8/40601/broken-ci-build.png 945w,
-/static/07db1087d81e271fbdf20d5a7de3b3f8/78612/broken-ci-build.png 1260w,
+        title=&quot;&quot;
+        src=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/31493/broken-ci-build.png&quot;
+        srcset=&quot;/static/07db1087d81e271fbdf20d5a7de3b3f8/e72ac/broken-ci-build.png 166w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/f8dc5/broken-ci-build.png 332w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/31493/broken-ci-build.png 664w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/5caea/broken-ci-build.png 996w,
+/static/07db1087d81e271fbdf20d5a7de3b3f8/6569d/broken-ci-build.png 1328w,
 /static/07db1087d81e271fbdf20d5a7de3b3f8/1cb21/broken-ci-build.png 2586w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
@@ -897,8 +1145,8 @@ A problem was found with the configuration of task &apos;:app:addSentryProguardS
     Possible solutions:
       1. Add an input or output annotation.
       2. Mark it as @Internal.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Apparentrly, during last few months technologies made a big step forward. Gradle has removed some deprecated plugin API, used by older version of Sentry plugin. Sentry also released a bunch of updates that I missed.&lt;/p&gt;
-&lt;p&gt;The annoying par was that the error only showed itself during compilation of &lt;code class=&quot;language-text&quot;&gt;release&lt;/code&gt; type. Lint also didn’t alarm me about presence of a more recent version of the plugin. Anyway, updating &lt;code class=&quot;language-text&quot;&gt;sentry-android-gradle-plugin&lt;/code&gt; from 1.7.36 to latest 2.1.4 fixed the problems.&lt;/p&gt;
+&lt;p&gt;Apparently, during last few months technologies made a big step forward. Gradle has removed some deprecated plugin API, used by older version of Sentry plugin. Sentry also released a bunch of updates that I missed.&lt;/p&gt;
+&lt;p&gt;The annoying part was that the error only showed itself during compilation of &lt;code class=&quot;language-text&quot;&gt;release&lt;/code&gt; type. Lint also didn’t alarm me about presence of a more recent version of the plugin. Anyway, updating &lt;code class=&quot;language-text&quot;&gt;sentry-android-gradle-plugin&lt;/code&gt; from 1.7.36 to latest 2.1.4 fixed the problems.&lt;/p&gt;
 &lt;h2&gt;Fixing R8 full mode&lt;/h2&gt;
 &lt;p&gt;After updating CI environment, I finally was able to build a proper release APK. However, when I run the app, it just crashed.&lt;/p&gt;
 &lt;p&gt;There was a problem with R8 full mode, which appeared after update. Deobfuscated stacktrace looked like this:&lt;/p&gt;
@@ -910,41 +1158,41 @@ A problem was found with the configuration of task &apos;:app:addSentryProguardS
     at retrofit2.Retrofit.create(Retrofit.java:141)
     ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The issue is not reproduced with &lt;code class=&quot;language-text&quot;&gt;android.enableR8.fullMode=false&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I almost decided to disable R8 full mode but suddenly I found a question with &lt;a href=&quot;https://stackoverflow.com/q/69098376/1199452&quot;&gt;similar problem&lt;/a&gt; on StackOverflow. The answer had a bunch of ProGuard rules that work, but actually redundant.&lt;/p&gt;
+&lt;p&gt;I almost decided to disable R8 full mode but suddenly I found a question with &lt;a href=&quot;https://stackoverflow.com/q/69098376/1199452&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;similar problem&lt;/a&gt; on StackOverflow. The answer had a bunch of ProGuard rules that work, but actually redundant.&lt;/p&gt;
 &lt;p&gt;It looks like in R8 full mode, generic type of an implicit parameter &lt;code class=&quot;language-text&quot;&gt;kotlin.coroutines.Continuation&amp;lt;T&gt;&lt;/code&gt; in &lt;code class=&quot;language-text&quot;&gt;suspend&lt;/code&gt; functions gets erased. That’s why adding the following line to &lt;code class=&quot;language-text&quot;&gt;proguard-rules.pro&lt;/code&gt; solves the above error:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Updated Google Play requirements&lt;/h2&gt;
-&lt;p&gt;Although I finally was able to fix my CI build pipeline and build rlease APK, the fight wasn’t over yet. Since August 2021, Google Play bumped the requirement for published apps to target Androdi SDK 31. It also now only accepts app bundles (.aab) rather than APKs.
-This is a smaller issue but yet another hurdle I need overcome in order to publish an update to Google Play.&lt;/p&gt;
+&lt;p&gt;Although I finally was able to fix my CI build pipeline and build release APK, the fight wasn’t over yet. Since August 2021, Google Play bumped the requirement for published apps to target Android SDK 31. It also now only accepts app bundles (.aab) rather than APKs.
+This is a smaller issue but yet another hurdle I need to overcome in order to publish an update to Google Play.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;I was not ready to spend that much time trying to make a new app release and it was a bit of a challenge. I did not expect that just after a few months of not working with the project, I would have to go through all this. I was planning to spend just one weekend to make this feature available for testing, but ended up working the evenings of the following week.&lt;/p&gt;
-&lt;p&gt;Many of these problems could have been avoided. All breaking changes in the APIs of the tools and libraries that we use do not happen overnight – they are uaually announced months and sometimes even years in advance. These announcement should not be ignored, and actions should not be put off till the last minute.&lt;/p&gt;
-&lt;p&gt;Everything works now, so not all is bad. Plus, this little experience with scripts I had was quite educational and inspiring. On the same evening that I fixed my CI build, I was also able to automate the deployment of this blog to Github Pages.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[As promised in my first blog post, I’m sharing how I set up a Gatsby blog and deployed it to Github Pages.
-There is a lot of material on the…]]></description><link>https://www.antondanshin.com/blog/creating-blog</link><guid isPermaLink="false">https://www.antondanshin.com/blog/creating-blog</guid><pubDate>Wed, 22 Sep 2021 22:30:00 GMT</pubDate><content:encoded>&lt;p&gt;As promised in my first blog post, I’m sharing how I set up a Gatsby blog and deployed it to Github Pages.
+&lt;p&gt;Many of these problems could have been avoided. All breaking changes in the APIs of the tools and libraries that we use do not happen overnight – they are usually announced months and sometimes even years in advance. These announcements should not be ignored, and actions should not be put off till the last minute.&lt;/p&gt;
+&lt;p&gt;Everything works now, so not all is bad. Plus, this little experience with scripts I had was quite educational and inspiring. On the same evening that I fixed my CI build, I was also able to automate the deployment of this blog to GitHub Pages.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[As promised in my first blog post, I’m sharing how I set up a Gatsby blog and deployed it to GitHub Pages.
+There is a lot of material on the…]]></description><link>https://www.antondanshin.com/blog/creating-blog</link><guid isPermaLink="false">https://www.antondanshin.com/blog/creating-blog</guid><pubDate>Wed, 22 Sep 2021 22:30:00 GMT</pubDate><content:encoded>&lt;p&gt;As promised in my first blog post, I’m sharing how I set up a Gatsby blog and deployed it to GitHub Pages.
 There is a lot of material on the Internet on this particular topic, but I still want to document my experience in case I need to do it again.&lt;/p&gt;
 &lt;p&gt;I split this into two posts. Here is what we’ll cover in this one:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;How to install Node.js and Gatsby on MacOS.&lt;/li&gt;
+&lt;li&gt;How to install Node.js and Gatsby on macOS.&lt;/li&gt;
 &lt;li&gt;How to create a blog from a blog-starter template.&lt;/li&gt;
 &lt;li&gt;Explain project structure and how it works.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Publishing to GitHub pages will be in the next post.&lt;/p&gt;
 &lt;h2&gt;Installing our tools&lt;/h2&gt;
-&lt;p&gt;To build a website with Gatsby.js, you need to install Node.js. Node is a JavaScript runtime built on Chrome’s javascript engine. Just like you need JRE to run Java apps, you also need some environment (e.g., a web-browser) to run javascript programs. Node.js lets you run javascript without the browser. It also comes with a package manager, which gives you access to thousands of libraries and tools.&lt;/p&gt;
+&lt;p&gt;To build a website with Gatsby.js, you need to install Node.js. Node is a JavaScript runtime built on Chrome’s JavaScript engine. Just like you need JRE to run Java apps, you also need some environment (e.g., a web-browser) to run JavaScript programs. Node.js lets you run JavaScript without the browser. It also comes with a package manager, which gives you access to thousands of libraries and tools.&lt;/p&gt;
 &lt;h3&gt;Installing Node.js&lt;/h3&gt;
 &lt;p&gt;You may go ahead and install the latest stable Node version. But because there are many versions of Node (just like with Java), and different projects might require different versions of Node, there is this tool called “nvm” or Node Version Manager. Usually, you would install this first and then use it to install a desired version of Node.js. The advantage of using nvm is that you can have several versions of Node.js and switch between them with a command.&lt;/p&gt;
-&lt;p&gt;To install LTS version of Node.js on MacOS run these two commands:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# installing VVM&lt;/span&gt;
+&lt;p&gt;To install LTS version of Node.js on macOS run these two commands:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# installing NVM&lt;/span&gt;
 brew &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; nvm
 &lt;span class=&quot;token comment&quot;&gt;# installing LTS version of Node.js&lt;/span&gt;
-nvm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --lts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+nvm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--lts&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Run &lt;code class=&quot;language-text&quot;&gt;node --version&lt;/code&gt; to check the installed version.&lt;/p&gt;
 &lt;h3&gt;Installing Gatsby CLI&lt;/h3&gt;
-&lt;p&gt;Gatsby.js is not just a JS framework, it’s a toolkit that, among other things, includes a development HTTP-server, web GraphQL IDE. To manage it all, they ship a command-line tool, aka &lt;a href=&quot;https://www.gatsbyjs.com/docs/reference/gatsby-cli/&quot;&gt;Gatsby CLI&lt;/a&gt;, which can be installed with &lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Gatsby.js is not just a JS framework, it’s a toolkit that, among other things, includes a development HTTP-server, web GraphQL IDE. To manage it all, they ship a command-line tool, aka &lt;a href=&quot;https://www.gatsbyjs.com/docs/reference/gatsby-cli/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Gatsby CLI&lt;/a&gt;, which can be installed with &lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# install Gatsby CLI globally&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -g gatsby-cli&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-g&lt;/span&gt; gatsby-cli&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Creating a blog with Gatsby&lt;/h2&gt;
-&lt;p&gt;You can create a new website with &lt;code class=&quot;language-text&quot;&gt;gatsby new&lt;/code&gt; and write initial boilerplate yourself, but CLI tools provide a convenient way to create a project from a variety of templates. I chose the simplest thing that is available out there, which is &lt;a href=&quot;https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog&quot;&gt;Gatsby Starter Blog&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can create a new website with &lt;code class=&quot;language-text&quot;&gt;gatsby new&lt;/code&gt; and write initial boilerplate yourself, but CLI tools provide a convenient way to create a project from a variety of templates. I chose the simplest thing that is available out there, which is &lt;a href=&quot;https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Gatsby Starter Blog&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Creating website from a template&lt;/h3&gt;
 &lt;p&gt;Navigate to the directory where you want to create your project and run the following command (replace &lt;code class=&quot;language-text&quot;&gt;YOUR-PROJECT-NAME-HERE&lt;/code&gt; with the name of your project):&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;npx gatsby new YOUR-PROJECT-NAME-HERE https://github.com/gatsbyjs/gatsby-starter-blog&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -989,10 +1237,10 @@ nvm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --lts&lt;/
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-config.js&lt;/code&gt; – main configuration file of gatsby site, contains plugin declaration and setup.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-browser.js&lt;/code&gt; – allows customization/extension of default Gatsby settings affecting the browser.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; – the main module that will be invoked by Gatsby to generate website pages.&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; – the derectory with the website’s javascript code that will be run by Gatsby and &lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; to render pages.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt; – the directory with the website’s JavaScript code that will be run by Gatsby and &lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt; to render pages.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/components&lt;/code&gt; – a directory where we can put reusable react components.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/pages&lt;/code&gt; – the code used to render pages: each js file will generate its own page.&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/teplates&lt;/code&gt; – similar to previous, but will be used for generating multiple pages (like blog posts).&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;src/templates&lt;/code&gt; – similar to previous, but will be used for generating multiple pages (like blog posts).&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;content&lt;/code&gt; - contains directories with Markdown files that will be transformed into blog posts.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;public&lt;/code&gt; – output directory with a generated website.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1001,9 +1249,9 @@ nvm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --lts&lt;/
 &lt;ol&gt;
 &lt;li&gt;Gatsby will run the code from &lt;code class=&quot;language-text&quot;&gt;gatsby-node.js&lt;/code&gt;, and applies plugins and config provided in &lt;code class=&quot;language-text&quot;&gt;gatsby-config.js&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;gatsby-browser.js&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Gatsby will generate index and 404 pages using code defined in &lt;code class=&quot;language-text&quot;&gt;src/pages&lt;/code&gt; directory. They will be rendered with &lt;code class=&quot;language-text&quot;&gt;Layout&lt;/code&gt; component defined in &lt;code class=&quot;language-text&quot;&gt;src/components/layout.js&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Pluging will be applied at different steps of the build process.
+&lt;li&gt;Plugins will be applied at different steps of the build process.
 &lt;ul&gt;
-&lt;li&gt;Particularly, plugin &lt;code class=&quot;language-text&quot;&gt;gatsby-transformer-remark&lt;/code&gt; will scan &lt;code class=&quot;language-text&quot;&gt;contents&lt;/code&gt; folder and transform all markdown into structured data, that can be retrieved with GraphQL API.&lt;/li&gt;
+&lt;li&gt;Particularly, plugin &lt;code class=&quot;language-text&quot;&gt;gatsby-transformer-remark&lt;/code&gt; will scan &lt;code class=&quot;language-text&quot;&gt;content&lt;/code&gt; folder and transform all markdown into structured data, that can be retrieved with GraphQL API.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gatsby-plugin-feed&lt;/code&gt; will generate RSS feed.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -1029,7 +1277,7 @@ I am going to create a dedicated &lt;strong&gt;About&lt;/strong&gt; page with mo
 &lt;p&gt;I don’t know yet. I think I’ll be posting about my work. But I could also post about some other life stuff. If this thing doesn’t sink, I plan to add Portfolio and CV sections. We’ll see.&lt;/p&gt;
 &lt;h3&gt;Why do I need a blog?&lt;/h3&gt;
 &lt;p&gt;I had a WordPress blog more than six years ago but somehow abandoned it. Although it took quite a bit of effort to publish articles at times, I have to admit results were rather rewarding. I did enjoy sharing my knowledge, and based on comments I received from my old blog, it helped some people.&lt;/p&gt;
-&lt;p&gt;Of course, there are other ways of sharing knowledge. But throughout my career as a software engineer, I realized that I don’t enjoy making presentations. I usually work on something that I cannot open source on Github. I don’t usually go on meet-ups, etc.&lt;/p&gt;
+&lt;p&gt;Of course, there are other ways of sharing knowledge. But throughout my career as a software engineer, I realized that I don’t enjoy making presentations. I usually work on something that I cannot open source on GitHub. I don’t usually go on meet-ups, etc.&lt;/p&gt;
 &lt;p&gt;Sharing knowledge is not the only reason why one would want to maintain a blog:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;If a blog focuses on professional matters, it complements the author’s resume. I think that having a blog did help me with landing my first full-time job at a good company.&lt;/li&gt;
@@ -1042,13 +1290,13 @@ I am going to create a dedicated &lt;strong&gt;About&lt;/strong&gt; page with mo
 &lt;p&gt;I realized that over the past 8 years since I did anything for the web, the technologies have made a huge step forward. There is a lot to catch up with and honestly, it’s a bit overwhelming. I will have to make myself not try to eat the whole thing and split the process into bite-sized pieces. So, what do I plan to learn with this new blog?&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;First of all, I will need to host this blog somewhere. I don’t really wanna have a personal domain or hosting server at this point. The first thing that comes to my mind is Github Pages. So, if you are reading this in 2021, this is probably where it is hosted.&lt;/p&gt;
+&lt;p&gt;First of all, I will need to host this blog somewhere. I don’t really wanna have a personal domain or hosting server at this point. The first thing that comes to my mind is GitHub Pages. So, if you are reading this in 2021, this is probably where it is hosted.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;I will also have to dive into this static website development thing and Gatsby.js in particular. Right now, a lot is like magic to me. As I add features and improve the design, I will have to learn some javascript and CSS. So, this website will be my main playground.&lt;/p&gt;
+&lt;p&gt;I will also have to dive into this static website development thing and Gatsby.js in particular. Right now, a lot is like magic to me. As I add features and improve the design, I will have to learn some JavaScript and CSS. So, this website will be my main playground.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Hopefully, I will be able to add content regularly, and because of that, I will need to automate the deployment process. In the beginning, it’s probably going to be just a simple bash script. Then I would need to wrap it into a docker image to make the scrip platform-independent and enable me to deploy the website with the click of a button on Github Actions.&lt;/p&gt;
+&lt;p&gt;Hopefully, I will be able to add content regularly, and because of that, I will need to automate the deployment process. In the beginning, it’s probably going to be just a simple bash script. Then I would need to wrap it into a docker image to make the script platform-independent and enable me to deploy the website with the click of a button on GitHub Actions.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I’ll be posting my journey through these steps in this blog. Stay tuned.&lt;/p&gt;</content:encoded></item></channel></rss>

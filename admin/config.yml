@@ -27,7 +27,9 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: updated, label: Updated, widget: datetime }
       - { name: draft, label: Draft, widget: boolean, default: true }
-      - { name: body, label: Body, widget: markdown }
+      # Raw markdown only: the rich-text editor re-serialises the body and
+      # corrupts widget directives (see docs/widgets.md, section "CMS")
+      - { name: body, label: Body, widget: markdown, modes: [raw] }
     # adding a meta object with a path property allows editing the path of entries
     # moving an existing entry will move the entire sub tree of the entry to the new location
     meta: { path: { widget: string, label: "Path", index_file: "index" } }
