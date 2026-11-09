@@ -1,4 +1,223 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog RSS Feed]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://www.antondanshin.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 08 Nov 2026 05:55:49 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><description><![CDATA[I got into virtual photography recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure…]]></description><link>https://www.antondanshin.com/blog/exposure-vs-brightness</link><guid isPermaLink="false">https://www.antondanshin.com/blog/exposure-vs-brightness</guid><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I got into &lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_photography&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;virtual photography&lt;/a&gt; recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure, Brightness, Levels, Curves. Everything made my dark screenshots lighter, so I assumed they were more or less the same thing with different names. At some point I was using gamma because I was told to, and Brightness because it was right there.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anton Danshin's Blog RSS Feed]]></title><description><![CDATA[Blog about day-to-day "struggles" of a software developer. ]]></description><link>https://www.antondanshin.com</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 09 Nov 2026 00:51:46 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><description><![CDATA[I recently got into virtual photography, which is taking photos inside video games. Editing my shots is what made me realize how little I…]]></description><link>https://www.antondanshin.com/blog/what-an-rgb-number-means</link><guid isPermaLink="false">https://www.antondanshin.com/blog/what-an-rgb-number-means</guid><pubDate>Sun, 08 Nov 2026 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I recently got into virtual photography, which is taking photos inside video games. Editing my shots is what made me realize how little I understood about color, so I decided to dive into the topic with Claude and fill the gaps in my knowledge.&lt;/p&gt;
+&lt;p&gt;In my previous post, &lt;a href=&quot;/blog/exposure-vs-brightness/&quot;&gt;Exposure vs Brightness&lt;/a&gt;, Claude helped me measure and understand what the Exposure and Brightness sliders do to a pixel. Along the way I wrote that a pixel is three numbers from 0 to 255, and then added a throwaway line about a “Pandora’s box of color profiles and color spaces” that I couldn’t close again. This is me opening the box.&lt;/p&gt;
+&lt;p&gt;The question I should have asked first is a simple one: &lt;strong&gt;what does &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt; actually mean?&lt;/strong&gt; Everything below follows from it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is a color space? Is sRGB one? What does the “s” stand for?&lt;/li&gt;
+&lt;li&gt;Why can the same three numbers be two different colors?&lt;/li&gt;
+&lt;li&gt;If a screen can’t show a color, why not just use more bits?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Short version: RGB &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt; is not a color. It’s an instruction (“turn the red light all the way up”), and which actual red you’ll see depends on the screen.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I’m learning color by doing it, with Claude as my guide, so some of this may be wrong. I’ve marked what Claude explained to me and what we checked in code. If you spot a mistake, please tell me in the comments.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can play with every number in this article. The small widgets do the real math, and Claude and I recomputed every number in the text in code, so nothing was just copied from a chat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Key takeaways:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;An RGB triple means nothing until you know its color space.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A color space is the contract that says what the numbers mean:&lt;/strong&gt; which red, green and blue, which white, and how numbers turn into light.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A color profile is the label that says which color space is used.&lt;/strong&gt; It’s a small file embedded in an image, or describing a screen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A gamut is the colors you can mix from your three paints.&lt;/strong&gt; On the map of visible color it’s a triangle, and a screen can’t leave it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Same numbers, different color:&lt;/strong&gt; sRGB red in P3 numbers is not &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;More bits give finer steps, not new colors.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;What is a color space? Why is it called sRGB?&lt;/h2&gt;
+&lt;p&gt;Here’s where my mental model broke. I had always imagined &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt; as “red”. But what you see depends on what the red light in your screen actually is. A &lt;strong&gt;color space&lt;/strong&gt; is the contract that pins down what the numbers mean. It fixes three things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;The primaries:&lt;/strong&gt; exactly which red, green and blue, as measurable points. “Full red” means a specific, physical red. Picture the tiny red diode (subpixel) in your display: full red means that diode at full power, and it glows one particular red. Another display can have a slightly different red diode.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The white point:&lt;/strong&gt; what &lt;code class=&quot;language-text&quot;&gt;(1, 1, 1)&lt;/code&gt; looks like. White isn’t one fixed color. A sheet of paper looks warm under a candle and bluish in the shade, so a screen has to pick which white it means. Most spaces pick &lt;strong&gt;D65&lt;/strong&gt;. It’s just the name of a standard white, roughly midday daylight. The “D” is for daylight, and the 65 is its color temperature, about 6500 K.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The transfer function:&lt;/strong&gt; how stored numbers map to amounts of light. This is the 2.2 “gamma” from &lt;a href=&quot;/blog/exposure-vs-brightness/&quot;&gt;Exposure vs Brightness&lt;/a&gt;: a stored 0.5 is only about 21% of the light, not 50%. I’m not going to repeat that here, but it is the third clause of the contract.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So “RGB” on its own is a family. sRGB, Display P3 and BT.2020 are members of it, each with specific values filled in.&lt;/p&gt;
+&lt;p&gt;The “s” in sRGB stands for &lt;strong&gt;standard&lt;/strong&gt;. &lt;a href=&quot;https://en.wikipedia.org/wiki/SRGB&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;HP and Microsoft&lt;/a&gt; made it in the 90s, based on what typical monitors back then could show. HDTV uses the same primaries. Nearly everything on the web assumes it: an image with no color profile attached (more on profiles below) is treated as sRGB.&lt;/p&gt;
+&lt;h3&gt;A map of color, and the triangles on it&lt;/h3&gt;
+&lt;p&gt;Here’s the second thing that blew my mind. In 1931 scientists made a map of human vision. Plot every color a person can see on a flat chart, with brightness taken out, and you get a horseshoe-shaped region. For now just take it as a map.&lt;/p&gt;
+&lt;p&gt;Okay, but two things bugged me right away. Why is the horseshoe sitting exactly there? Why isn’t a corner at 0,0, and what are x and y even?&lt;/p&gt;
+&lt;p&gt;So I asked Claude. Turns out this map doesn’t use red, green and blue. It describes a color with 3 other numbers: brightness, and x and y. Fix the brightness at one level, draw only x and y, and you get the horseshoe. That’s also why it’s not like the RGB I’m used to, where 0,0 would be a corner. x and y aren’t “how much red” and “how much green”.&lt;/p&gt;
+&lt;p&gt;And how do x and y work, and why is there dead space outside the horseshoe? The high-level answer is above: the horseshoe is every color a person can see, so outside of it is stuff our eyes can’t see. But why it has this exact shape, and how x and y work? Magic for now. I want to understand it too, so we’ll dive in next time in &lt;a href=&quot;/blog/where-the-horseshoe-comes-from/&quot;&gt;Why the map of visible color is a horseshoe&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A screen mixes three lights. Any mix of three points lands inside the triangle they form.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Gamut.&lt;/strong&gt; I first heard this word in Android talks (Romain Guy used it a lot, haha) and I pretended I understood it. Then I got into color, it was everywhere, and I was super confused. Finally, with the help of Claude, I got the real meaning (at least I hope).&lt;/p&gt;
+&lt;p&gt;Picture a paint box with three tubes: red, green and blue. Everything you can mix from them is the box’s gamut. A wide gamut doesn’t mean more tubes, it means stronger ones. A redder red, a greener green.&lt;/p&gt;
+&lt;p&gt;So &lt;strong&gt;a color space’s gamut is a triangle on this map&lt;/strong&gt;. Here are the three I’ll keep mentioning:&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;gamut-chart&quot; data-props=&quot;{}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (gamut-chart). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sRGB&lt;/strong&gt;: the small triangle. The internet’s default, and what almost every screen can show.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display P3&lt;/strong&gt;: wider red and green. It comes from digital cinema and it’s what recent iPhones and Macs show.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BT.2020&lt;/strong&gt;: red, green and blue corners almost on the edge of the horseshoe, because its primaries are &lt;a href=&quot;https://en.wikipedia.org/wiki/Rec._2020&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;single wavelengths of light&lt;/a&gt;. It was built for UHD and HDR video, and few displays reach all of it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Claude helped me compute how much of the horseshoe each triangle covers: roughly a third for sRGB, almost half for Display P3 and about two thirds for BT.2020. You’ll see other figures online depending on how you measure, so treat these as ballpark.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: the exact primaries&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;These are the published values; I use them in the widgets. White is D65 at (0.3127, 0.3290) in all three.&lt;/em&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Space&lt;/th&gt;
+&lt;th&gt;Red (x, y)&lt;/th&gt;
+&lt;th&gt;Green (x, y)&lt;/th&gt;
+&lt;th&gt;Blue (x, y)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;sRGB&lt;/td&gt;
+&lt;td&gt;(0.640, 0.330)&lt;/td&gt;
+&lt;td&gt;(0.300, 0.600)&lt;/td&gt;
+&lt;td&gt;(0.150, 0.060)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Display P3&lt;/td&gt;
+&lt;td&gt;(0.680, 0.320)&lt;/td&gt;
+&lt;td&gt;(0.265, 0.690)&lt;/td&gt;
+&lt;td&gt;(0.150, 0.060)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BT.2020&lt;/td&gt;
+&lt;td&gt;(0.708, 0.292)&lt;/td&gt;
+&lt;td&gt;(0.170, 0.797)&lt;/td&gt;
+&lt;td&gt;(0.131, 0.046)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/details&gt;
+&lt;h3&gt;Same numbers, different color&lt;/h3&gt;
+&lt;p&gt;This is where it gets practical. Take pure sRGB red, &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt;. Written in Display P3 numbers, it is &lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;#EA3323&lt;/code&gt;&lt;/strong&gt;. And P3’s own &lt;code class=&quot;language-text&quot;&gt;255 · 0 · 0&lt;/code&gt; is a red that sRGB can’t show at all. It’s purer than sRGB’s red, so you’d have to take away a bit of green and blue to get there (negative green and blue), and you can’t have less than no light.&lt;/p&gt;
+&lt;p&gt;I got curious and asked Claude: why do we only talk about negative green and blue? Can’t the red go above 255 too? Turns out it can, P3’s red needs a bit more than full red. But that’s the easy problem. Dim everything a little and the red fits. Green and blue are stuck, because they’re already below zero and dimming doesn’t change that. So too much red is just too much brightness, and the negatives are what make the color impossible.&lt;/p&gt;
+&lt;p&gt;Back to the reds. The same three numbers really are two different colors:&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;srgb-vs-p3&quot; data-props=&quot;{&amp;quot;r&amp;quot;:255,&amp;quot;g&amp;quot;:0,&amp;quot;b&amp;quot;:0}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (srgb-vs-p3). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;If your screen is wide-gamut (most recent iPhones and Macs), the second swatch is visibly more vivid. If it isn’t, the widget tells you so, because there’s nothing to see.&lt;/p&gt;
+&lt;p&gt;This explains the “washed out” and “oversaturated” bugs everyone runs into when the color profile is wrong or missing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sRGB numbers read as P3:&lt;/strong&gt; every color gets stretched outward. Oversaturated, sunburnt skin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;P3 numbers read as sRGB:&lt;/strong&gt; every color gets pulled inward. Dull and flat.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here is what each one looks like. I took two of my own PS5 screenshots and, with the help of Claude, simulated the mix-up in code with the real sRGB and P3 numbers. It’s a simulation, not a screenshot of a broken app. In both pictures the left half is the correct one and the right half is the mix-up.&lt;/p&gt;
+&lt;p&gt;First, sRGB numbers read as P3:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/150e0b7c2586dc5b7801b58726b9668c/07b2d/profile-srgb-read-as-p3.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 28.313253012048197%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAGABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAQC/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQID/9oADAMBAAIQAxAAAAGPBndIH//EABkQAAIDAQAAAAAAAAAAAAAAAAABAgMREv/aAAgBAQABBQKmQ582vD//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAZEAABBQAAAAAAAAAAAAAAAAAAERJCUZL/2gAIAQEABj8CaLRHJ//EABoQAAMAAwEAAAAAAAAAAAAAAAERIQAxQfD/2gAIAQEAAT8h7gLaHmhCBEuYxTQe3P/aAAwDAQACAAMAAAAQe8//xAAYEQACAwAAAAAAAAAAAAAAAAAAAREhMf/aAAgBAwEBPxCXQ9P/xAAWEQEBAQAAAAAAAAAAAAAAAAARARD/2gAIAQIBAT8QI5//xAAaEAEBAAIDAAAAAAAAAAAAAAABEQAxIUFx/9oACAEBAAE/EBlMXLjwTVMiBgkQfHW9ZUnyj0Y//9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;The same screenshot twice. The right half has stretched colors: the face and the red posters are more orange and more intense.&quot;
+        title=&quot;&quot;
+        src=&quot;/static/150e0b7c2586dc5b7801b58726b9668c/3517e/profile-srgb-read-as-p3.jpg&quot;
+        srcset=&quot;/static/150e0b7c2586dc5b7801b58726b9668c/27c2d/profile-srgb-read-as-p3.jpg 166w,
+/static/150e0b7c2586dc5b7801b58726b9668c/71bac/profile-srgb-read-as-p3.jpg 332w,
+/static/150e0b7c2586dc5b7801b58726b9668c/3517e/profile-srgb-read-as-p3.jpg 664w,
+/static/150e0b7c2586dc5b7801b58726b9668c/a820a/profile-srgb-read-as-p3.jpg 996w,
+/static/150e0b7c2586dc5b7801b58726b9668c/be0f2/profile-srgb-read-as-p3.jpg 1328w,
+/static/150e0b7c2586dc5b7801b58726b9668c/07b2d/profile-srgb-read-as-p3.jpg 1406w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Left: correct. Right: sRGB numbers read as P3.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;The right side might look better at first glance, with its punchier colors. But it’s the wrong one. Those aren’t the colors the game made. The skin goes sunburnt, and the strongest colors hit the limit and get clipped: in this picture about half of the strong reds are cut off, so the detail in them is gone. That matters when I edit: colors that aren’t clipped I can still work with, but once they’re clipped there is nothing left to pull back. More vivid is not more correct. The whole point of the contract is that everyone sees the colors the creator picked.&lt;/p&gt;
+&lt;p&gt;Now P3 numbers read as sRGB:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d2ec34679f6dd49d97277e9ad01a7134/07b2d/profile-p3-read-as-srgb.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 28.313253012048197%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAGABQDASIAAhEBAxEB/8QAFwABAAMAAAAAAAAAAAAAAAAAAAECBP/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAHBAVUD/8QAGRAAAgMBAAAAAAAAAAAAAAAAAQIAERIT/9oACAEBAAEFAtLlWF9CJ//EABcRAQADAAAAAAAAAAAAAAAAAAABERL/2gAIAQMBAT8BtqX/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAYEAACAwAAAAAAAAAAAAAAAAAAASEiMv/aAAgBAQAGPwLJZEJH/8QAGhABAAIDAQAAAAAAAAAAAAAAAQAhETFBcf/aAAgBAQABPyHgsOnUtsq9I0SHk//aAAwDAQACAAMAAAAQD9//xAAXEQEBAQEAAAAAAAAAAAAAAAABABFR/9oACAEDAQE/EFYE9L//xAAWEQEBAQAAAAAAAAAAAAAAAAAAEUH/2gAIAQIBAT8Q1H//xAAbEAABBQEBAAAAAAAAAAAAAAABABEhMUFRYf/aAAgBAQABPxAV2ZYSMaATiZRxouBPpfV//9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;The same screenshot twice. The right half has pulled-in colors: the neon signs are less intense and the picture looks flatter.&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d2ec34679f6dd49d97277e9ad01a7134/3517e/profile-p3-read-as-srgb.jpg&quot;
+        srcset=&quot;/static/d2ec34679f6dd49d97277e9ad01a7134/27c2d/profile-p3-read-as-srgb.jpg 166w,
+/static/d2ec34679f6dd49d97277e9ad01a7134/71bac/profile-p3-read-as-srgb.jpg 332w,
+/static/d2ec34679f6dd49d97277e9ad01a7134/3517e/profile-p3-read-as-srgb.jpg 664w,
+/static/d2ec34679f6dd49d97277e9ad01a7134/a820a/profile-p3-read-as-srgb.jpg 996w,
+/static/d2ec34679f6dd49d97277e9ad01a7134/be0f2/profile-p3-read-as-srgb.jpg 1328w,
+/static/d2ec34679f6dd49d97277e9ad01a7134/07b2d/profile-p3-read-as-srgb.jpg 1406w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Left: correct. Right: P3 numbers read as sRGB. The effect is subtler this time, so compare the neon signs.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;It’s not only sRGB and P3. The video clips from my PS5 are HDR. They use a much wider gamut (BT.2020) and a different curve for brightness. If a player or editor reads them as ordinary sRGB video, they come out washed out and grey. It’s the same bug with a different contract: this time the curve (the third clause) gets misread, and the primaries too.&lt;/p&gt;
+&lt;p&gt;Same trap when I export for Instagram. The file needs sRGB embedded in it, or Instagram flattens and desaturates the image.&lt;/p&gt;
+&lt;h3&gt;Profile vs space&lt;/h3&gt;
+&lt;p&gt;A small point that confused me. The &lt;strong&gt;color space&lt;/strong&gt; is the contract (primaries, white, curve). An &lt;strong&gt;ICC profile&lt;/strong&gt; is a small file embedded in an image, or describing a device, that says which contract applies. The system reads the image’s profile and your monitor’s profile and converts between them, so what you meant is what you see.&lt;/p&gt;
+&lt;p&gt;The screenshots I work with are JPG and PNG files from my PS5. They carry no HDR information and no profile at all, so sRGB is implied, and that’s what I should be grading for.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Claude explained the rest of this section to me. I haven’t tested it myself.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So what happens when things don’t match? Two cases.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The screen can’t show the image’s space.&lt;/strong&gt; Say a photo is in P3 and your screen is sRGB. The system still converts it, but it can’t reach the most vivid colors, so it moves them to the closest ones the screen can do. The photo looks a bit tamer, but nothing is broken.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The software doesn’t know the profile, or there isn’t one.&lt;/strong&gt; Then it guesses, and usually it guesses sRGB. That’s fine most of the time, since most photos are sRGB anyway. The trouble starts when the guess is wrong, and that’s the washed out and oversaturated stuff from before. Some older apps don’t even check, they just send the numbers straight to the screen.&lt;/p&gt;
+&lt;h2&gt;And then there’s print&lt;/h2&gt;
+&lt;p&gt;This is actually where I first ran into all of this, way before I became a software engineer. I’d print photos from the Internet, or ones I took with my camera, after editing them in Photoshop. And the print never exactly matched what I saw on screen. Maybe it was the printer, maybe a color profile, who knows, it was years ago. I had no idea why. Now I (kind of) do.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Claude explained the rest of this section to me. I haven’t tested it myself.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;A screen makes color out of light. Paper doesn’t glow, it just reflects the light in the room, and a printer mixes inks, so it’s a different paint box. Bright vivid blues, greens and oranges often don’t exist in ink, so the printer squeezes them to the closest color it can make. And the brightest thing on paper is the paper itself, so the whole photo feels darker and flatter than on a glowing screen.&lt;/p&gt;
+&lt;p&gt;It’s the paint box idea again, except now it’s literal paint. It’s not even a clean triangle anymore, more of a lumpy shape.&lt;/p&gt;
+&lt;h2&gt;Why isn’t more bits enough?&lt;/h2&gt;
+&lt;p&gt;At this point I asked the most engineer question of the whole journey: if sRGB can’t make P3’s red, why not just give each channel more bits? Instead of 256 levels of red, 65,536. Surely more precision covers everything.&lt;/p&gt;
+&lt;p&gt;It doesn’t, and the reason helped everything click. &lt;strong&gt;Bits give finer steps, not a bigger gamut.&lt;/strong&gt; They are two independent things.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: the ADC analogy&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;This is how Claude explained it to me, in terms I know from electronics.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;A 24-bit analog-to-digital converter with a 0 to 3.3 V reference can resolve microvolts, but it can’t measure 5 V. Bit depth is the resolution; the reference voltage sets the full scale.&lt;/p&gt;
+&lt;p&gt;In RGB, the &lt;strong&gt;primaries are the reference.&lt;/strong&gt; &lt;code class=&quot;language-text&quot;&gt;(1, 0, 0)&lt;/code&gt; means “the red emitter at full power”, and that red has a fixed physical spectrum. 8 bits gives you 256 steps between off and that red. 16 bits gives you 65,536 steps between off and &lt;em&gt;the same&lt;/em&gt; red.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;Here is that in pictures. Every dot is one color you can make by mixing the three primaries in whole steps (equal steps of light, plotted on the same map). First, more bits with the same primaries:&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;dot-grid&quot; data-props=&quot;{&amp;quot;axis&amp;quot;:&amp;quot;bits&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (dot-grid). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;More bits, denser dots, the exact same triangle. Now the opposite: the same number of steps, but moving the primaries outward:&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;dot-grid&quot; data-props=&quot;{&amp;quot;axis&amp;quot;:&amp;quot;range&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (dot-grid). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Same dots, bigger triangle, so each step is coarser. Two different knobs.&lt;/p&gt;
+&lt;p&gt;That second picture also hints at a catch. 8 bits gives 256 steps per channel regardless of the triangle, so a bigger triangle spreads the same steps further apart, and you can get banding in smooth gradients. That is why wide gamut and HDR are paired with 10-bit.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: two simplifications I made&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;Claude explained this to me.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The real sRGB curve isn’t exactly a 2.2 power. It’s a short straight piece near black plus a power curve, so a stored 0.5 comes out as 0.214 of the light, where a pure 2.2 gives 0.218. That’s why I say “about 21%“.&lt;/p&gt;
+&lt;p&gt;The dots in the grids above are equal steps of light. Real image files store gamma-encoded steps instead, which are spaced differently: finer in the darks, coarser in the brights. The triangle and the idea stay the same, the dots would just sit a bit differently inside it.&lt;/p&gt;
+&lt;/details&gt;
+&lt;h3&gt;Why the triangle is a hard wall&lt;/h3&gt;
+&lt;p&gt;A pixel is three lights added together. Any non-negative mix of three points stays inside the triangle they form, like a weighted average. To reach outside, you would need a &lt;em&gt;negative&lt;/em&gt; amount of one light. Negative light doesn’t exist.&lt;/p&gt;
+&lt;details class=&quot;fold&quot;&gt;
+&lt;summary&gt;For nerds: the twist, you can write down colors outside the triangle&lt;/summary&gt;
+&lt;p&gt;&lt;em&gt;Claude explained this to me, and then we computed the numbers in code.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I said you can’t reach outside the triangle, but I was half right. With negative numbers (and values above 1), the sRGB primaries &lt;em&gt;can&lt;/em&gt; describe any color mathematically. The greenest P3 green, P3 &lt;code class=&quot;language-text&quot;&gt;(0, 1, 0)&lt;/code&gt;, in linear sRGB coordinates is:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;(−0.225, 1.042, −0.079)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Formats built for this exist, such as scRGB and Apple’s “extended sRGB”, which use floating-point values. So unbounded floats solve &lt;em&gt;storage&lt;/em&gt;. They don’t solve &lt;em&gt;display&lt;/em&gt;: no screen can emit −0.225 red.&lt;/p&gt;
+&lt;p&gt;The real reason for the contract is that numbers eventually drive specific physical lights, and those differ between devices. A color space defines the numbers relative to known primaries, so software can convert them to &lt;em&gt;this&lt;/em&gt; screen’s primaries and clip what doesn’t fit.&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2&gt;What I took away&lt;/h2&gt;
+&lt;p&gt;I used to think an RGB number was a color. It’s an instruction. If someone hands me three numbers, I can’t tell which exact color they mean until I know the color space they’re in: which red, green and blue, which white, and which curve. In an image file the color profile is what says it, the label that tells you which color space the numbers belong to. Without one, the software has to guess, and usually it guesses sRGB. And no amount of bits gets you out of the triangle.&lt;/p&gt;
+&lt;p&gt;Is this information strictly required for my use cases? No. But I just cannot work without understanding the fundamentals. In any of my chats with Claude the terms pop up all the time (AI likes to be nerdy) and it puzzles me, making me feel stupid. Learning this helps to fill the gaps in my mind map and makes the conversations with Claude more level.&lt;/p&gt;
+&lt;p&gt;What I do differently now: before I worry about a color, I ask what space it is in. For my own work the gamut ceiling that matters isn’t some theoretical limit, it is my screen (P3) and Instagram (effectively sRGB for most viewers).&lt;/p&gt;
+&lt;p&gt;But this leaves a question I couldn’t stop thinking about. Why is the map that shape? Why a horseshoe, why a curved edge, and why three lights? In &lt;a href=&quot;/blog/where-the-horseshoe-comes-from/&quot;&gt;Why the map of visible color is a horseshoe&lt;/a&gt; I go after that.&lt;/p&gt;
+&lt;p&gt;Did I get something wrong, or do you think about color spaces differently? The comments are open.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The color series:&lt;/strong&gt; 1. &lt;strong&gt;What does RGB 255, 0, 0 actually mean?&lt;/strong&gt; (you are here) · 2. &lt;a href=&quot;/blog/where-the-horseshoe-comes-from/&quot;&gt;Why the map of visible color is a horseshoe&lt;/a&gt; · 3. &lt;a href=&quot;/blog/hsl-and-hsv/&quot;&gt;HSL and HSV: RGB with different knobs&lt;/a&gt; · 4. &lt;a href=&quot;/blog/what-is-lab/&quot;&gt;Lab: numbers that match what you see&lt;/a&gt; · 5. &lt;a href=&quot;/blog/why-gradients-go-muddy/&quot;&gt;Why gradients go muddy&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded></item><item><title><![CDATA[No title]]></title><description><![CDATA[I got into virtual photography recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure…]]></description><link>https://www.antondanshin.com/blog/exposure-vs-brightness</link><guid isPermaLink="false">https://www.antondanshin.com/blog/exposure-vs-brightness</guid><pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I got into &lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_photography&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;virtual photography&lt;/a&gt; recently: taking photos inside video games. Like any beginner, I started pushing sliders. Exposure, Brightness, Levels, Curves. Everything made my dark screenshots lighter, so I assumed they were more or less the same thing with different names. At some point I was using gamma because I was told to, and Brightness because it was right there.&lt;/p&gt;
 &lt;details class=&quot;fold&quot;&gt;
 &lt;summary&gt;My story: how I got into in-game photography&lt;/summary&gt;
 &lt;p&gt;This part is personal and not needed for the rest of the article, so feel free to skip it.&lt;/p&gt;
@@ -15,7 +234,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I’m still learning photography. Everything below comes from my own tests, run with Claude or under Claude’s guidance, on one computer, in Affinity Photo 3, with 8-bit sRGB images. Other versions or other apps may behave differently, and I may have gotten something wrong.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;You can play with every number in this article. The small widgets are real: they do the same math I measured.&lt;/p&gt;
+&lt;p&gt;You can play with every number in this article. The small widgets are real: they do the same math I measured. And if you are too lazy to read (no judgment) and just want to play with the sliders, I made a &lt;a href=&quot;/tools/exposure-vs-brightness/&quot;&gt;dedicated page with all the widgets&lt;/a&gt; and a short note on what each one shows.&lt;/p&gt;
 &lt;p&gt;Where it gets technical, there is a collapsed &lt;strong&gt;For nerds&lt;/strong&gt; box. You can skip them and the article still works. Those parts were explained to me by Claude (an AI), not measured by me, and each box says where it comes from.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Key takeaways:&lt;/strong&gt;&lt;/p&gt;
@@ -27,6 +246,47 @@
 &lt;li&gt;&lt;strong&gt;What I use:&lt;/strong&gt; Levels gamma or Curves to lift a dark 8-bit screenshot. In an app with only Exposure and Brightness, Exposure for dark images and Brightness for ones with bright areas. Exposure is the one for RAW or HDR files, but I don’t work with those.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
+&lt;h2&gt;The photo, and two sliders I couldn’t tell apart&lt;/h2&gt;
+&lt;p&gt;Here is the photo I’ll use in this article. It’s a screenshot from Cyberpunk 2077: Phantom Liberty, taken on a PS5 in photo mode with no filters. It’s very dark, which makes it a good test.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.024096385542165%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABxWrmQFD/xAAXEAEBAQEAAAAAAAAAAAAAAAAAARAR/9oACAEBAAEFAo4qLn//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAaEAACAgMAAAAAAAAAAAAAAAAAARAxEUFh/9oACAEBAAE/IcNjRPhYsi0f/9oADAMBAAIAAwAAABDoP//EABcRAAMBAAAAAAAAAAAAAAAAAAABESH/2gAIAQMBAT8Qa0h//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAHBAAAgICAwAAAAAAAAAAAAAAAREAITFREHGh/9oACAEBAAE/EK7IblwILJ4cyoAdT0ShLfH/2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;A dark, teal-lit corridor in Cyberpunk 2077 with a character sitting by the wall&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg&quot;
+        srcset=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/27c2d/cyberpunk-corridor.jpg 166w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/71bac/cyberpunk-corridor.jpg 332w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg 664w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/a820a/cyberpunk-corridor.jpg 996w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/be0f2/cyberpunk-corridor.jpg 1328w,
+/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg 2000w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Cyberpunk 2077: Phantom Liberty, © CD Projekt Red. Unedited PS5 photo mode capture.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Affinity Photo has two sliders that both make it lighter: &lt;strong&gt;Exposure&lt;/strong&gt; and &lt;strong&gt;Brightness&lt;/strong&gt;. Before any theory, play with them. There are no curves and no histograms here, just the photo and the two sliders.&lt;/p&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;compare-exposure-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;plot&amp;quot;:false}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (compare-exposure-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Did you notice the difference? I didn’t, at first. Both make the picture lighter, and what separates them is subtle: how the bright parts behave, and how the colors shift on the way. Yet they sit right next to each other in Affinity Photo, as if they were two different tools. I was very confused. Which one should I use, and when?&lt;/p&gt;
+&lt;p&gt;I couldn’t answer that by moving the sliders. To pick one, I needed to understand the math behind each. That is how this article started.&lt;/p&gt;
+&lt;p&gt;Later I found out that Brightness is a legacy tool. Lightroom removed it years ago (more on that near the end). But I work in Affinity and in other free apps, and they still have Brightness as a separate knob, so the question stays real for me. If you edit in one of those, it might for you too.&lt;/p&gt;
 &lt;h2&gt;Two words, many meanings&lt;/h2&gt;
 &lt;p&gt;“Brightness” and “exposure” sound familiar because we use them every day.&lt;/p&gt;
 &lt;p&gt;On a phone or a TV, &lt;strong&gt;brightness&lt;/strong&gt; is how strong the backlight is. In a photo editor from a few years ago, it is a slider that makes the picture lighter or darker. On Instagram and in the iOS Photos app it is still there.&lt;/p&gt;
@@ -38,7 +298,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;0 · 0 · 0&lt;/code&gt; is black and &lt;code class=&quot;language-text&quot;&gt;255 · 255 · 255&lt;/code&gt; is white.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;128 · 128 · 128&lt;/code&gt; is a middle gray.&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;224 · 140 · 9&lt;/code&gt; is the orange glow on the hand in the photo below: a lot of red, some green, almost no blue.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;224 · 140 · 9&lt;/code&gt; is the orange glow on the hand in the photo above: a lot of red, some green, almost no blue.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Those numbers are what the file contains, and what every slider in an editor changes. But they are &lt;strong&gt;not amounts of light&lt;/strong&gt;. A gray with the stored value 128 is not “half as much light as white”. It is much less than half.&lt;/p&gt;
 &lt;p&gt;I always imagined the values stored in the R, G and B channels as light intensity, and I thought they would translate to lightness in a linear fashion: twice the number, twice the light. It turned out this is not the case. Finding that out opened a Pandora’s box of color profiles and color spaces that I couldn’t close again. Maybe I’ll write about it next time.&lt;/p&gt;
@@ -158,42 +418,7 @@
 &lt;/table&gt;
 &lt;p&gt;They only come apart in the deepest shadows. A stored 10 becomes 14 with the shortcut, which is about 1.4 times the light instead of 2 times. Values that low are almost black, and in an 8-bit file they are mostly noise and banding anyway, so I wouldn’t worry about it.&lt;/p&gt;
 &lt;/details&gt;
-&lt;p&gt;Here is the photo I’ll use in this article. It’s a screenshot from Cyberpunk 2077: Phantom Liberty, taken on a PS5 in photo mode with no filters. It’s very dark, which makes it a good test.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; margin-left: 0; margin-right: 0;&quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.024096385542165%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABxWrmQFD/xAAXEAEBAQEAAAAAAAAAAAAAAAAAARAR/9oACAEBAAEFAo4qLn//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAaEAACAgMAAAAAAAAAAAAAAAAAARAxEUFh/9oACAEBAAE/IcNjRPhYsi0f/9oADAMBAAIAAwAAABDoP//EABcRAAMBAAAAAAAAAAAAAAAAAAABESH/2gAIAQMBAT8Qa0h//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAHBAAAgICAwAAAAAAAAAAAAAAAREAITFREHGh/9oACAEBAAE/EK7IblwILJ4cyoAdT0ShLfH/2Q==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;A dark, teal-lit corridor in Cyberpunk 2077 with a character sitting by the wall&quot;
-        title=&quot;&quot;
-        src=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg&quot;
-        srcset=&quot;/static/9b1e2b10354322a616b5b4cfd36eb1a3/27c2d/cyberpunk-corridor.jpg 166w,
-/static/9b1e2b10354322a616b5b4cfd36eb1a3/71bac/cyberpunk-corridor.jpg 332w,
-/static/9b1e2b10354322a616b5b4cfd36eb1a3/3517e/cyberpunk-corridor.jpg 664w,
-/static/9b1e2b10354322a616b5b4cfd36eb1a3/a820a/cyberpunk-corridor.jpg 996w,
-/static/9b1e2b10354322a616b5b4cfd36eb1a3/be0f2/cyberpunk-corridor.jpg 1328w,
-/static/9b1e2b10354322a616b5b4cfd36eb1a3/3acf0/cyberpunk-corridor.jpg 2000w&quot;
-        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;Cyberpunk 2077: Phantom Liberty, © CD Projekt Red. Unedited PS5 photo mode capture.&lt;/small&gt;&lt;/p&gt;
-&lt;p&gt;Let’s start with one pixel from the orange glow on the hand, a very saturated color. Move the slider up.&lt;/p&gt;
+&lt;p&gt;Let’s start with one pixel from the orange glow on the hand in the photo, a very saturated color. Move the slider up.&lt;/p&gt;
 &lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-exposure&quot; data-props=&quot;{&amp;quot;r&amp;quot;:224,&amp;quot;g&amp;quot;:140,&amp;quot;b&amp;quot;:9,&amp;quot;min&amp;quot;:0,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-exposure). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;The red channel hits 255 before you even reach +0.5 stop, and then it has nowhere to go while green and blue keep growing. That’s &lt;strong&gt;clipping&lt;/strong&gt;. And because only one channel clipped, the color changes: the orange becomes more and more yellow. At +2 stops it is &lt;code class=&quot;language-text&quot;&gt;255 · 255 · 17&lt;/code&gt;, pure yellow. The hue went from 37° to 60° just by “making it brighter”.&lt;/p&gt;
 &lt;p&gt;The same happens with other colors, only with another channel. The teal of the pipes (this one is close to it) has green and blue high, so green clips first and the color slides toward cyan and then white.&lt;/p&gt;
@@ -254,7 +479,7 @@
 &lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;image-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo, Brightness slider. Notice how the histogram bunches up on the right.&amp;quot;,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (image-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Affinity also has a “Linear” checkbox in the Brightness Contrast panel (under the Contrast slider). I measured it too: it’s just &lt;code class=&quot;language-text&quot;&gt;value + 2.55 × slider&lt;/code&gt;, a flat offset, clipped at 255. Black turns gray. I’d skip it.&lt;/p&gt;
 &lt;p&gt;To put the two side by side, here is one photo with both sliders. They’re separate on purpose: there’s no fair way to say “Brightness 30 equals Exposure 0.7”, because they are different curves.&lt;/p&gt;
-&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;compare-exposure-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo twice, one slider for each tool.&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (compare-exposure-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;compare-exposure-brightness&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;plot&amp;quot;:true}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (compare-exposure-brightness). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2&gt;One curve, three channels&lt;/h2&gt;
 &lt;p&gt;I skipped over something important: &lt;strong&gt;both sliders work on each color channel separately.&lt;/strong&gt; The red, green and blue values of a pixel each go through the same curve. Affinity never looks at the color as a whole.&lt;/p&gt;
 &lt;p&gt;I checked this. I put eight color squares in my test image, applied the adjustment and compared them with what the gray curve predicted for each channel on its own. For Exposure and for Brightness (at all eight settings from -100 to +100) the difference was at most 2.5 values out of 255, which is just the noise in my measurement. So the curve you see in the widgets is applied three times, once per channel.&lt;/p&gt;
@@ -289,7 +514,7 @@
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/6ea72b52f2b5db356808908d77d20478/f7616/affinity-levels.png&quot;
+    href=&quot;/static/89e93231d506463d4510e3fecd95bf83/f7616/affinity-levels-gamma.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -300,13 +525,13 @@
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;The Levels adjustment panel in Affinity Photo 3, with a histogram and Black Level, White Level, Gamma and output level sliders&quot;
+        alt=&quot;The Levels adjustment panel in Affinity Photo 3 with everything dimmed except the Gamma slider, which is set to 1&quot;
         title=&quot;&quot;
-        src=&quot;/static/6ea72b52f2b5db356808908d77d20478/31493/affinity-levels.png&quot;
-        srcset=&quot;/static/6ea72b52f2b5db356808908d77d20478/e72ac/affinity-levels.png 166w,
-/static/6ea72b52f2b5db356808908d77d20478/f8dc5/affinity-levels.png 332w,
-/static/6ea72b52f2b5db356808908d77d20478/31493/affinity-levels.png 664w,
-/static/6ea72b52f2b5db356808908d77d20478/f7616/affinity-levels.png 766w&quot;
+        src=&quot;/static/89e93231d506463d4510e3fecd95bf83/31493/affinity-levels-gamma.png&quot;
+        srcset=&quot;/static/89e93231d506463d4510e3fecd95bf83/e72ac/affinity-levels-gamma.png 166w,
+/static/89e93231d506463d4510e3fecd95bf83/f8dc5/affinity-levels-gamma.png 332w,
+/static/89e93231d506463d4510e3fecd95bf83/31493/affinity-levels-gamma.png 664w,
+/static/89e93231d506463d4510e3fecd95bf83/f7616/affinity-levels-gamma.png 766w&quot;
         sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -314,12 +539,62 @@
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;Affinity Photo 3, Levels adjustment (RGB, Master). Gamma is the slider I use, and 1 means no change.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Affinity Photo 3, Levels adjustment (RGB, Master). Gamma, highlighted, is the slider I use, and 1 means no change.&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;Try gamma on a dark pixel from the wall. Going below 1 lifts it.&lt;/p&gt;
 &lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;pixel-gamma&quot; data-props=&quot;{&amp;quot;r&amp;quot;:15,&amp;quot;g&amp;quot;:22,&amp;quot;b&amp;quot;:15,&amp;quot;min&amp;quot;:0.1,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (pixel-gamma). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;And on the photo:&lt;/p&gt;
 &lt;div class=&quot;widget-placeholder&quot; data-widget=&quot;image-gamma&quot; data-props=&quot;{&amp;quot;src&amp;quot;:&amp;quot;/static/widgets/398594ff35-cyberpunk-corridor.jpg&amp;quot;,&amp;quot;caption&amp;quot;:&amp;quot;Same photo, Levels gamma. Below 1 is lighter.&amp;quot;,&amp;quot;min&amp;quot;:0.1,&amp;quot;max&amp;quot;:3,&amp;quot;editor&amp;quot;:&amp;quot;affinity-3&amp;quot;}&quot;&gt;&lt;div class=&quot;widget-fallback&quot;&gt;&lt;p&gt;&lt;em&gt;Interactive illustration (image-gamma). Open this article on antondanshin.com to try it.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;widget-mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;I left out gamma 0. In Affinity it turns the whole picture white.&lt;/p&gt;
+&lt;p&gt;Looking at the curves, I noticed that these three don’t push the same tones. To compare them fairly, I picked a setting of each that lifts a mid gray (128) by about the same amount, and checked where they differ:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Stored value&lt;/th&gt;
+&lt;th&gt;Exposure +1&lt;/th&gt;
+&lt;th&gt;Brightness +50&lt;/th&gt;
+&lt;th&gt;Gamma 0.5&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;44 (+12)&lt;/td&gt;
+&lt;td&gt;56 (+24)&lt;/td&gt;
+&lt;td&gt;90 (+58)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;td&gt;88 (+24)&lt;/td&gt;
+&lt;td&gt;105 (+41)&lt;/td&gt;
+&lt;td&gt;128 (+64)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;128&lt;/td&gt;
+&lt;td&gt;175 (+47)&lt;/td&gt;
+&lt;td&gt;185 (+57)&lt;/td&gt;
+&lt;td&gt;181 (+53)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;192&lt;/td&gt;
+&lt;td&gt;255 (+63)&lt;/td&gt;
+&lt;td&gt;235 (+43)&lt;/td&gt;
+&lt;td&gt;221 (+29)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;224&lt;/td&gt;
+&lt;td&gt;255 (+31)&lt;/td&gt;
+&lt;td&gt;249 (+25)&lt;/td&gt;
+&lt;td&gt;239 (+15)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The number in brackets is how much the value went up. It’s the same picture, but with three different shapes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exposure&lt;/strong&gt; lifts the highlights the most. The brighter the tone, the bigger the lift, until it hits 255 and gets cut off. That’s why it clips so easily.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gamma&lt;/strong&gt; is the opposite: it lifts the shadows the most. The peak is around 60 out of 255, and it fades toward white. At 224 it adds only 15.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Brightness&lt;/strong&gt; sits in between. Its lift peaks in the mid-tones (around 115 at small settings, sliding down toward 90 at +100). It’s harder on the highlights than gamma and gentler than exposure, because it squeezes them against 255 instead of cutting them off.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To sum it up: Exposure pushes the highlights hardest, Gamma pushes the shadows hardest, and Brightness peaks in the mid-tones, somewhere in between. That’s why I use gamma for dark screenshots: it opens up the shadows without pushing the bright parts into white.&lt;/p&gt;
 &lt;h2&gt;What the other editors do&lt;/h2&gt;
 &lt;p&gt;Brightness has disappeared from most serious editors. Lightroom removed it in Lightroom 4 (Process Version 2012), together with Recovery and Fill Light, and added Highlights, Shadows and Whites. I could not find an Adobe page that says why, so these are third-party sources: &lt;a href=&quot;https://peachpit.com/articles/article.aspx?p=1843881&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Peachpit&lt;/a&gt;, &lt;a href=&quot;https://cambridgeincolour.com/forums/thread653-3.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;a Cambridge in Colour forum thread&lt;/a&gt; (people there say the old Exposure and Brightness sliders did an overlapping job) and &lt;a href=&quot;https://laurashoe.com/2013/06/26/where-are-my-lightroom-4-or-5-develop-controls-and-whats-that-lightning-bolt-below-the-histogram&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Laura Shoe’s guide&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I also looked at &lt;a href=&quot;https://github.com/storytold/lightcraft&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;LightCraft&lt;/a&gt;, a new open-source Lightroom-style editor. It has an Exposure slider from -5 to +5 stops (&lt;a href=&quot;https://github.com/storytold/lightcraft/blob/472560b30936259fe50f8df67b9ad57ea8ef7a6d/crates/develop/src/controls.rs#L178&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;controls.rs&lt;/code&gt;&lt;/a&gt;), and no plain Brightness slider in its normal Light section, only Contrast, Highlights, Shadows, Whites and Blacks. In its shader, the local exposure is a multiplication of the color by &lt;code class=&quot;language-text&quot;&gt;exp2(stops)&lt;/code&gt; (&lt;a href=&quot;https://github.com/storytold/lightcraft/blob/472560b30936259fe50f8df67b9ad57ea8ef7a6d/crates/gpu/src/wgsl/finish.wgsl#L480&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;finish.wgsl&lt;/code&gt;&lt;/a&gt;), which is the “double the light per stop” idea in one line. I didn’t trace how the global slider is applied, so I won’t claim more than that.&lt;/p&gt;
@@ -327,16 +602,10 @@
 &lt;h2&gt;So, which one should I use?&lt;/h2&gt;
 &lt;p&gt;This is what I do now. Remember that it is my opinion, based on 8-bit game screenshots.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;8-bit screenshot, too dark:&lt;/strong&gt; lift with Levels gamma or Curves. They squeeze the highlights instead of burning them.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;An app with only Exposure and Brightness&lt;/strong&gt; (Instagram, the iOS Photos app): it depends on the image.
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Dark image:&lt;/strong&gt; use Exposure. Nothing is near 255, so there is little risk of clipping, and the hue doesn’t move.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Image with bright areas:&lt;/strong&gt; use Brightness. It squeezes the highlights instead of cutting them off, so it avoids clipping (in Affinity at +25 it only clips the values from 253 up).&lt;/li&gt;
-&lt;li&gt;I only measured Affinity’s, so for the other apps this is an educated bet.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;8-bit screenshot, too bright:&lt;/strong&gt; Exposure is fine. Going down never clips.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Linear Brightness:&lt;/strong&gt; skip it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;8-bit screenshot, too dark:&lt;/strong&gt; lift with Levels gamma or Curves. They open up the shadows and squeeze the highlights instead of burning them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Instagram or the iOS Photos app:&lt;/strong&gt; reach for Shadows (and Highlights) before Exposure or Brightness. As &lt;a href=&quot;https://support.apple.com/guide/photos/pht806aea6a6&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Apple describes them&lt;/a&gt;, these sliders only touch the dark or the bright part of the picture, which is what a dark photo needs. I didn’t measure them.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;An app with only Exposure and Brightness:&lt;/strong&gt; for a dark photo, try Brightness first. In my table above, at a similar lift of the mid gray, it raises a dark tone like 32 twice as much as Exposure does (+24 against +12) and it clips later. Exposure makes sense when the whole picture is dark and nothing in it is near white. I only measured Affinity’s, so for other apps this is an educated bet.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;8-bit screenshot, too bright:&lt;/strong&gt; Exposure is fine. Going down never clips, but your whites turn gray.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;RAW or HDR file:&lt;/strong&gt; start with Exposure. There is room above white, so it is safe, and it behaves like the camera would have. I don’t work with RAW myself, so this one is theory.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;

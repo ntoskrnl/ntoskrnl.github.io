@@ -1314,6 +1314,7 @@ pre[class*="language-"] {
 :root {
   --widget-surface: var(--color-surface);
   --widget-border: var(--color-border);
+  --widget-inset: var(--color-bg);
   --widget-text: var(--color-text);
   --widget-text-muted: var(--color-text-muted);
   --widget-accent: var(--color-primary);
@@ -1661,9 +1662,15 @@ pre[class*="language-"] {
   min-width: 0;
 }
 
-.w-compare__title {
-  margin: 0 0 var(--widget-space-sm);
-  font-weight: 700;
+/* Stacked (narrow screens): each tool is its own inset card, so one tool's
+   slider and picture are not mistaken for the other's. */
+@media (max-width: 39.99rem) {
+  .w-compare__panel {
+    padding: var(--widget-space);
+    background: var(--widget-inset);
+    border: 1px solid var(--widget-border);
+    border-radius: var(--widget-radius);
+  }
 }
 
 /*
@@ -1886,6 +1893,15 @@ pre[class*="language-"] {
 
   .widget-dialog .w-tone {
     --w-h-max: max(10rem, calc(100dvh - 11rem));
+  }
+
+  /* No plot: the picture alone takes the width (still capped by --w-h) */
+  .w-tone--bare {
+    --w-h: min(calc(100cqw / var(--w-aspect)), var(--w-h-max));
+    grid-template-columns: calc(var(--w-h) * var(--w-aspect));
+    grid-template-areas:
+      "slider"
+      "media";
   }
 }
 
