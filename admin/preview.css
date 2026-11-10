@@ -2890,3 +2890,62 @@ pre[class*="language-"] {
     align-items: start;
   }
 }
+
+/* device-coverage: one bar per display, name above on a phone */
+.w-devices {
+  display: grid;
+  gap: var(--widget-space-sm);
+  margin: 0 0 var(--widget-space-sm);
+  padding: 0;
+  list-style: none;
+}
+
+.w-devices__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem var(--widget-space-sm);
+  align-items: center;
+}
+
+.w-devices__name {
+  grid-column: 1 / -1;
+  font-size: var(--fontSize-0);
+}
+
+.w-devices__bar {
+  display: block;
+  height: 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--widget-track);
+  overflow: hidden;
+}
+
+.w-devices__fill {
+  display: block;
+  height: 100%;
+  background: var(--widget-accent);
+}
+
+.w-devices__row--claim .w-devices__fill {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--widget-accent) 0 0.25rem,
+    transparent 0.25rem 0.5rem
+  );
+}
+
+.w-devices__value {
+  font-size: var(--fontSize-0);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@container (min-width: 30rem) {
+  .w-devices__row {
+    grid-template-columns: minmax(10rem, 1fr) minmax(0, 1.4fr) 9rem;
+  }
+
+  .w-devices__name {
+    grid-column: auto;
+  }
+}
