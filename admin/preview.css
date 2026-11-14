@@ -415,6 +415,9 @@ pre[class*="language-"].line-numbers > code {
     var(--color-bg)
   );
   --color-danger: light-dark(#b00020, #ff8a9b);
+  /* Logo fringes (the RGB glitch split). Light values are darkened for 3:1 on white. */
+  --color-glitch-red: light-dark(#e11d48, #ff2d55);
+  --color-glitch-cyan: light-dark(#0891b2, #22d3ee);
 
   /* Layout */
   --maxWidth-wrapper: 44rem;
@@ -853,6 +856,10 @@ small {
   padding: var(--spacing-8) var(--spacing-5) var(--spacing-12);
 }
 
+.global-wrapper[data-wide="true"] {
+  max-width: 64rem;
+}
+
 .global-header {
   display: flex;
   align-items: center;
@@ -877,6 +884,21 @@ small {
 
 .header-link-home:hover {
   color: var(--color-primary);
+}
+
+/* the site mark sits left of the site name in the header link */
+.header-link-home,
+.main-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.site-logo {
+  flex: none;
+  width: 1.8em;
+  height: 1.8em;
+  color: var(--color-heading);
 }
 
 footer {
@@ -1097,7 +1119,7 @@ footer {
   line-height: var(--leading-small);
 }
 
-/* "Posts | Drafts" tabs (only where drafts are shown, see post-tabs.jsx) */
+/* "Posts | Drafts | Tools" tabs (Drafts only where drafts are shown, see post-tabs.jsx) */
 .post-tabs ul {
   display: flex;
   gap: var(--spacing-6);
@@ -1148,6 +1170,108 @@ a.post-tabs__tab:hover {
     content: "·";
     margin: 0 0.4em;
   }
+}
+
+/* /tools/ page: one soft card per tool page, grouped by category. No rules:
+   the surface tint separates the cards. */
+.tool-group {
+  margin-top: var(--spacing-8);
+}
+
+.tool-group + .tool-group {
+  margin-top: var(--spacing-12);
+}
+
+.tool-group h2 {
+  margin: 0 0 var(--spacing-3);
+  color: var(--color-heading);
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-card,
+.tool-card + .tool-card {
+  position: relative;
+  margin: 0;
+  padding: var(--spacing-5);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.tool-card:hover {
+  background: color-mix(in srgb, var(--color-surface), var(--color-primary) 6%);
+}
+
+.tool-card h3 {
+  margin: 0 0 var(--spacing-1);
+  color: var(--color-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-wrap: pretty;
+}
+
+.tool-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The whole card is clickable through the title link; the "Goes with" links
+   sit above that overlay */
+.tool-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.tool-card:hover h3 a {
+  color: var(--color-primary);
+}
+
+/* The card shows the focus ring, not the title text */
+.tool-card h3 a:focus-visible {
+  outline: none;
+}
+
+.tool-card:has(h3 a:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tool-card__description {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: var(--leading-small);
+}
+
+.tool-card__inside {
+  margin: var(--spacing-2) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-small);
+}
+
+.tool-articles {
+  margin: var(--spacing-2) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-small);
+  overflow-wrap: anywhere;
+}
+
+.tool-card .tool-articles {
+  position: relative;
+  z-index: 1;
 }
 
 /* Widget placeholders (see plugins/gatsby-remark-widgets). Kept global and
@@ -1363,6 +1487,19 @@ pre[class*="language-"] {
     var(--widget-text-muted) 30%,
     transparent
   );
+  /* Byobu crop overlay. Line and handle are the same near-white in both
+     themes (never the page background, which is near-black in dark mode),
+     drawn with a dark halo around them: the light line reads on dark photo
+     areas, the halo on light ones, so the photo is the third color. The crop
+     frame and handles are drawn with the light line plus the dark halo so
+     they read on any photo. Primary button: accent fill
+     with text that keeps 4.5:1 (page background on the accent, both themes). */
+  --widget-crop-shade: rgb(0 0 0 / 55%);
+  --widget-crop-line: #ffffff;
+  --widget-crop-handle: #ffffff;
+  --widget-crop-halo: rgb(0 0 0 / 60%);
+  --widget-primary-bg: var(--color-primary);
+  --widget-primary-text: var(--color-bg);
 }
 
 .widget-frame {
@@ -2440,6 +2577,28 @@ pre[class*="language-"] {
   stroke-dasharray: 2 4;
 }
 
+.w-conelegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem var(--widget-space);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fontSize-0);
+}
+
+.w-conelegend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.w-conekey {
+  width: 2rem;
+  height: 0.5rem;
+}
+
 .w-conemarker {
   stroke: var(--widget-text);
   stroke-width: 1.5;
@@ -2497,6 +2656,16 @@ pre[class*="language-"] {
 
 .w-button:hover:not(:disabled) {
   border-color: var(--widget-accent);
+}
+
+.w-button--primary {
+  color: var(--widget-primary-text);
+  background: var(--widget-primary-bg);
+  border-color: var(--widget-primary-bg);
+}
+
+.w-button--primary:hover:not(:disabled) {
+  border-color: var(--widget-primary-text);
 }
 
 .w-button:focus-visible {
